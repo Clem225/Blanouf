@@ -1,0 +1,49 @@
+Question 1.1 : Que constatez vous ? Pourquoi ce fichier ne peut-il pas s'exécuter sur la cible ?
+
+Architecture x84/64, pas ARM
+
+Question 1.2 : Que faut-il faire avant de pouvoir lancer cette commande ?
+
+Faire le source (voir screen)
+
+Question 1.3 : Utilisez de nouveau la commande file, que constatez vous ?
+
+Executable ARM
+
+Question 2.1 : Rappelez comment accéder aux LEDs en manipulant des fichiers.
+
+On accede aux leds comme ça : 
+
+root@DevKit8600:~# echo 1 > /sys/class/leds/user_led/brightness
+root@DevKit8600:~# echo 0 > /sys/class/leds/user_led/brightness
+(page 72)
+
+
+Question 3.1 : Combien y a t-il de boutons poussoirs sur la cible ? Comment y accède t-on ?
+
+Input Interfaces
+Three user buttons (HOME, MENU, BACK)
+One reset button
+
+page 11 / 40 / 54
+
+MENU = KEY_F1
+BACK = KEY_ESC
+HOME = KEY_HOME
+
+Pour tester : evtest /dev/input/event1
+
+3.2)
+
+/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/include/linux/input.h
+Ajouter : #include <linux/input.h>
+
+
+4.1 )
+
+voir screen
+
+4.2)
+
+voir screen
+Plus grande priorité au programme

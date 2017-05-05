@@ -1,0 +1,538 @@
+EXO 1
+
+1.1 ) P10
+
+1.2) tftp nfs dhcp (à verif)
+
+1.3 ) Une liaison série, avec l'application cutecom
+
+1.4) TFTP error: 'File not found' (1)
+
+ERROR: can't get kernel image!
+
+Le fichier manquant est l'image du kernel, appelé uImage.
+Il faudrait le placer dans /tftpboot, comme indiqué /etc/xinetd.d/tftp
+
+1.5 ) il n'y a pas de root fs donc ça marche pô
+
+exo2
+
+2.1) le dossier contient les fichiers de configurations de poky
+bblayers.conf  local.conf  sanity_info  templateconf.cfg
+
+le dossier meta-bidule
+drwxr-xr-x 3 mi11 mi11 4096 avril 10 17:54 conf/
+drwxr-xr-x 3 mi11 mi11 4096 mai   27  2016 recipes-core/
+drwxr-xr-x 3 mi11 mi11 4096 mai   23  2016 recipes-extra/
+drwxr-xr-x 3 mi11 mi11 4096 avril 30  2016 recipes-kernel/
+drwxr-xr-x 3 mi11 mi11 4096 mai   23  2016 recipes-support/
+drwxr-xr-x 3 mi11 mi11 4096 mai   23  2016 recipes-xenomai/
+contient les fichiers spécifiques à la cible
+
+2.2) on a ajouté une ligne dans le fichier bblayers.conf :
+
+BBLAYERS ?= " \
+  /home/mi11/poky-dizzy-12.0.3/meta \
+  /home/mi11/poky-dizzy-12.0.3/meta-yocto \
+  /home/mi11/poky-dizzy-12.0.3/meta-yocto-bsp \
+  /home/mi11/devkit8600/meta-devkit8600 \  // CELLE LA
+  "
+
+et dans le fichier local.conf, on change la ligne 36 :
+MACHINE ??= "devkit8600"
+
+le nom "devkit8600" est en fait le nom du fichier de conf du même nom situé ici : 
+/home/mi11/devkit8600/meta-devkit8600/conf/machine
+
+2.3)Résultat de la compilation :
+
+Build Configuration:
+BB_VERSION        = "1.24.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "LinuxMint-17.3"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "devkit8600"
+DISTRO            = "poky"
+DISTRO_VERSION    = "1.7.3"
+TUNE_FEATURES     = "arm armv7a vfp neon"
+TARGET_FPU        = "vfp-neon"
+meta              
+meta-yocto        
+meta-yocto-bsp    
+meta-devkit8600   = "<unknown>:<unknown>"
+
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+NOTE: Tasks Summary: Attempted 2605 tasks of which 2190 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message shown.
+
+
+On obtient notre image kernel uImage qui est un lien symbolique vers le fichier 
+uImage--3.1.0-r0-devkit8600-20170410160636.bin.
+
+De plus, on voit le système de fichiers (rootfs).
+
+
+Comparaison avec la VM :
+
+CIBLE : Taille image : 3215152
+	Taille rootfs : 18255233
+
+HOTE : Taille image : 6572944 (on le voit dans /boot)
+	Taille syst fichiers : 18G - 11,1 Go =
+
+Grosse diff car l'image de la cible n'est faite que pour cette cible là, elle gère moins de choses (périphériques... etc) et propose
+moins de fonctionnalités. Pour le rootfs, grosse différence car programmes installés dans l'un et pas dans l'autre.
+En gros sur la cible on a la configuration minimale.
+
+Exercice 3
+
+3.1) on a copié uImage dans le dossier /tftpboot, comme c'est indiqué dans le fichier de conf /etc/xinetd.d/tftp
+on a foutu le rootfs dans /tftpboot/rootfs
+
+3.2 ) 
+
+
+
+
+/**** SORTIE AU BOOT *///////
+
+
+
+
+
+
+CCCCCCCC
+U-Boot SPL 2011.09-svn (May 22 2012 - 11:19:00)
+Texas Instruments Revision detection unimplemented
+Booting from NAND...
+
+
+U-Boot 2011.09-svn (May 22 2012 - 11:19:00)
+
+I2C:   ready
+DRAM:  512 MiB
+WARNING: Caches not enabled
+Did not find a recognized configuration, assuming General purpose EVM in Profile 0 with Daughter board
+NAND:  HW ECC Hamming Code selected
+512 MiB
+MMC:   OMAP SD/MMC: 0
+Net:   cpsw
+Hit any key to stop autoboot:  3 \0x08\0x08\0x08 2 \0x08\0x08\0x08 1 \0x08\0x08\0x08 0 
+Card did not respond to voltage select!
+Booting from network ...
+miiphy read id fail
+link up on port 0, speed 100, full duplex
+BOOTP broadcast 1
+DHCP client bound to address 192.168.1.6
+Using cpsw device
+TFTP from server 192.168.1.1; our IP address is 192.168.1.6
+Filename 'uImage'.
+Load address: 0x82000000
+Loading: *\0x08#################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 #################################################################
+\0x09 ###########################################
+done
+Bytes transferred = 3215152 (310f30 hex)
+## Booting kernel from Legacy Image at 82000000 ...
+   Image Name:   Linux-3.1.0
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3215088 Bytes = 3.1 MiB
+   Load Address: 80008000
+   Entry Point:  80008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+Linux version 3.1.0 (mi11@mi11-VirtualBox) (gcc version 4.9.1 (GCC) ) #1 Mon Apr 10 18:15:11 CEST 2017
+CPU: ARMv7 Processor [413fc082] revision 2 (ARMv7), cr=10c53c7d
+CPU: VIPT nonaliasing data cache, VIPT aliasing instruction cache
+Machine: am335xevm
+Memory policy: ECC disabled, Data cache writeback
+AM335X ES1.0 (neon )
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 130048
+Kernel command line: console=ttyO0,115200n8 ip=dhcp noinitrd root=/dev/nfs rw rootwait
+PID hash table entries: 2048 (order: 1, 8192 bytes)
+Dentry cache hash table entries: 65536 (order: 6, 262144 bytes)
+Inode-cache hash table entries: 32768 (order: 5, 131072 bytes)
+Memory: 512MB = 512MB total
+Memory: 512996k/512996k available, 11292k reserved, 0K highmem
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+    DMA     : 0xffa00000 - 0xffe00000   (   4 MB)
+    vmalloc : 0xe0800000 - 0xf8000000   ( 376 MB)
+    lowmem  : 0xc0000000 - 0xe0000000   ( 512 MB)
+    modules : 0xbf000000 - 0xc0000000   (  16 MB)
+      .text : 0xc0008000 - 0xc05c6000   (5880 kB)
+      .init : 0xc05c6000 - 0xc05ff000   ( 228 kB)
+      .data : 0xc0600000 - 0xc065e618   ( 378 kB)
+       .bss : 0xc065e63c - 0xc0699694   ( 237 kB)
+NR_IRQS:396
+IRQ: Found an INTC at 0xfa200000 (revision 5.0) with 128 interrupts
+Total of 128 interrupts on 1 active controller
+OMAP clockevent source: GPTIMER1 at 25000000 Hz
+OMAP clocksource: GPTIMER2 at 25000000 Hz
+sched_clock: 32 bits at 25MHz, resolution 40ns, wraps every 171798ms
+Console: colour dummy device 80x30
+Calibrating delay loop... 718.02 BogoMIPS (lpj=3590144)
+pid_max: default: 32768 minimum: 301
+Security Framework initialized
+Mount-cache hash table entries: 512
+CPU: Testing write buffer coherency: ok
+devtmpfs: initialized
+print_constraints: dummy: 
+NET: Registered protocol family 16
+GPMC revision 6.0
+OMAP GPIO hardware version 0.1
+omap_l3_smx omap_l3_smx.0: couldn't find resource
+omap_mux_init: Add partition: #1: core, flags: 0
+ omap_i2c.1: alias fck already exists
+The board is general purpose EVM in profile 0
+ omap_hsmmc.0: alias fck already exists
+ omap_hsmmc.2: alias fck already exists
+Configure Bluetooth Enable pin...
+error setting wl12xx data
+ omap2_mcspi.1: alias fck already exists
+ omap2_mcspi.2: alias fck already exists
+bio: create slab <bio-0> at 0
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+registerd cppi-dma Intr @ IRQ 17
+Cppi41 Init Done Qmgr-base(e083a000) dma-base(e0838000)
+Cppi41 Init Done
+omap_i2c omap_i2c.1: bus 1 rev4.0 at 100 kHz
+Advanced Linux Sound Architecture Driver Version 1.0.24.
+Bluetooth: Core ver 2.16
+NET: Registered protocol family 31
+Bluetooth: HCI device and connection manager initialized
+Bluetooth: HCI socket layer initialized
+Bluetooth: L2CAP socket layer initialized
+Bluetooth: SCO socket layer initialized
+Switching to clocksource gp timer
+Switched to NOHz mode on CPU #0
+musb-hdrc: version 6.0, ?dma?, otg (peripheral+host)
+musb-hdrc musb-hdrc.0: dma type: dma-cppi41
+musb-hdrc musb-hdrc.0: USB OTG mode controller at e080a000 using DMA, IRQ 18
+musb-hdrc musb-hdrc.1: dma type: dma-cppi41
+musb-hdrc musb-hdrc.1: USB OTG mode controller at e080c800 using DMA, IRQ 19
+NET: Registered protocol family 2
+IP route cache hash table entries: 4096 (order: 2, 16384 bytes)
+TCP established hash table entries: 16384 (order: 5, 131072 bytes)
+TCP bind hash table entries: 16384 (order: 4, 65536 bytes)
+TCP: Hash tables configured (established 16384 bind 16384)
+TCP reno registered
+UDP hash table entries: 256 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+NetWinder Floating Point Emulator V0.97 (double precision)
+VFS: Disk quotas dquot_6.5.2
+Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+JFFS2 version 2.2. (NAND) (SUMMARY)  \0xc2\0xa9 2001-2006 Red Hat, Inc.
+msgmni has been set to 1001
+io scheduler noop registered
+io scheduler deadline registered
+io scheduler cfq registered (default)
+Could not set LED4 to fully on
+da8xx_lcdc da8xx_lcdc.0: GLCD: Found AT043TN24 panel
+Console: switching to colour frame buffer device 60x34
+Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+omap_uart.0: ttyO0 at MMIO 0x44e09000 (irq = 72) is a OMAP UART0
+console [ttyO0] enabled
+omap_uart.1: ttyO1 at MMIO 0x48022000 (irq = 73) is a OMAP UART1
+omap_uart.2: ttyO2 at MMIO 0x48024000 (irq = 74) is a OMAP UART2
+omap_uart.3: ttyO3 at MMIO 0x481a6000 (irq = 44) is a OMAP UART3
+omap_uart.4: ttyO4 at MMIO 0x481a8000 (irq = 45) is a OMAP UART4
+omap_uart.5: ttyO5 at MMIO 0x481aa000 (irq = 46) is a OMAP UART5
+brd: module loaded
+loop: module loaded
+i2c-core: driver [tsl2550] using legacy suspend method
+i2c-core: driver [tsl2550] using legacy resume method
+mtdoops: mtd device (mtddev=name/number) must be supplied
+omap2-nand driver initializing
+ONFI flash detected
+ONFI param page 0 valid
+NAND device: Manufacturer ID: 0xad, Chip ID: 0xdc (Hynix H27U4G8F2DTR-BC)
+Creating 8 MTD partitions on "omap2-nand.0":
+0x000000000000-0x000000020000 : "SPL"
+0x000000020000-0x000000040000 : "SPL.backup1"
+0x000000040000-0x000000060000 : "SPL.backup2"
+0x000000060000-0x000000080000 : "SPL.backup3"
+0x000000080000-0x000000260000 : "U-Boot"
+0x000000260000-0x000000280000 : "U-Boot Env"
+0x000000280000-0x000000780000 : "Kernel"
+0x000000780000-0x000020000000 : "File System"
+OneNAND driver initializing
+davinci_mdio davinci_mdio.0: davinci mdio revision 1.6
+davinci_mdio davinci_mdio.0: detected phy mask ffffffef
+davinci_mdio.0: probed
+davinci_mdio davinci_mdio.0: phy[4]: device 0:04, driver unknown
+CAN device driver interface
+CAN bus driver for Bosch D_CAN controller 1.0
+d_can d_can: d_can device registered (irq=55, irq_obj=56)
+usbcore: registered new interface driver cdc_ether
+usbcore: registered new interface driver cdc_subset
+Initializing USB Mass Storage driver...
+usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+ gadget: using random self ethernet address
+ gadget: using random host ethernet address
+usb0: MAC 06:50:55:8c:0c:93
+usb0: HOST MAC 62:9a:93:a2:1e:53
+ gadget: Ethernet Gadget, version: Memorial Day 2008
+ gadget: g_ether ready
+musb-hdrc musb-hdrc.0: MUSB HDRC host driver
+musb-hdrc musb-hdrc.0: new USB bus registered, assigned bus number 1
+usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb1: Product: MUSB HDRC host driver
+usb usb1: Manufacturer: Linux 3.1.0 musb-hcd
+usb usb1: SerialNumber: musb-hdrc.0
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+musb-hdrc musb-hdrc.1: MUSB HDRC host driver
+musb-hdrc musb-hdrc.1: new USB bus registered, assigned bus number 2
+usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb2: Product: MUSB HDRC host driver
+usb usb2: Manufacturer: Linux 3.1.0 musb-hcd
+usb usb2: SerialNumber: musb-hdrc.1
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 1 port detected
+mousedev: PS/2 mouse device common for all mice
+input: ti-tsc-adcc as /devices/platform/tsc/input/input0
+omap_rtc omap_rtc: rtc core: registered omap_rtc as rtc0
+i2c /dev entries driver
+Linux video capture interface: v2.00
+usbcore: registered new interface driver uvcvideo
+USB Video Class driver (1.1.1)
+OMAP Watchdog Timer Rev 0x01: initial timeout 60 sec
+Bluetooth: HCI UART driver ver 2.2
+Bluetooth: HCI H4 protocol initialized
+Bluetooth: HCI BCSP protocol initialized
+Bluetooth: HCILL protocol initialized
+Bluetooth: HCIATH3K protocol initialized
+cpuidle: using governor ladder
+cpuidle: using governor menu
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+usbcore: registered new interface driver snd-usb-audio
+_regulator_get: 1-000a supply VDDA not found, using dummy regulator
+_regulator_get: 1-000a supply VDDIO not found, using dummy regulator
+_regulator_get: 1-000a supply VDDD not found, using dummy regulator
+sgtl5000 1-000a: sgtl5000 revision 17
+print_constraints: 1-000a: 850 <--> 1600 mV at 1200 mV normal 
+_regulator_get: 1-000a supply VDDA not found, using dummy regulator
+_regulator_get: 1-000a supply VDDIO not found, using dummy regulator
+sgtl5000 1-000a: Using internal LDO instead of VDDD
+mmc1: card claims to support voltages below the defined range. These will be ignored.
+sgtl5000 1-000a: Failed to add route HPLOUT->Headphone Jack
+sgtl5000 1-000a: dapm: unknown pin MONO_LOUT
+sgtl5000 1-000a: dapm: unknown pin HPLCOM
+sgtl5000 1-000a: dapm: unknown pin HPRCOM
+asoc: sgtl5000 <-> davinci-mcasp.0 mapping ok
+ALSA device list:
+  #0: AM335X EVM
+oprofile: hardware counters not available
+oprofile: using timer interrupt.
+nf_conntrack version 0.5.0 (8015 buckets, 32060 max)
+ip_tables: (C) 2000-2006 Netfilter Core Team
+TCP cubic registered
+NET: Registered protocol family 17
+can: controller area network core (rev 20090105 abi 8)
+NET: Registered protocol family 29
+can: raw protocol (rev 20090105)
+can: broadcast manager protocol (rev 20090105 t)
+Bluetooth: RFCOMM TTY layer initialized
+Bluetooth: RFCOMM socket layer initialized
+Bluetooth: RFCOMM ver 1.11
+Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+Bluetooth: BNEP filters: protocol multicast
+Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+Registering the dns_resolver key type
+VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 3
+ThumbEE CPU extension supported.
+_regulator_get: mpu.0 supply mpu not found, using dummy regulator
+omap2_set_init_voltage: Fail set voltage-dpll_mpu_ck(f=720000000 v=1260000)on vddmpu
+omap2_set_init_voltage: unable to set vdd_mpu
+Detected MACID=0:18:30:fe:7b:f6
+input: gpio-keys as /devices/platform/gpio-keys/input/input1
+omap_rtc omap_rtc: setting system clock to 2000-01-01 00:00:00 UTC (946684800)
+mmc1: queuing unknown CIS tuple 0x91 (3 bytes)
+
+CPSW phy found : id is : 0x4dd072
+PHY 0:01 not found
+mmc1: new SDIO card at address 0001
+PHY: 0:04 - Link is Up - 100/Full
+Sending DHCP requests ., OK
+IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.6
+IP-Config: Complete:
+     device=eth0, addr=192.168.1.6, mask=255.255.255.0, gw=255.255.255.255,
+     host=192.168.1.6, domain=, nis-domain=(none),
+     bootserver=192.168.1.1, rootserver=192.168.1.1, rootpath=/tftpboot/rootfs
+VFS: Mounted root (nfs filesystem) on device 0:15.
+devtmpfs: mounted
+Freeing init memory: 228K
+
+INIT: version 2.88 booting
+
+Starting udev
+udevd[718]: starting version 182
+bootlogd: cannot allocate pseudo tty: No such file or directory
+Populating dev cache
+Fri Apr 14 13:12:58 UTC 2017
+
+INIT: Entering runlevel: 5
+
+Configuring network interfaces... ifup skipped for nfsroot interface eth0
+run-parts: /etc/network/if-pre-up.d/nfsroot exited with code 1
+Starting system message bus: dbus.
+Starting Dropbear SSH server: Generating key, this may take a while...
+Public key portion is:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHQW67zEKPRIeKx6VZxLER0R/2HThSN/SWD3fMk23eXy9j3PudyVMJfjGBF258qnZNicoMsK0Mx5JrpV124XKCzvKTAYsMjLc67WdqcX73zSzt1Cplk99ATrT3SKK+Dq16Nld2ZuhfGDidLPvrSqOfRaUYRH6048XV/E7penoQ8oP2tJV0kiGnXRQMoqSyLyZFWW/0xNzatB/Wr6o+I7Iboc2KWDyOu8caJxP4fxrV/4zEjyTvSQCBCzwuv2RSFPJV7lleMD2XkKN+QOGCgG1Eq8TgrNDU0Jps+RelENrtkj+lgVJF2odabmPMtmsB+8lhtgdgk8wth0dbjQzedRFt root@devkit8600
+Fingerprint: md5 a7:0c:a2:b1:07:9a:77:98:01:7e:31:13:10:02:42:2c
+dropbear.
+Starting rpcbind daemon...rpcbind: cannot create socket for udp6
+
+rpcbind: cannot create socket for tcp6
+
+done.
+Starting syslogd/klogd: done
+ * Starting Avahi mDNS/DNS-SD Daemon: avahi-daemon
+   ...done.
+Starting Telephony daemon
+Starting Linux NFC daemon
+/etc/rc5.d/S64neard: line 26: /usr/lib/neard/nfc/neard: No such file or directory
+
+
+Poky (Yocto Project Reference Distro) 1.7.3 devkit8600 /dev/ttyO0
+
+
+
+devkit8600 login: root
+root@devkit8600:~# 
+
+
+
+
+
+
+
+/**** FIN SORTIE AU BOOT *///////
+
+
+
+
+Jusqu'à "Starting kernel ...", il charge l'image via tftp et la lance.
+
+A FINIR PAR RAFIK
+
+
+3.3 ) IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.6 (sortie du boot)
+
+3.4 ) proc/devices contient les périphériques dans la premiere categorie et les stockages dans la deuxieme
+port série ==> ttyS
+Le numéro en début de ligne correspond au numéro mineur, ça veut dire qu'ils sont gérés par le même driver (voir cours)
+
+
+
+EXERCICE 4
+
+4.1 ) Il est organisé selon l'architecture. Les sous dossiers contiennent des fichiers .ipk
+
+4.2 ) voir screen
+
+opkg install /libxml2_2.9.1-r0_armv7a-vfp-neon.ipk
+
+4.3 ) première méthode :
+sudo cp libxml2_2.9.1-r0_armv7a-vfp-neon.ipk /tftpboot/rootfs/home/root/
+
+deuxieme methode :
+scp libxml2_2.9.1-r0_armv7a-vfp-neon.ipk root@192.168.1.6:/home/root/
+
+4.4 ) /usr/lib
+Ces fichiers sont des .so (shared objects), ce sont des librairies dynamiques.
+
+
+
+EXERCICE 5
+
+5.1) on accede aux leds comme ça : 
+
+root@DevKit8600:~# echo 1 > /sys/class/leds/user_led/brightness
+root@DevKit8600:~# echo 0 > /sys/class/leds/user_led/brightness
+(page 72)
+
+Mais le dossier user_led n'existe pas lol donc c'est pas opérationnel
+
+
+5.2) ce fichier sert à set up l'environnement de compilation de manière à avoir les bons prefixes
+pour une compilation croisée
+Le prefixe ici est arm-poky-linux-gnueabi-
+
+5.3 ) make ARCH=arm help
+
+configs possibles :
+
+  devkit8600_defconfig     - Build for devkit8600
+  devkit8600_tisdk_defconfig - Build for devkit8600_tisdk
+
+
+make devkit8600_defconfig
+
+5.4)
+ voir screen
+make ARCH=arm menuconfig
+différentes possibilités : 
+ajouter en modularizes features ou bien en built-in
+
+compilation : make ARCH=arm uImage -j2
+
+5.5) le resultat de la compilation arch/arm/boot/uImage
+
+
+Linux version 3.1.0 (mi11@mi11-VirtualBox) (gcc version 4.9.1 (GCC) ) #1 Fri Apr 14 17:25:26 CEST 2017
+
+5.6 et 5.7 : voir screens
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
