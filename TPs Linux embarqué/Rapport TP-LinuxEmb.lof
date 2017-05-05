@@ -1,0 +1,15 @@
+\select@language {french}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Dossier image}}{6}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Mise en \'evidence du port s\'erie dans /proc/devices}}{8}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Mise en \'evidence du port s\'erie dans /dev}}{9}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Dossier \textit {ipk}}}{9}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Dossier \textit {ipk/devkit800}}}{10}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Dossier \textit {ipk/armv7a-vfp-neon}}}{11}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Dossier \textit {/usr/lib}}}{12}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Configurations par d\'efaut de \textit {devkit8600}}}{13}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Activation du driver pour les LEDs}}{14}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Logs de d\'emarrage}}{16}
+\contentsline {figure}{\numberline {1.11}{\ignorespaces Logs du kernel}}{18}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
