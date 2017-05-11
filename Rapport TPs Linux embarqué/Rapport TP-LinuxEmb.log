@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.5)  4 MAY 2017 09:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.5)  11 MAY 2017 09:36
 entering extended mode
 **"./Rapport TP-LinuxEmb.tex"
 ("Rapport TP-LinuxEmb.tex"
@@ -527,22 +527,28 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [2
+
+])
 \tf@toc=\write3
 \openout3 = `"Rapport TP-LinuxEmb.toc"'.
 
- [2
 
-]
-("Rapport TP-LinuxEmb.lof")
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[3] ("Rapport TP-LinuxEmb.lof")
 \tf@lof=\write4
 \openout4 = `"Rapport TP-LinuxEmb.lof"'.
 
- [3
+ [4
 
 ]
 Chapitre 1.
-[4
+[5
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -557,13 +563,7 @@ Overfull \hbox (12.35114pt too wide) in paragraph at lines 223--223
 e/mi11/poky/build/tmp/deploy/images
  []
 
-
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[5] <23dossierimage.PNG, id=25, 873.2625pt x 289.08pt>
+[6] <23dossierimage.PNG, id=28, 873.2625pt x 289.08pt>
 File: 23dossierimage.PNG Graphic file (type png)
 
 <use 23dossierimage.PNG>
@@ -572,12 +572,12 @@ Package pdftex.def Info: 23dossierimage.PNG used on input line 226.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6 <./23dossierimage.PNG>]
+ [7 <./23dossierimage.PNG>]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `!tbp') on input line 268.
 
-<341.jpg, id=31, 230.36063pt x 674.52pt>
+<341.jpg, id=35, 230.36063pt x 674.52pt>
 File: 341.jpg Graphic file (type jpg)
  <use 341.jpg>
 Package pdftex.def Info: 341.jpg used on input line 270.
@@ -587,27 +587,27 @@ Package pdftex.def Info: 341.jpg used on input line 270.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `!tbp') on input line 274.
 
-<342.jpg, id=32, 201.75375pt x 67.75313pt>
+<342.jpg, id=36, 201.75375pt x 67.75313pt>
 File: 342.jpg Graphic file (type jpg)
  <use 342.jpg>
 Package pdftex.def Info: 342.jpg used on input line 276.
 (pdftex.def)             Requested size: 125.47737pt x 42.13779pt.
- [7] [8 <./341.jpg>]
-<41dossier_deploy_ipk.png, id=40, 715.92468pt x 117.43875pt>
+ [8] [9 <./341.jpg>]
+<41dossier_deploy_ipk.png, id=43, 715.92468pt x 117.43875pt>
 File: 41dossier_deploy_ipk.png Graphic file (type png)
 
 <use 41dossier_deploy_ipk.png>
 Package pdftex.def Info: 41dossier_deploy_ipk.png used on input line 294.
 (pdftex.def)             Requested size: 418.25368pt x 68.61089pt.
- [9 <./342.jpg> <./41dossier_deploy_ipk.png>]
-<41ou_se_trouve_le_noyau.png, id=45, 715.17188pt x 677.53125pt>
+ [10 <./342.jpg> <./41dossier_deploy_ipk.png>]
+<41ou_se_trouve_le_noyau.png, id=48, 715.17188pt x 677.53125pt>
 File: 41ou_se_trouve_le_noyau.png Graphic file (type png)
 
 <use 41ou_se_trouve_le_noyau.png>
 Package pdftex.def Info: 41ou_se_trouve_le_noyau.png used on input line 304.
 (pdftex.def)             Requested size: 418.25368pt x 396.24564pt.
- [10 <./41ou_se_trouve_le_noyau.png>]
-<42.png, id=50, 711.4078pt x 152.06813pt>
+ [11 <./41ou_se_trouve_le_noyau.png>]
+<42.png, id=53, 711.4078pt x 152.06813pt>
 File: 42.png Graphic file (type png)
  <use 42.png>
 Package pdftex.def Info: 42.png used on input line 318.
@@ -629,7 +629,7 @@ Overfull \hbox (7.79352pt too wide) in paragraph at lines 341--341
 me/root/ 
  []
 
-[11 <./42.png>] <44.png, id=56, 691.83469pt x 359.09157pt>
+[12 <./42.png>] <44.png, id=59, 691.83469pt x 359.09157pt>
 File: 44.png Graphic file (type png)
  <use 44.png>
 Package pdftex.def Info: 44.png used on input line 352.
@@ -640,19 +640,19 @@ Overfull \hbox (3.2111pt too wide) in paragraph at lines 362--363
 e d'al-lu-mer et d'éteindre
  []
 
-[12 <./44.png>]
+[13 <./44.png>]
 Overfull \hbox (44.87155pt too wide) in paragraph at lines 378--378
 []\T1/lmtt/m/n/12 source /opt/poky/1.7.3/environment-setup-armv7a-vfp-neon-poky
 -linux-gnueabi 
  []
 
-<53.png, id=61, 715.17188pt x 139.27031pt>
+<53.png, id=65, 715.17188pt x 139.27031pt>
 File: 53.png Graphic file (type png)
  <use 53.png>
 Package pdftex.def Info: 53.png used on input line 392.
 (pdftex.def)             Requested size: 418.25368pt x 81.45047pt.
- [13 <./53.png>]
-<54.png, id=67, 711.4078pt x 702.37407pt>
+ [14 <./53.png>]
+<54.png, id=70, 711.4078pt x 702.37407pt>
 File: 54.png Graphic file (type png)
  <use 54.png>
 Package pdftex.def Info: 54.png used on input line 411.
@@ -662,7 +662,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 415--418
 
  []
 
-[14 <./54.png>] [15] <56.png, id=75, 634.62094pt x 527.72156pt>
+[15 <./54.png>] [16] <56.png, id=78, 634.62094pt x 527.72156pt>
 File: 56.png Graphic file (type png)
  <use 56.png>
 Package pdftex.def Info: 56.png used on input line 435.
@@ -673,64 +673,88 @@ Overfull \hbox (211.58263pt too wide) in paragraph at lines 441--441
  (GCC) ) #1 Fri Apr 14 17:25:26 CEST 2017 
  []
 
-[16 <./56.png>] [17] <57.png, id=83, 559.33969pt x 88.83188pt>
+[17 <./56.png>] [18] <57.png, id=86, 559.33969pt x 88.83188pt>
 File: 57.png Graphic file (type png)
  <use 57.png>
 Package pdftex.def Info: 57.png used on input line 454.
 (pdftex.def)             Requested size: 418.25368pt x 66.42719pt.
 
-[18 <./57.png>]
+[19 <./57.png>]
 Chapitre 2.
-[19
+<screenstp6/32.PNG, id=92, 474.27188pt x 309.40594pt>
+File: screenstp6/32.PNG Graphic file (type png)
+ <use screenstp6/32.PNG>
+Package pdftex.def Info: screenstp6/32.PNG used on input line 474.
+(pdftex.def)             Requested size: 209.12683pt x 136.43173pt.
 
-]
-Annexe A.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 504.
+Overfull \hbox (42.85374pt too wide) in paragraph at lines 483--484
+[] \T1/lmr/m/n/12 " \T1/lmr/m/it/12 /opt/poky/1.7.3/sysroots/armv7a-vfp-neon-po
+ky-linux-gnueabi/usr/include/linux/input.h\T1/lmr/m/n/12 " 
+ []
+
+[20
+
+ <./screenstp6/32.PNG>] [21]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 622.
+
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 504.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 622.
+ [23]
+Underfull \vbox (badness 1466) has occurred while \output is active []
+
+ [24]
+[25]
+Chapitre 3.
+[26
+
+]
+Annexe A.
 
 Underfull \vbox (badness 2799) has occurred while \output is active []
 
- [20
+ [27
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [21]
+ [28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [22]
+ [29]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23]
+ [30]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24]
+ [31]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
-Overfull \hbox (159.752pt too wide) in paragraph at lines 780--781
+ [32]
+Overfull \hbox (159.752pt too wide) in paragraph at lines 1012--1013
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26]
-[27] ("Rapport TP-LinuxEmb.aux")
+ [33]
+[34] ("Rapport TP-LinuxEmb.aux")
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 8609 strings out of 493333
- 115668 string characters out of 3139186
+ 8651 strings out of 493333
+ 116162 string characters out of 3139186
  532372 words of memory out of 3000000
- 11932 multiletter control sequences out of 15000+200000
+ 11972 multiletter control sequences out of 15000+200000
  82231 words of font info for 65 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,12n,72p,525b,1789s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -742,9 +766,9 @@ ram Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on "Rapport TP-LinuxEmb.pdf" (27 pages, 1315654 bytes).
+Output written on "Rapport TP-LinuxEmb.pdf" (34 pages, 1386026 bytes).
 PDF statistics:
- 145 PDF objects out of 1000 (max. 8388607)
+ 169 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
