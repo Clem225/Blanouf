@@ -1,0 +1,36 @@
+exo 1)
+
+task_descriptor ==> contient les i,nformations de la tâche, c à d 
+	le pointeur vers la fct
+	la periode T de la tache
+	la durée de la tache
+	sa priorité
+	
+rt_task ==> voir code
+
+exo 2)
+
+rt_task_name sert à obtenir le nom de la tâche en cours grâce à la structure RT_TASK_INFO et son champ name
+Autres champs : http://xenomai.org/documentation/xenomai-2.4/html/api/structrt__task__info.html
+
+
+exo 5)
+
+on fait V (+1) après l'initialisation de chaque taches
+Dans require on fait P(-1) et dans release V(+1)
+
+Commentez l’enchaînement des
+tâches pour les cas extrêmes du temps d’exécution de METEO 
+==> Dans le cas min (40ms) ORDO_BUS n'a pas terminé sa periode de 125 ms (il n'est pas encore prêt) et dans le cas max (60ms) il est prêt
+
+exo 6)
+
+Creation d'un deuxieme semaphore ==> voir code
+
+exo 7)
+
+Inversion de priorité
+
+exo 8)
+
+Utilisation MUTEX
