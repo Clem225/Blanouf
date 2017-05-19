@@ -14,4 +14,9 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces R\'esultat du evtest sur /dev/input/event1}}{20}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Statistiques Xenomai avec un programme non temps r\'eel}}{26}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel}}{28}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel et la fonction rt\_task\_sleep}}{28}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel et les fonctions rt\_task\_sleep et rt\_printf}}{29}
+\addvspace {10\p@ }
 \addvspace {10\p@ }

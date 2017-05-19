@@ -94,7 +94,7 @@
 \pagestyle{fancy}
 \lhead{Clément BLANQUET et Rafik CHENNOUF}
 \rhead{Page \thepage}
-\cfoot{MI11 - Rapport des TPs linux embarqué}
+\cfoot{\footnotesize{MI11 - Rapport des TPs linux embarqué}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -701,6 +701,213 @@ Voici les temps relevés :
 
 
 \chapter{TP1 Xenomai}
+
+\section{Exercice 1 : tâches}
+
+\subsection{Question 1.1}
+Un code "classique" ne s'exécute pas de façon temps réel. En effet, il n'apparaît pas dans le fichier /proc/xenomai/stats ce qui signifie qu'il n'est pas temps réel.\smallbreak
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/11.PNG}
+\caption{Statistiques Xenomai avec un programme non temps réel}
+\end{figure}
+
+\subsection{Question 1.2}
+Voici le code qui permet de créer une tâche temps réel :
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+
+void task_hello()
+{
+	while(1)
+	{
+		sleep(rt_timer_ns2ticks(1000000000));
+		printf("Hello World !\n");
+	}
+}
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err;
+	
+	err = rt_task_create(&task_printf, "hello world", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+	if(!err)
+		rt_task_start(&task_printf, &task_hello, NULL);
+		
+	getchar();
+	
+	return 0;
+}
+\end{lstlisting}
+
+
+Le chemin des fichiers à inclure est: 
+\begin{lstlisting}
+/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/include/xenomai
+\end{lstlisting}
+Le chemin des librairies est : 
+\begin{lstlisting}
+/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/lib
+\end{lstlisting}
+
+Cela nous donne la ligne de commande (après avoir fait un \textit{source}) :
+\begin{lstlisting}
+$CC -o main main.c -I/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/include/xenomai -L/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/lib -lxenomai -lnative
+\end{lstlisting}
+
+\subsection{Question 1.3}
+Cette application n'est toujours pas temps réel. En effet, malgré la création d'une tâche temps réel, les fonctions \textit{sleep} et \textit{printf} qui s'y trouvent ne sont pas temps réel.
+
+Le fichier de statistiques Xenomai donne :
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/13.PNG}
+\caption{Statistiques Xenomai avec une tâche temps réel}
+\end{figure}
+
+\subsection{Question 1.4}
+Voici le code après avoir remplacé la fonction sleep par son équivalent temps réel :
+\begin{lstlisting}
+void task_hello()
+{
+	while(1)
+	{
+		rt_task_sleep(rt_timer_ns2ticks(1000000000));
+		printf("Hello World !\n");
+	}
+}
+\end{lstlisting}
+
+Le fichier de statistiques Xenomai donne :
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/14.PNG}
+\caption{Statistiques Xenomai avec une tâche temps réel et la fonction rt\_task\_sleep}
+\end{figure}
+
+
+\subsection{Question 1.5}
+Voici le code après avoir remplacé les fonctions sleep et printf par leurs équivalents temps réel :
+\begin{lstlisting}
+void task_hello()
+{
+	while(1)
+	{
+		rt_task_sleep(rt_timer_ns2ticks(1000000000));
+		rt_printf("Hello World !\n");
+	}
+}
+\end{lstlisting}
+
+Le fichier de statistiques Xenomai donne :
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/15.PNG}
+\caption{Statistiques Xenomai avec une tâche temps réel et les fonctions rt\_task\_sleep et rt\_printf}
+\end{figure}
+
+\textbf{Interprétation des statistiques Xenomai :} On constate que : 
+\begin{itemize}
+\item Lorsqu'on crée une tâche temps réel qui n'utilise aucune fonction temps réel (dans notre exemple, les fonctions \textit{sleep} et \textit{printf}, elle n'apparaît pas dans le fichier de statistiques. Elle n'est en fait absolument pas temps réel.
+\item Lorsque, dans cette même tâche, on rend la fonction \textit{sleep} temps réel (en la remplaçant par \textit{rt\_task\_sleep}), elle apparaît dans le fichier de statistiques. On constate que son nombre de changements de contexte (9) est très inférieur  au nombre de changements de contexte du ROOT (282), ce qui signifie que ... A COMPLETER
+\item Lorsque les fonctions \textit{sleep} et \textit{printf} ont été remplacées par leurs équivalents temps réel (\textit{rt\_task\_sleep} et \textit{rt\_printf}), le nombre changements de contextes de la tâche est égal à celui de ROOT (46), ce qui montre alors que la tâche est "entièrement" temps réel.
+\end{itemize}
+
+\section{Exercice 2 : Synchronisation}
+\subsection{Question 2.1}
+Voici le code du programme lançant deux tâches Xenomai qui afficheront chacune une partie du message "Hello World !" :
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+RT_TASK task_printf2;
+
+void task_hello()
+{
+	rt_printf("Hello\n");
+}
+
+void task_world()
+{
+	rt_printf("World !\n");
+	rt_task_sleep(rt_timer_ns2ticks(1000000000));
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1, err2;
+	
+	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+	if(!err1 && !err2)
+	{
+		rt_task_start(&task_printf, &task_hello, NULL);
+		rt_task_join(&task_printf);	
+		rt_task_start(&task_printf2, &task_world, NULL);
+		rt_task_join(&task_printf2);	
+	}
+		
+	getchar();
+	
+	return 0;
+}
+\end{lstlisting}
+
+
+Le résultat est le suivant :
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+Hello
+World !
+c
+root@devkit8600-xenomai:~# 
+\end{lstlisting}
+
+
+\subsection{Question 2.2}
+Pour le moment, les priorités des tâches n'ont aucune influence. En effet, elles sont lancées dans l'ordre dans lequel elles se trouvent dans notre code : après le \textit{rt\_task\_start}, rien ne "bloque" l'exécution de la tâche; les tâches se lancent donc l'une après l'autre comme on l'a défini. Pour afficher les messages de le désordre, il faut donc inverser les deux tâches le code. On peut aussi utiliser des sémaphores, comme vu dans les questions suivantes.
+
+\subsection{Question 2.3}
+Il faut initialiser le sémaphore à 0 de manière à bloquer les tâches.
+
+\subsection{Question 2.4}
+RAFIK TERMINE CE TP
+
+
+
+\chapter{TP2 Xenomai}
+
+
+
+
+
+
+
+
 
 
 \appendix
