@@ -464,6 +464,146 @@ a été crée.
 
 \chapter{Rapport TP 2 - Linux embarqué}
 
+\section{Exercice 1 :  Hello World}
+
+\subsection{Question 1.1}
+
+Après avoir compilé notre programme \textit{Hello World} avec \textbf{gcc} nous avons exécute la commande file pour obtenir des informations sur l'exécutable. Nous nous sommes rendu compte que cet exécutable a été compilé pour une architecture classique x86/64 et non ARM. C'est pour cela que le programme ne peut pas s'exécuter sur la cible. 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/11.png}
+		\caption{Commande \textit{file}}
+\end{figure}
+
+\subsection{Question 1.2}
+
+Avant de pouvoir cross-compiler notre programme il faut activer l'environnement de cross-compilation via la commande \textit{source} sur le fichier \\
+\textbf{/opt/poky/1.7.3/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/12.png}
+		\caption{Commande \textit{source}}
+\end{figure}
+
+
+\subsection{Question 1.3}
+
+En utilisant de nouveau la commande \textit{file} après la cross-compilation, nous constatons que le nouveau exécutable a bien été compilé pour une architecture ARM.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/13.png}
+		\caption{Commande \textit{file}}
+\end{figure}
+
+\subsection{Question 1.4}
+
+Voici le programme \textit{Hello World} :
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+		printf("Hello World !");
+		return 0;
+}
+\end{lstlisting}
+
+Ainsi que le résultat :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/14.png}
+		\caption{Résultat \textit{Hello World}}
+\end{figure}
+
+\section{Exercice 2 :  Clignotement des LEDs}
+
+\subsection{Question 2.1}
+
+Pour accéder aux LEDs il suffit de manipuler les fichiers 
+\begin{verbatim}
+/sys/class/leds/user_led/brightness
+\end{verbatim}
+pour la LED utilisateur et 
+\begin{verbatim}
+/sys/class/leds/sys_led/brightness 
+\end{verbatim}
+pour la LED système.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/21.png}
+		\caption{Fichiers des LEDs}
+\end{figure}
+
+\subsection{Question 2.2}
+
+L'allumage d'une LED se fait en écrivant le caractère '1' dans le fichier correspondant et l'éteignage se fait en écrivant le caractère '0' comme on peut le voir sur la copie d'écran suivante.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/22.png}
+		\caption{Manipulation des LEDs}
+\end{figure}
+
+\subsection{Question 2.3}
+
+Le programme suivant allume en alternance la LED utilisateur et la LED système chaque seconde :
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+	int sys_led, user_led;
+
+	sys_led = open("/sys/class/leds/sys_led/brightness", O_RDWR);	
+	// ouverture des fichiers
+	user_led = open("/sys/class/leds/user_led/brightness", O_RDWR); 
+
+	if(sys_led == -1 || user_led == -1)
+	{
+		perror("Erreur d'ouverture de l'un des fichiers");
+		return 0;
+	}
+
+	while(1)
+	{
+		if(write(user_led, "0", 1) == -1)	// éteingage de la LED user
+			perror("Erreur d'ecriture");
+
+		if(write(sys_led, "1", 1) == -1)    // allumage de la LED système
+			perror("Erreur d'ecriture");
+
+		sleep(1);							// attente d'une seconde
+
+		if(write(sys_led, "0", 1) == -1)	// éteingage de la LED système
+			perror("Erreur d'ecriture");
+
+		if(write(user_led, "1", 1) == -1)   // allumage de la LED user
+			perror("Erreur d'ecriture");
+
+		sleep(1);							// attente d'une seconde
+	}
+
+	close(sys_led);		// fermeture
+	close(user_led);	// des fichiers
+
+	return 0;
+}
+\end{lstlisting}
+
+
+\newpage
+
 \section{Exercice 3 : Boutons poussoirs}
 \subsection{Question 3.1}
 La cible dispose de trois boutons utilisateur (HOME, BACK, MENU) et un bouton de reset. On y accède via le fichier "\textit{/dev/input/event1}" dans lequel toutes les informations quant aux pressions et relâchement de ces boutons seront écrites.
