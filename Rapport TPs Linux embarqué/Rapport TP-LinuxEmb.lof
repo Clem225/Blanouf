@@ -12,11 +12,17 @@
 \contentsline {figure}{\numberline {1.10}{\ignorespaces Logs de d\'emarrage}}{17}
 \contentsline {figure}{\numberline {1.11}{\ignorespaces Logs du kernel}}{19}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces R\'esultat du evtest sur /dev/input/event1}}{20}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Commande \textit {file}}}{20}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Commande \textit {source}}}{20}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Commande \textit {file}}}{21}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces R\'esultat \textit {Hello World}}}{21}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Fichiers des LEDs}}{22}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Manipulation des LEDs}}{22}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces R\'esultat du evtest sur /dev/input/event1}}{24}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Statistiques Xenomai avec un programme non temps r\'eel}}{26}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel}}{28}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel et la fonction rt\_task\_sleep}}{28}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel et les fonctions rt\_task\_sleep et rt\_printf}}{29}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Statistiques Xenomai avec un programme non temps r\'eel}}{30}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel}}{32}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel et la fonction rt\_task\_sleep}}{32}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Statistiques Xenomai avec une t\^ache temps r\'eel et les fonctions rt\_task\_sleep et rt\_printf}}{33}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.5)  19 MAY 2017 11:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.5)  22 MAY 2017 15:16
 entering extended mode
 **"./Rapport TP-LinuxEmb.tex"
 ("Rapport TP-LinuxEmb.tex"
@@ -541,7 +541,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [3] ("Rapport TP-LinuxEmb.lof"
-Overfull \hbox (25.48874pt too wide) in paragraph at lines 19--19
+Overfull \hbox (25.48874pt too wide) in paragraph at lines 25--25
  [][] []\T1/lmr/m/n/12 Statistiques Xe-no-mai avec une tâche temps réel et la f
 onc-tion rt_task_sleep [][]  
  []
@@ -687,109 +687,158 @@ Package pdftex.def Info: 57.png used on input line 454.
 
 [19 <./57.png>]
 Chapitre 2.
-<screenstp6/32.PNG, id=92, 474.27188pt x 309.40594pt>
+<screenstp6/11.png, id=92, 645.16031pt x 41.4047pt>
+File: screenstp6/11.png Graphic file (type png)
+ <use screenstp6/11.png>
+Package pdftex.def Info: screenstp6/11.png used on input line 475.
+(pdftex.def)             Requested size: 418.25368pt x 26.84195pt.
+
+Overfull \hbox (18.60072pt too wide) in paragraph at lines 481--483
+\T1/lmr/bx/n/12 /opt/poky/1.7.3/environment-setup-armv7a-vfp-neon-poky-linux-gn
+ueabi\T1/lmr/m/n/12 . 
+ []
+
+<screenstp6/12.png, id=93, 493.0922pt x 65.49469pt>
+File: screenstp6/12.png Graphic file (type png)
+ <use screenstp6/12.png>
+Package pdftex.def Info: screenstp6/12.png used on input line 486.
+(pdftex.def)             Requested size: 418.25368pt x 55.5568pt.
+
+<screenstp6/13.png, id=94, 503.63156pt x 91.09032pt>
+File: screenstp6/13.png Graphic file (type png)
+ <use screenstp6/13.png>
+Package pdftex.def Info: screenstp6/13.png used on input line 497.
+(pdftex.def)             Requested size: 418.25368pt x 75.64801pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[20
+
+ <./screenstp6/11.png> <./screenstp6/12.png>]
+<screenstp6/14.png, id=100, 362.85562pt x 68.50594pt>
+File: screenstp6/14.png Graphic file (type png)
+ <use screenstp6/14.png>
+Package pdftex.def Info: screenstp6/14.png used on input line 519.
+(pdftex.def)             Requested size: 418.25368pt x 78.96727pt.
+
+<screenstp6/21.png, id=101, 355.3275pt x 51.94406pt>
+File: screenstp6/21.png Graphic file (type png)
+ <use screenstp6/21.png>
+Package pdftex.def Info: screenstp6/21.png used on input line 539.
+(pdftex.def)             Requested size: 418.25368pt x 61.14523pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[21 <./screenstp6/13.png> <./screenstp6/14.png>]
+<screenstp6/22.png, id=107, 386.19281pt x 52.69687pt>
+File: screenstp6/22.png Graphic file (type png)
+ <use screenstp6/22.png>
+Package pdftex.def Info: screenstp6/22.png used on input line 549.
+(pdftex.def)             Requested size: 418.25368pt x 57.07176pt.
+
+[22 <./screenstp6/21.png> <./screenstp6/22.png>] [23]
+<screenstp6/32.PNG, id=116, 474.27188pt x 309.40594pt>
 File: screenstp6/32.PNG Graphic file (type png)
  <use screenstp6/32.PNG>
-Package pdftex.def Info: screenstp6/32.PNG used on input line 474.
+Package pdftex.def Info: screenstp6/32.PNG used on input line 614.
 (pdftex.def)             Requested size: 209.12683pt x 136.43173pt.
 
-Overfull \hbox (42.85374pt too wide) in paragraph at lines 483--484
+Overfull \hbox (42.85374pt too wide) in paragraph at lines 623--624
 [] \T1/lmr/m/n/12 " \T1/lmr/m/it/12 /opt/poky/1.7.3/sysroots/armv7a-vfp-neon-po
 ky-linux-gnueabi/usr/include/linux/input.h\T1/lmr/m/n/12 " 
  []
 
-[20
-
- <./screenstp6/32.PNG>] [21]
+[24 <./screenstp6/32.PNG>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [22]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 622.
+ [25]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 762.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 622.
- [23]
-Underfull \vbox (badness 1466) has occurred while \output is active []
-
- [24]
-[25]
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 762.
+ [27] [28] [29]
 Chapitre 3.
-<screenstp7/11.PNG, id=113, 430.60875pt x 51.19125pt>
+<screenstp7/11.PNG, id=137, 430.60875pt x 51.19125pt>
 File: screenstp7/11.PNG Graphic file (type png)
  <use screenstp7/11.PNG>
-Package pdftex.def Info: screenstp7/11.PNG used on input line 711.
+Package pdftex.def Info: screenstp7/11.PNG used on input line 851.
 (pdftex.def)             Requested size: 334.60422pt x 39.77902pt.
 
-[26
+[30
 
- <./screenstp7/11.PNG>] [27]
-<screenstp7/13.PNG, id=121, 430.60875pt x 53.44969pt>
+ <./screenstp7/11.PNG>] [31]
+<screenstp7/13.PNG, id=146, 430.60875pt x 53.44969pt>
 File: screenstp7/13.PNG Graphic file (type png)
  <use screenstp7/13.PNG>
-Package pdftex.def Info: screenstp7/13.PNG used on input line 777.
+Package pdftex.def Info: screenstp7/13.PNG used on input line 917.
 (pdftex.def)             Requested size: 334.60422pt x 41.53398pt.
 
-<screenstp7/14.PNG, id=122, 432.11438pt x 69.25874pt>
+<screenstp7/14.PNG, id=147, 432.11438pt x 69.25874pt>
 File: screenstp7/14.PNG Graphic file (type png)
  <use screenstp7/14.PNG>
-Package pdftex.def Info: screenstp7/14.PNG used on input line 797.
+Package pdftex.def Info: screenstp7/14.PNG used on input line 937.
 (pdftex.def)             Requested size: 334.60422pt x 53.63162pt.
 
-[28 <./screenstp7/13.PNG> <./screenstp7/14.PNG>]
-<screenstp7/15.PNG, id=128, 432.11438pt x 67.75313pt>
+[32 <./screenstp7/13.PNG> <./screenstp7/14.PNG>]
+<screenstp7/15.PNG, id=153, 432.11438pt x 67.75313pt>
 File: screenstp7/15.PNG Graphic file (type png)
  <use screenstp7/15.PNG>
-Package pdftex.def Info: screenstp7/15.PNG used on input line 818.
+Package pdftex.def Info: screenstp7/15.PNG used on input line 958.
 (pdftex.def)             Requested size: 334.60422pt x 52.46573pt.
 
-[29 <./screenstp7/15.PNG>] [30] [31]
+[33 <./screenstp7/15.PNG>] [34] [35]
 Chapitre 4.
-[32
+[36
 
 ]
 Annexe A.
 
 Underfull \vbox (badness 2799) has occurred while \output is active []
 
- [33
+ [37
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [35]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [36]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [37]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [38]
-Overfull \hbox (159.752pt too wide) in paragraph at lines 1219--1220
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [41]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42]
+Overfull \hbox (159.752pt too wide) in paragraph at lines 1378--1379
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39]
-[40] ("Rapport TP-LinuxEmb.aux") ) 
+ [43]
+[44] ("Rapport TP-LinuxEmb.aux") ) 
 Here is how much of TeX's memory you used:
- 8717 strings out of 493333
- 117107 string characters out of 3139186
+ 8758 strings out of 493333
+ 117810 string characters out of 3139186
  532372 words of memory out of 3000000
- 12033 multiletter control sequences out of 15000+200000
+ 12071 multiletter control sequences out of 15000+200000
  82231 words of font info for 65 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,12n,72p,525b,1811s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,12n,72p,525b,1813s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/
 lm/lm-ec.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}<C:/
 Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiK
@@ -799,9 +848,9 @@ pe1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr1
 iles/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /lm/lmtt12.pfb>
-Output written on "Rapport TP-LinuxEmb.pdf" (40 pages, 1452178 bytes).
+Output written on "Rapport TP-LinuxEmb.pdf" (44 pages, 1582366 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
+ 223 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
