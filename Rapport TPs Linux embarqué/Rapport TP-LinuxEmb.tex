@@ -1035,8 +1035,71 @@ Pour le moment, les priorités des tâches n'ont aucune influence. En effet, elles
 Il faut initialiser le sémaphore à 0 de manière à bloquer les tâches.
 
 \subsection{Question 2.4}
-RAFIK TERMINE CE TP
 
+Le paramètre \textit{mode} lors de la création du sémaphore nous sert à définir le mode d'ordonnancement à utiliser.
+Par exemple, si on choisit le mode \textit{S\_FIFO} alors les tâches seront ordonnancés en suivant la méthode FIFO (First In First Out), c'est à dire que les tâches attendront dans leur ordre d'arrivée que le sémaphore se libère. Un second exemple de \textit{mode} utilisable est le mode \textit{S\_PRIO} qui permet d'ordonnancer les tâches par ordre de priorité, c'est à dire que les tâches avec la plus haute priorité auront accès au sémaphore avant les tâches de plus faible priorité.\newline
+
+
+\subsection{Question 2.5}
+
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 99
+//#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+RT_TASK task_printf2;
+RT_SEM sem;
+
+void task_hello()
+{
+	rt_sem_p (&sem, 0);
+	rt_printf("Hello\n");
+}
+
+void task_world()
+{
+	rt_sem_p (&sem, 0);
+	rt_printf("World !\n");
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1, err2;
+	
+	rt_sem_create (&sem, "sem", 0, S_FIFO);
+	
+	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO_HELLO, TASK_MODE);
+	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO_WORLD, TASK_MODE);
+	if(!err1 && !err2)
+	{
+		rt_task_start(&task_printf, &task_hello, NULL);
+		rt_task_join(&task_printf);
+		rt_task_start(&task_printf2, &task_world, NULL);
+		rt_task_join(&task_printf2);
+		
+		getchar();
+		
+		rt_sem_v (&sem);
+		rt_sem_v (&sem);
+	}
+		
+	return 0;
+}
+\end{lstlisting}
 
 
 \chapter{TP2 Xenomai}
