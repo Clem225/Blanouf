@@ -46,7 +46,7 @@
 %\onehalfspacing       %% 1,5-spacing
 %\doublespacing        %% 2-spacing
 \usepackage{listings}
-\lstset{language=Scilab} 
+\lstset{language=C} 
 \usepackage{color}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -1042,7 +1042,6 @@ Par exemple, si on choisit le mode \textit{S\_FIFO} alors les tâches seront ordo
 
 \subsection{Question 2.5}
 
-
 \begin{lstlisting}
 #include <stdio.h>
 #include <native/task.h>
@@ -1061,15 +1060,16 @@ RT_TASK task_printf;
 RT_TASK task_printf2;
 RT_SEM sem;
 
-void task_hello()
+
+void task_hello()			// affichage de 'Hello'
 {
-	rt_sem_p (&sem, 0);
+	rt_sem_p (&sem, 0);	// décrémentation du sémaphore
 	rt_printf("Hello\n");
 }
 
-void task_world()
+void task_world()			// affichage de 'World'
 {
-	rt_sem_p (&sem, 0);
+	rt_sem_p (&sem, 0);	// décrémentation du sémaphore
 	rt_printf("World !\n");
 }
 
@@ -1080,27 +1080,351 @@ int main()
 	rt_print_auto_init(1);
 	int err1, err2;
 	
-	rt_sem_create (&sem, "sem", 0, S_FIFO);
+	// création du sémaphore en mode FIFO
+	rt_sem_create (&sem, "sem", 0, S_FIFO);				
 	
+	// création des deux tâches
 	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO_HELLO, TASK_MODE);
 	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO_WORLD, TASK_MODE);
+	
+	
 	if(!err1 && !err2)
 	{
-		rt_task_start(&task_printf, &task_hello, NULL);
-		rt_task_join(&task_printf);
-		rt_task_start(&task_printf2, &task_world, NULL);
-		rt_task_join(&task_printf2);
+		// démarrage de la tâche qui affiche 'Hello'
+		rt_task_start(&task_printf, &task_hello, NULL);  
+		
+		// attente de sa terminaison
+		rt_task_join(&task_printf);					
+								
+	  // démarrage de la tâche qui affiche 'World'
+		rt_task_start(&task_printf2, &task_world, NULL); 
+		
+		// attente de sa terminaison
+		rt_task_join(&task_printf2);										
 		
 		getchar();
 		
-		rt_sem_v (&sem);
-		rt_sem_v (&sem);
+		rt_sem_v (&sem);	// incrémentation du sémaphore
+		rt_sem_v (&sem);	// incrémentation du sémaphore
 	}
 		
 	return 0;
 }
 \end{lstlisting}
 
+Le programme précédent avec le mode \textit{S\_FIFO} pour le sémaphore nous donne le résultat suivant :
+
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+
+Hello
+World !
+\end{lstlisting}
+
+Cependant, si nous utilisons le mode \textit{S\_PRIO} pour le sémaphore nous obtenons :
+
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+
+World !
+Hello
+\end{lstlisting}
+
+Ceci est cohérent puisque nous avons défini les priorités comme suit : 
+
+\begin{lstlisting}
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 99
+\end{lstlisting}
+
+La tâche qui s'occupe d'afficher le 'World !' est plus prioritaire que la tâche qui affiche le 'Hello'.
+
+
+\subsection{Question 2.6}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 97
+#define TASK_PRIO_METRO 99
+//#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+RT_TASK task_printf2;
+RT_TASK task_metronome;
+RT_SEM sem;
+
+void task_hello()
+{
+	while(1)
+	{
+		rt_sem_p (&sem, 0);	// décrémentation du sémaphore
+		rt_printf("Hello\n");
+	}
+}
+
+void task_world()
+{
+	while(1)
+	{
+		rt_sem_p (&sem, 0); // décrémentation du sémaphore
+		rt_printf("World !\n");
+		rt_sem_v (&sem);    // incrémentation du sémaphore
+	}
+}
+
+void task_metro()		// tâche métronome
+{
+	while(1)
+	{
+		rt_sem_v (&sem); // incrémentation du sémaphore
+		rt_sem_v (&sem); // incrémentation du sémaphore
+		
+		rt_sem_p (&sem, 0); // décrémentation du sémaphore
+		rt_task_sleep(rt_timer_ns2ticks(1000000000));	// attente 1 sec
+	}
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1, err2, err3;
+	
+	// création du sémaphore en mode PRIO
+	rt_sem_create (&sem, "sem", 0, S_PRIO);
+	
+	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO_HELLO, TASK_MODE);
+	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO_WORLD, TASK_MODE);
+	
+  // création de la tâche métronome
+	err3= rt_task_create(&task_metronome, "metro", TASK_STKSZ, TASK_PRIO_METRO, TASK_MODE);
+	
+	if(!err1 && !err2 && !err3)
+	{
+		rt_task_start(&task_printf, &task_hello, NULL);
+		rt_task_join(&task_printf);
+		rt_task_start(&task_printf2, &task_world, NULL);
+		rt_task_join(&task_printf2);
+		
+	  // démarrage de la tâche métronome
+		rt_task_start(&task_metronome, &task_metro, NULL);
+	  // attente de sa terminaison
+		rt_task_join(&task_metronome);
+		
+		getchar();
+		
+	}
+		
+	return 0;
+}
+\end{lstlisting}
+
+Le programme ci-dessus nous donne le résultat suivant à l'infini :
+
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+
+Hello
+World !
+Hello
+World !
+Hello
+World !
+\end{lstlisting}
+
+La tâche métronome possède la plus haute priorité comme on peut le voir ci-dessous :
+
+\begin{lstlisting}
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 97
+#define TASK_PRIO_METRO 99
+\end{lstlisting}
+
+Initialement, les tâches 'Hello' et 'World' sont bloquées.
+A chaque activation de la tâche métronome, le sémaphore est incrémenté de 2. A la première incrémentation, c'est la tâche 'Hello' qui prend la main puisque elle a une priorité supérieure à la tâche 'World'. La tâche 'Hello' décrémente le sémaphore et affiche 'Hello'.
+Ensuite, la tâche métronome reprend son exécution puisque la tache 'World' est bloquée et elle incrémente une seconde fois le sémaphore. La tâche 'World' est donc débloquée, elle décrémente le sémaphore, affiche 'World !' puis incrémente le sémaphore pour débloquer la tâche métronome qui va reprendre son exécution en décrémentant le sémaphore et en faisant une attente d'une seconde avant de relancer le même processus. *** CLEEEEEEEEEEEEEEEEEEEEEEEEMENT : TU PEUX CONFIRMER CE QUE JE DIS J'AI UN DOUTE ***
+
+\subsection{Question 2.7}
+
+Le fichier de statistiques de Xenomai lors du lancement de notre programme est le suivant :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp7/271.png}
+		\caption{Fichier de statistiques de Xenomai}
+\end{figure}
+
+On retrouve bien nos 3 tâches 'hello', 'world' et 'metro'. On voit également que ces tâches ne subissent que très peu de changements de contexte (CSW) car ce sont des tâches temps-réel.\newline
+
+Pour le fichier du scheduler de Xenomai nous avons : 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp7/272.png}
+		\caption{Fichier du scheduler de Xenomai}
+\end{figure}
+
+\newpage
+Nous retrouvons bien les priorités de nos tâches que nous avons défini dans notre code. On voit également que nos trois tâches sont temps-réel via la colonne \textit{CLASS} (rt). On voit également que la tâche 'ROOT' qui correspond à Linux est en mode 'idle', c'est à dire qu'elle a priorité la plus faible (-1). Dans la colonne \textit{STAT}, on remarque que la tâche 'metro' est marquée de la lettre 'D' qui signifie 'Delayed', c'est à dire que la tâche est retardée sans aucune autre condition d'attente (wait d'une seconde). Les tâches 'hello' et 'metro' sont marquées de la lettre 'W' qui signifie que ces tâches sont en attente d'une ressource (sémaphore) et la tâche 'ROOT' est marquée de la lettre 'R' qui signifie 'Runnable', c'est à dire que la tâche est exécutable. 
+
+\section{Exercice 3 : Latence}
+
+\subsection{Question 3.1}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+#include <nucleus/timer.h>
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+#define TAILLE 10000
+
+RT_TASK task_latence;
+
+void task_wait()
+{
+	int i;
+	
+	// boucle de 1 à 10000
+	for(i = 0; i < TAILLE; i++)
+	{
+		// attente de 1ms
+		rt_task_sleep(rt_timer_ns2ticks(1000000));
+	}
+}
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1;
+	
+	err1 = rt_task_create(&task_latence, "wait", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+
+	if(!err1)
+	{
+		rt_task_start(&task_latence, &task_wait, NULL);
+		rt_task_join(&task_latence);
+		
+		getchar();
+	}
+		
+	
+	return 0;
+}
+\end{lstlisting}
+
+
+\subsection{Question 3.2}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+#include <nucleus/timer.h>
+
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+#define TAILLE 10000
+
+RT_TASK task_latence;
+
+void task_wait()
+{
+	int i;
+	RTIME moy = 0, min, max;
+	RTIME begin, end;
+	
+	min = 9999999999999;
+	max = 0;
+	
+	
+	for(i = 0; i < TAILLE; i++)
+	{
+		begin = rt_timer_read();	// lecture du temps
+		rt_task_sleep(rt_timer_ns2ticks(1000000));
+		end = rt_timer_read();		// lecture du temps
+		
+		if(min > end - begin)			// calcul du min
+			min = end - begin;
+
+		if(max < end - begin)			// calcul du max
+		{
+			max = end - begin;
+		}
+		
+		moy += end - begin;	 // calcul de la moyenne
+	}
+	
+	moy = moy / TAILLE;
+	
+	rt_printf("Moyenne :%llu \nMaximum : %llu \nMinimum : %llu\n", moy, max, min);
+
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1;
+	
+	err1 = rt_task_create(&task_latence, "wait", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+
+	if(!err1)
+	{
+		rt_task_start(&task_latence, &task_wait, NULL);
+		rt_task_join(&task_latence);
+		
+		getchar();
+	}
+		
+	
+	return 0;
+}
+\end{lstlisting}
+
+\newpage
+Le programme précédent nous donne le résultat suivant : 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.6\textwidth]{screenstp7/32.png}
+		\caption{Résultat du programme \textit{Latence} sans stress}
+\end{figure}
+
+\subsection{Question 3.3}
+
+Ici, on charge le CPU via la commande \textit{stress} avant de lancer notre programme :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.6\textwidth]{screenstp7/33.png}
+		\caption{Résultat du programme \textit{Latence} avec stress}
+\end{figure}
+
+On remarque que les résultats avec charge CPU et sans charge CPU sont pratiquement les même ce qui veut dire que la charge n'a aucune influence sur les tâches exécutées. Ceci est logique puisque le programme est temps-réel donc une charge CPU ne ralentira que les programmes non temps-réel qui sont toujours reliés à Linux (ROOT) comme on a pu le constater dans le tp précédent. Ici, les tâches temps-réel ont la plus grande priorité sur le CPU.
 
 \chapter{TP2 Xenomai}
 
