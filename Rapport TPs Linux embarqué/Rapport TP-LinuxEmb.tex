@@ -1,4 +1,4 @@
-\documentclass[a4paper,twoside,12pt]{report}
+\documentclass[a4paper,12pt]{report}
 % Alternative Options:
 %	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
 % Duplex: oneside / twoside
@@ -1447,13 +1447,87 @@ La structure \textit{task\_descriptor} permet d'obtenir des informations de la t
 \end{itemize} 
 
 
+\subsection{Question 2}
+La fonction \textit{rt\_task\_name} sert à obtenir le nom de la tâche en cours grâce à la structure RT\_TASK\_INFO et son champ \textit{name}. Cette structure a d'autres champs :
+\begin{itemize}
+\item bprio : priorité de base (ne change pas au cours du temps)
+\item cprio : priorité actuelle (peut changer au cours du temps)
+\item status : statut de la tâche
+\item relpoint : temps restant avant la prochaine exécution
+\item exectime : temps d'exécution de la tâche depuis son lancement
+\item modeswitches : nombre de changements de mode primaire / secondaire
+\item ctxswitches : nombre de changements de contextes
+\item pagefaults : nombre de défauts de page
+\end{itemize}
 
+\newpage
+\subsection{Question 3}
 
+Voici notre fonction \textit{busy\_wait} :
 
+\begin{lstlisting}
+void busy_wait(RTIME time) 
+{ 
+  	static RT_TASK_INFO info;			// info sur la tâche
+  	rt_task_inquire(NULL,&info);		// initialisation des infos dont exectime
+  	RTIME begin = info.exectime;		// recuperation du temps d'execution initial (> 0)
+  
+  
+    while(info.exectime - begin < time)
+  		  rt_task_inquire(NULL,&info);	// initialisation des infos dont exectime
+}
+\end{lstlisting}
 
+On commence par acquérir les informations relatives à la tâche grâce à une structure RT\_TASK\_INFO et à la fonction rt\_task\_inquire. La champ \textit{exectime} de cette structure nous permet d'obtenir le temps d'exécution de la tâche depuis son lancement (donc il y a certainement eu plusieurs occurrences). On appelle ce temps \textit{begin}. Ce qu'on veut, c'est simuler le temps d'\textbf{une} exécution de la tâche.
 
+Pour cela, on va, dans une boucle, vérifier la différence entre le temps d'exécution actuel de la tâche (avec le champ \textit{exectime} de RT\_TASK\_INFO mis à jour) et le temps d'exécution de la tâche initial (qu'on a appelé \textit{begin}). Dès que cette différence atteint la durée voulue (durée d'exécution de la tâche donnée en paramètre), on peut sortir de la boucle et de la fonction. De cette façon, on a réalisé une attente active pendant la durée recherchée.
 
+\subsection{Question 4}
 
+On se sert de la fonction time\_since\_start dans la fonction rt\_task pour avoir un point de repère temporel :
+
+\begin{lstlisting}
+rt_printf("doing %s    time : %d\n",rt_task_name(), time_since_start());
+\end{lstlisting}
+
+\newpage
+Voici le résultat de l'exécution du programme :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{screenstp8/4.png}
+		\caption{Résultat avec ORDO\_BUS}
+\end{figure}
+
+Le timing est bon : 25ms d'exécution et 125ms de période.
+
+\subsection{Question 5}
+
+Pour une bonne coordination des tâches, le sémaphore doit être utilisé comme suit :
+\begin{itemize}
+\item Faire un sem\_p (-1) dans acquire\_resource et un sem\_v (+1) dans release\_resource sur le sémaphore
+\item Initialisation du sémaphore à 0 (bloque tout)
+\item Initialisation de toutes les tâches (et donc toutes les tâches sont bloquées)
+\item Faire un sem\_v (+1) sur le sémaphore juste après ces initialisations (ce qui débloquera la tâche la plus prioritaire)
+\end{itemize}
+
+De cette façon, les tâches s'enchaîneront de la bonne manière selon leurs priorités.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp8/51.png}
+		\caption{Enchaînement avec meilleur cas pour METEO (40ms)}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp8/52.png}
+		\caption{Enchaînement avec pire cas pour METEO (60ms)}
+\end{figure}
+\newpage
+On se rend compte que, lors du meilleur cas pour la tâche METEO (soit 40ms), ORDO\_BUS n'a pas encore terminé sa période et n'est donc pas prêt pour exécution avant le début de la tâche PILOTAGE ou la fin de DISTRIB\_DONNEES. Dans le pire cas pour la tâche METEO (soit 60ms),  ORDO\_BUS a atteint sa période et est donc exécuté avant la tâche PILOTAGE et s'intercale entre le début et le fin de l'exécution de DISTRIB\_DONNEES.
+\newpage
+\subsection{Question 6}
 
 
 \appendix
