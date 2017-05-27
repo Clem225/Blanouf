@@ -1529,6 +1529,26 @@ On se rend compte que, lors du meilleur cas pour la tâche METEO (soit 40ms), ORD
 \newpage
 \subsection{Question 6}
 
+Pour être sur qu'entre deux exécutions de ORDO\_BUS, DISTRIB\_DONNEES s'est exécutée entièrement, nous pouvons utiliser une seconde sémaphore en mode S\_PRIO (comme la première) qui vaut 1 avant la création des tâches pour que la tâche ORDO\_BUS puisse s'exécuter au début. Nous créons ensuite deux nouvelles fonctions \textbf{rt\_task\_ordo\_bus} et \textbf{rt\_task\_distrib\_donnees} pour remplacer la fonction de base \textbf{rt\_task}. Dans la fonction \textbf{rt\_task\_distrib\_donnees}, lors de l'exécution de la tâche DISTRIB\_DONNEES, il faut incrémenter la sémaphore pour prévenir la tâche ORDO\_BUS que la tâche DISTRIB\_DONNEES est en cours d'exécution. Si la tâche DISTRIB\_DONNEES est en cours d'exécution et qu'on est en train d'exécuter la tâche ORDO\_BUS alors il faut lancer un reset et terminer le programme. Pour cela, dans la fonction \textbf{rt\_task\_ordo\_bus}, il faut vérifier si une unité du sémaphore est disponible, si c'est le cas alors on exécute la tâche normalement sinon on lance un reset et on termine le programme. Il faut faire attention de ne pas bloquer la tâche ORDO\_BUS sur le sémaphore car la suite du code doit pouvoir s'exécuter. 
+
+\subsection{Question 7}
+
+Nous avons testé notre programme pour le cas extrême du temps d'exécution de METEO (60ms) sans terminer notre programme après le reset afin de mieux voir ce qu'il se passe. Voici le résultat obtenu :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp8/7.png}
+		\caption{Reset avec le cas extrême pour METEO (60ms)}
+\end{figure}
+
+On voit que le reset se place entre le début de la tâche DISTRIB\_DONNEES et le début de la tâche ORDO\_BUS ce qui valide le fonctionnement de la solution.\newline
+
+Cependant, on remarque que lorsque la tâche METEO démarre elle s'empare du sémaphore puis elle est préemptée par la tâche ORDO\_BUS de plus haute priorité. A la fin de la tâche ORDO\_BUS, la tâche DISTRIB\_DONNEES démarre mais elle est bloquée par le sémaphore car c'est la tâche METEO qui le possède. Ensuite, après les exécutions des tâches RADIO et CAMERA, la tâche METEO reprend la main et se termine en libérant le sémaphore ce qui permet à la tâche DISTRIB\_DONNEES de reprendre son exécution avant le Reset. Ceci est problématique car une tâches de plus haute priorité (DISTRIB\_DONNEES) ne peut pas avoir accès au processeur car une tâche de plus faible priorité (METEO) l'utilise. C'est ce qu'on appelle une inversion de priorité. 
+Le chronogramme suivant illustre ce qu'il se passe :
+
+ METTRE SCAN !!!!
+
+
 
 \appendix
 \chapter{Messages de sortie du terminal entre l'allumage de la cible et le prompt de login}
