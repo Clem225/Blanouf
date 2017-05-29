@@ -1,0 +1,740 @@
+\documentclass[a4paper,12pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+\usepackage[export]{adjustbox}
+
+\usepackage{geometry}
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{verbatim}
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{Dateiname}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+\usepackage{listings}
+\lstset{language=C} 
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  otherkeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
+
+
+
+
+%% NOTE POUR CLEMENT : UTILISE LE HEADER CI-DESSUS, IL EST MEILLEUR
+
+%%AJOUTS DE CLEMENT DANS LE HEADER :
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Clément BLANQUET et Rafik CHENNOUF}
+\rhead{Page \thepage}
+\cfoot{\footnotesize{MI11 - Rapport du TP1 Xenomai}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{titlesec}
+\makeatletter
+\titleformat{\chapter}[frame]
+  {\normalfont}{\filright\enspace \@chapapp~\thechapter\enspace}
+  {15pt}{\LARGE\bfseries\filcenter}
+\titlespacing*{\chapter}
+  {0pt}{0pt}{20pt}
+\makeatother
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+
+
+\author{Clément BLANQUET et Rafik CHENNOUF}
+\title{MI11 - Rapport TP 1 - Xenomai}
+
+\begin{document}
+
+\begin{titlepage}
+
+	\centering
+	\includegraphics[width=0.15\textwidth]{sigle_UTC.jpg}\par\vspace{1cm}
+	{\scshape\LARGE Université de Technologie de Compiègne \par\vspace{1cm}}	
+	{\scshape\Large MI11\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Rapport du TP1 Xenomai\par}
+	\vspace{2cm}
+	{\Large\itshape Clément BLANQUET et Rafik CHENNOUF\par}
+	\vspace{2cm}
+	\vfill
+% Bottom of the page
+	{\large Juin 2017}
+\end{titlepage}
+
+
+\renewcommand{\contentsname}{Sommaire} % Changer le nom de la table des matieres
+\tableofcontents
+% Les différentes tables
+\listoffigures        % Liste des figures
+
+
+
+
+\chapter{TP1 Xenomai}
+
+\section{Exercice 1 : tâches}
+
+\subsection{Question 1.1}
+Un code "classique" ne s'exécute pas de façon temps réel. En effet, il n'apparaît pas dans le fichier /proc/xenomai/stats ce qui signifie qu'il n'est pas temps réel.\smallbreak
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/11.PNG}
+\caption{Statistiques Xenomai avec un programme non temps réel}
+\end{figure}
+
+\subsection{Question 1.2}
+Voici le code qui permet de créer une tâche temps réel :
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+
+void task_hello()
+{
+	while(1)
+	{
+		sleep(rt_timer_ns2ticks(1000000000));
+		printf("Hello World !\n");
+	}
+}
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err;
+	
+	err = rt_task_create(&task_printf, "hello world", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+	if(!err)
+		rt_task_start(&task_printf, &task_hello, NULL);
+		
+	getchar();
+	
+	return 0;
+}
+\end{lstlisting}
+
+
+Le chemin des fichiers à inclure est: 
+\begin{lstlisting}
+/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/include/xenomai
+\end{lstlisting}
+Le chemin des librairies est : 
+\begin{lstlisting}
+/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/lib
+\end{lstlisting}
+
+Cela nous donne la ligne de commande (après avoir fait un \textit{source}) :
+\begin{lstlisting}
+$CC -o main main.c -I/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/include/xenomai -L/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/lib -lxenomai -lnative
+\end{lstlisting}
+
+\subsection{Question 1.3}
+Cette application n'est toujours pas temps réel. En effet, malgré la création d'une tâche temps réel, les fonctions \textit{sleep} et \textit{printf} qui s'y trouvent ne sont pas temps réel.
+
+Le fichier de statistiques Xenomai donne :
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/13.PNG}
+\caption{Statistiques Xenomai avec une tâche temps réel}
+\end{figure}
+
+\subsection{Question 1.4}
+Voici la fonction task\_hello après avoir remplacé la fonction sleep par son équivalent temps réel :
+\begin{lstlisting}
+void task_hello()
+{
+	while(1)
+	{
+		rt_task_sleep(rt_timer_ns2ticks(1000000000));
+		printf("Hello World !\n");
+	}
+}
+\end{lstlisting}
+
+Le fichier de statistiques Xenomai donne :
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/14.PNG}
+\caption{Statistiques Xenomai avec une tâche temps réel et la fonction rt\_task\_sleep}
+\end{figure}
+
+
+\subsection{Question 1.5}
+Voici le code après avoir remplacé les fonctions sleep et printf par leurs équivalents temps réel :
+\begin{lstlisting}
+void task_hello()
+{
+	while(1)
+	{
+		rt_task_sleep(rt_timer_ns2ticks(1000000000));
+		rt_printf("Hello World !\n");
+	}
+}
+\end{lstlisting}
+
+Le fichier de statistiques Xenomai donne :
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{screenstp7/15.PNG}
+\caption{Statistiques Xenomai avec une tâche temps réel et les fonctions rt\_task\_sleep et rt\_printf}
+\end{figure}
+
+\textbf{Interprétation des statistiques Xenomai :} On constate que : 
+\begin{itemize}
+\item Lorsqu'on crée une tâche temps réel qui n'utilise aucune fonction temps réel (dans notre exemple, les fonctions \textit{sleep} et \textit{printf}), elle n'apparaît pas dans le fichier de statistiques. Elle n'est en fait absolument pas temps réel.
+\item Lorsque, dans cette même tâche, on rend la fonction \textit{sleep} temps réel (en la remplaçant par \textit{rt\_task\_sleep}), elle apparaît dans le fichier de statistiques. On constate que son nombre de changements de contexte (9) est très inférieur  au nombre de changements de contexte du ROOT (282), ce qui signifie que ... A COMPLETER
+\item Lorsque les fonctions \textit{sleep} et \textit{printf} ont été remplacées par leurs équivalents temps réel (\textit{rt\_task\_sleep} et \textit{rt\_printf}), le nombre changements de contextes de la tâche est égal à celui de ROOT (46), ce qui montre alors que la tâche est "entièrement" temps réel.
+\end{itemize}
+
+\section{Exercice 2 : Synchronisation}
+\subsection{Question 2.1}
+Voici le code du programme lançant deux tâches Xenomai qui afficheront chacune une partie du message "Hello World !" :
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+RT_TASK task_printf2;
+
+void task_hello()
+{
+	rt_printf("Hello\n");
+}
+
+void task_world()
+{
+	rt_printf("World !\n");
+	rt_task_sleep(rt_timer_ns2ticks(1000000000));
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1, err2;
+	
+	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+	if(!err1 && !err2)
+	{
+		rt_task_start(&task_printf, &task_hello, NULL);
+		rt_task_join(&task_printf);	
+		rt_task_start(&task_printf2, &task_world, NULL);
+		rt_task_join(&task_printf2);	
+	}
+		
+	getchar();
+	
+	return 0;
+}
+\end{lstlisting}
+
+
+Le résultat est le suivant :
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+Hello
+World !
+c
+root@devkit8600-xenomai:~# 
+\end{lstlisting}
+
+
+\subsection{Question 2.2}
+Pour le moment, les priorités des tâches n'ont aucune influence. En effet, elles sont lancées dans l'ordre dans lequel elles se trouvent dans notre code : après le \textit{rt\_task\_start}, rien ne "bloque" l'exécution de la tâche; les tâches se lancent donc l'une après l'autre comme on l'a défini. Pour afficher les messages de le désordre, il faut donc inverser les deux tâches le code. On peut aussi utiliser des sémaphores, comme vu dans les questions suivantes.
+
+\subsection{Question 2.3}
+Il faut initialiser le sémaphore à 0 de manière à bloquer les tâches.
+
+\subsection{Question 2.4}
+
+Le paramètre \textit{mode} lors de la création du sémaphore nous sert à définir le mode d'ordonnancement à utiliser.
+Par exemple, si on choisit le mode \textit{S\_FIFO} alors les tâches seront ordonnancés en suivant la méthode FIFO (First In First Out), c'est à dire que les tâches attendront dans leur ordre d'arrivée que le sémaphore se libère. Un second exemple de \textit{mode} utilisable est le mode \textit{S\_PRIO} qui permet d'ordonnancer les tâches par ordre de priorité, c'est à dire que les tâches avec la plus haute priorité auront accès au sémaphore avant les tâches de plus faible priorité.\newline
+
+
+\subsection{Question 2.5}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 99
+//#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+RT_TASK task_printf2;
+RT_SEM sem;
+
+
+void task_hello()			// affichage de 'Hello'
+{
+	rt_sem_p (&sem, 0);	// décrémentation du sémaphore
+	rt_printf("Hello\n");
+}
+
+void task_world()			// affichage de 'World'
+{
+	rt_sem_p (&sem, 0);	// décrémentation du sémaphore
+	rt_printf("World !\n");
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1, err2;
+	
+	// création du sémaphore en mode FIFO
+	rt_sem_create (&sem, "sem", 0, S_FIFO);				
+	
+	// création des deux tâches
+	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO_HELLO, TASK_MODE);
+	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO_WORLD, TASK_MODE);
+	
+	
+	if(!err1 && !err2)
+	{
+		// démarrage de la tâche qui affiche 'Hello'
+		rt_task_start(&task_printf, &task_hello, NULL);  
+		
+		// attente de sa terminaison
+		rt_task_join(&task_printf);					
+								
+	  // démarrage de la tâche qui affiche 'World'
+		rt_task_start(&task_printf2, &task_world, NULL); 
+		
+		// attente de sa terminaison
+		rt_task_join(&task_printf2);										
+		
+		getchar();
+		
+		rt_sem_v (&sem);	// incrémentation du sémaphore
+		rt_sem_v (&sem);	// incrémentation du sémaphore
+	}
+		
+	return 0;
+}
+\end{lstlisting}
+
+Le programme précédent avec le mode \textit{S\_FIFO} pour le sémaphore nous donne le résultat suivant :
+
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+
+Hello
+World !
+\end{lstlisting}
+
+Cependant, si nous utilisons le mode \textit{S\_PRIO} pour le sémaphore nous obtenons :
+
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+
+World !
+Hello
+\end{lstlisting}
+
+Ceci est cohérent puisque nous avons défini les priorités comme suit : 
+
+\begin{lstlisting}
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 99
+\end{lstlisting}
+
+La tâche qui s'occupe d'afficher le 'World !' est plus prioritaire que la tâche qui affiche le 'Hello'.
+
+
+\subsection{Question 2.6}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 97
+#define TASK_PRIO_METRO 99
+//#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+
+RT_TASK task_printf;
+RT_TASK task_printf2;
+RT_TASK task_metronome;
+RT_SEM sem;
+
+void task_hello()
+{
+	while(1)
+	{
+		rt_sem_p (&sem, 0);	// décrémentation du sémaphore
+		rt_printf("Hello\n");
+	}
+}
+
+void task_world()
+{
+	while(1)
+	{
+		rt_sem_p (&sem, 0); // décrémentation du sémaphore
+		rt_printf("World !\n");
+		rt_sem_v (&sem);    // incrémentation du sémaphore
+	}
+}
+
+void task_metro()		// tâche métronome
+{
+	while(1)
+	{
+		rt_sem_v (&sem); // incrémentation du sémaphore
+		rt_sem_v (&sem); // incrémentation du sémaphore
+		
+		rt_sem_p (&sem, 0); // décrémentation du sémaphore
+		rt_task_sleep(rt_timer_ns2ticks(1000000000));	// attente 1 sec
+	}
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1, err2, err3;
+	
+	// création du sémaphore en mode PRIO
+	rt_sem_create (&sem, "sem", 0, S_PRIO);
+	
+	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO_HELLO, TASK_MODE);
+	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO_WORLD, TASK_MODE);
+	
+  // création de la tâche métronome
+	err3= rt_task_create(&task_metronome, "metro", TASK_STKSZ, TASK_PRIO_METRO, TASK_MODE);
+	
+	if(!err1 && !err2 && !err3)
+	{
+		rt_task_start(&task_printf, &task_hello, NULL);
+		rt_task_join(&task_printf);
+		rt_task_start(&task_printf2, &task_world, NULL);
+		rt_task_join(&task_printf2);
+		
+	  // démarrage de la tâche métronome
+		rt_task_start(&task_metronome, &task_metro, NULL);
+	  // attente de sa terminaison
+		rt_task_join(&task_metronome);
+		
+		getchar();
+		
+	}
+		
+	return 0;
+}
+\end{lstlisting}
+
+Le programme ci-dessus nous donne le résultat suivant à l'infini :
+
+\begin{lstlisting}
+root@devkit8600-xenomai:~# ./synchro
+
+Hello
+World !
+Hello
+World !
+Hello
+World !
+\end{lstlisting}
+
+La tâche métronome possède la plus haute priorité comme on peut le voir ci-dessous :
+
+\begin{lstlisting}
+#define TASK_PRIO_HELLO 98
+#define TASK_PRIO_WORLD 97
+#define TASK_PRIO_METRO 99
+\end{lstlisting}
+
+Initialement, les tâches 'Hello' et 'World' sont bloquées.
+A chaque activation de la tâche métronome, le sémaphore est incrémenté de 2. A la première incrémentation, c'est la tâche 'Hello' qui prend la main puisque elle a une priorité supérieure à la tâche 'World'. La tâche 'Hello' décrémente le sémaphore et affiche 'Hello'.
+Ensuite, la tâche métronome reprend son exécution puisque la tache 'World' est bloquée et elle incrémente une seconde fois le sémaphore. La tâche 'World' est donc débloquée, elle décrémente le sémaphore, affiche 'World !' puis incrémente le sémaphore pour débloquer la tâche métronome qui va reprendre son exécution en décrémentant le sémaphore et en faisant une attente d'une seconde avant de relancer le même processus. *** CLEEEEEEEEEEEEEEEEEEEEEEEEMENT : TU PEUX CONFIRMER CE QUE JE DIS J'AI UN DOUTE ***        REPONSE DE CLEMENT : JE CROIS QUE CEST BON
+
+\subsection{Question 2.7}
+
+Le fichier de statistiques de Xenomai lors du lancement de notre programme est le suivant :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp7/271.png}
+		\caption{Fichier de statistiques de Xenomai}
+\end{figure}
+
+On retrouve bien nos 3 tâches 'hello', 'world' et 'metro'. On voit également que ces tâches ne subissent que très peu de changements de contexte (CSW) car ce sont des tâches temps-réel.\newline
+
+Pour le fichier du scheduler de Xenomai nous avons : 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp7/272.png}
+		\caption{Fichier du scheduler de Xenomai}
+\end{figure}
+
+\newpage
+Nous retrouvons bien les priorités de nos tâches que nous avons défini dans notre code. On voit également que nos trois tâches sont temps-réel via la colonne \textit{CLASS} (rt). On voit également que la tâche 'ROOT' qui correspond à Linux est en mode 'idle', c'est à dire qu'elle a priorité la plus faible (-1). Dans la colonne \textit{STAT}, on remarque que la tâche 'metro' est marquée de la lettre 'D' qui signifie 'Delayed', c'est à dire que la tâche est retardée sans aucune autre condition d'attente (wait d'une seconde). Les tâches 'hello' et 'metro' sont marquées de la lettre 'W' qui signifie que ces tâches sont en attente d'une ressource (sémaphore) et la tâche 'ROOT' est marquée de la lettre 'R' qui signifie 'Runnable', c'est à dire que la tâche est exécutable. 
+
+\section{Exercice 3 : Latence}
+
+\subsection{Question 3.1}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+#include <nucleus/timer.h>
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+#define TAILLE 10000
+
+RT_TASK task_latence;
+
+void task_wait()
+{
+	int i;
+	
+	// boucle de 1 à 10000
+	for(i = 0; i < TAILLE; i++)
+	{
+		// attente de 1ms
+		rt_task_sleep(rt_timer_ns2ticks(1000000));
+	}
+}
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1;
+	
+	err1 = rt_task_create(&task_latence, "wait", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+
+	if(!err1)
+	{
+		rt_task_start(&task_latence, &task_wait, NULL);
+		rt_task_join(&task_latence);
+		
+		getchar();
+	}
+		
+	
+	return 0;
+}
+\end{lstlisting}
+
+
+\subsection{Question 3.2}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <native/task.h>
+#include <analogy/os_facilities.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <native/sem.h>
+#include <nucleus/timer.h>
+
+
+#define TASK_PRIO 99
+#define TASK_MODE 0
+#define TASK_STKSZ 0
+#define TAILLE 10000
+
+RT_TASK task_latence;
+
+void task_wait()
+{
+	int i;
+	RTIME moy = 0, min, max;
+	RTIME begin, end;
+	
+	min = 9999999999999;
+	max = 0;
+	
+	
+	for(i = 0; i < TAILLE; i++)
+	{
+		begin = rt_timer_read();	// lecture du temps
+		rt_task_sleep(rt_timer_ns2ticks(1000000));
+		end = rt_timer_read();		// lecture du temps
+		
+		if(min > end - begin)			// calcul du min
+			min = end - begin;
+
+		if(max < end - begin)			// calcul du max
+		{
+			max = end - begin;
+		}
+		
+		moy += end - begin;	 // calcul de la moyenne
+	}
+	
+	moy = moy / TAILLE;
+	
+	rt_printf("Moyenne :%llu \nMaximum : %llu \nMinimum : %llu\n", moy, max, min);
+
+}
+
+
+int main()
+{
+	mlockall(MCL_CURRENT|MCL_FUTURE);
+	rt_print_auto_init(1);
+	int err1;
+	
+	err1 = rt_task_create(&task_latence, "wait", TASK_STKSZ, TASK_PRIO, TASK_MODE);
+
+	if(!err1)
+	{
+		rt_task_start(&task_latence, &task_wait, NULL);
+		rt_task_join(&task_latence);
+		
+		getchar();
+	}
+		
+	
+	return 0;
+}
+\end{lstlisting}
+
+\newpage
+Le programme précédent nous donne le résultat suivant : 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.6\textwidth]{screenstp7/32.png}
+		\caption{Résultat du programme \textit{Latence} sans stress}
+\end{figure}
+
+\subsection{Question 3.3}
+
+Ici, on charge le CPU via la commande \textit{stress} avant de lancer notre programme :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.6\textwidth]{screenstp7/33.png}
+		\caption{Résultat du programme \textit{Latence} avec stress}
+\end{figure}
+
+On remarque que les résultats avec charge CPU et sans charge CPU sont pratiquement les même ce qui veut dire que la charge n'a aucune influence sur les tâches exécutées. Ceci est logique puisque le programme est temps-réel donc une charge CPU ne ralentira que les programmes non temps-réel qui sont toujours reliés à Linux (ROOT) comme on a pu le constater dans le tp précédent. Ici, les tâches temps-réel ont la plus grande priorité sur le CPU.
+
+\end{document}
+

@@ -1,0 +1,544 @@
+\documentclass[a4paper,12pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+\usepackage[export]{adjustbox}
+
+\usepackage{geometry}
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{verbatim}
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{Dateiname}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+\usepackage{listings}
+\lstset{language=C} 
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  otherkeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
+
+
+
+
+%% NOTE POUR CLEMENT : UTILISE LE HEADER CI-DESSUS, IL EST MEILLEUR
+
+%%AJOUTS DE CLEMENT DANS LE HEADER :
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Clément BLANQUET et Rafik CHENNOUF}
+\rhead{Page \thepage}
+\cfoot{\footnotesize{MI11 - Rapport du TP2 linux embarqué}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{titlesec}
+\makeatletter
+\titleformat{\chapter}[frame]
+  {\normalfont}{\filright\enspace \@chapapp~\thechapter\enspace}
+  {15pt}{\LARGE\bfseries\filcenter}
+\titlespacing*{\chapter}
+  {0pt}{0pt}{20pt}
+\makeatother
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+
+
+\author{Clément BLANQUET et Rafik CHENNOUF}
+\title{MI11 - Rapport TP 2 - Linux embarqué}
+
+\begin{document}
+
+\begin{titlepage}
+
+	\centering
+	\includegraphics[width=0.15\textwidth]{sigle_UTC.jpg}\par\vspace{1cm}
+	{\scshape\LARGE Université de Technologie de Compiègne \par\vspace{1cm}}	
+	{\scshape\Large MI11\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Rapport du TP2 linux embarqué\par}
+	\vspace{2cm}
+	{\Large\itshape Clément BLANQUET et Rafik CHENNOUF\par}
+	\vspace{2cm}
+	\vfill
+% Bottom of the page
+	{\large Juin 2017}
+\end{titlepage}
+
+
+\renewcommand{\contentsname}{Sommaire} % Changer le nom de la table des matieres
+\tableofcontents
+% Les différentes tables
+\listoffigures        % Liste des figures
+
+
+
+
+\chapter{Rapport TP 2 - Linux embarqué}
+
+\section{Exercice 1 :  Hello World}
+
+\subsection{Question 1.1}
+
+Après avoir compilé notre programme \textit{Hello World} avec \textbf{gcc} nous avons exécute la commande file pour obtenir des informations sur l'exécutable. Nous nous sommes rendu compte que cet exécutable a été compilé pour une architecture classique x86/64 et non ARM. C'est pour cela que le programme ne peut pas s'exécuter sur la cible. 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/11.png}
+		\caption{Commande \textit{file}}
+\end{figure}
+
+\subsection{Question 1.2}
+
+Avant de pouvoir cross-compiler notre programme il faut activer l'environnement de cross-compilation via la commande \textit{source} sur le fichier \\
+\textbf{/opt/poky/1.7.3/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/12.png}
+		\caption{Commande \textit{source}}
+\end{figure}
+
+
+\subsection{Question 1.3}
+
+En utilisant de nouveau la commande \textit{file} après la cross-compilation, nous constatons que le nouveau exécutable a bien été compilé pour une architecture ARM.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/13.png}
+		\caption{Commande \textit{file}}
+\end{figure}
+
+\subsection{Question 1.4}
+
+Voici le programme \textit{Hello World} :
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+		printf("Hello World !");
+		return 0;
+}
+\end{lstlisting}
+
+Ainsi que le résultat :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/14.png}
+		\caption{Résultat \textit{Hello World}}
+\end{figure}
+
+\section{Exercice 2 :  Clignotement des LEDs}
+
+\subsection{Question 2.1}
+
+Pour accéder aux LEDs il suffit de manipuler les fichiers 
+\begin{verbatim}
+/sys/class/leds/user_led/brightness
+\end{verbatim}
+pour la LED utilisateur et 
+\begin{verbatim}
+/sys/class/leds/sys_led/brightness 
+\end{verbatim}
+pour la LED système.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/21.png}
+		\caption{Fichiers des LEDs}
+\end{figure}
+
+\subsection{Question 2.2}
+
+L'allumage d'une LED se fait en écrivant le caractère '1' dans le fichier correspondant et l'éteignage se fait en écrivant le caractère '0' comme on peut le voir sur la copie d'écran suivante.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/22.png}
+		\caption{Manipulation des LEDs}
+\end{figure}
+
+\subsection{Question 2.3}
+
+Le programme suivant allume en alternance la LED utilisateur et la LED système chaque seconde :
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+	int sys_led, user_led;
+
+	sys_led = open("/sys/class/leds/sys_led/brightness", O_RDWR);	
+	// ouverture des fichiers
+	user_led = open("/sys/class/leds/user_led/brightness", O_RDWR); 
+
+	if(sys_led == -1 || user_led == -1)
+	{
+		perror("Erreur d'ouverture de l'un des fichiers");
+		return 0;
+	}
+
+	while(1)
+	{
+		if(write(user_led, "0", 1) == -1)	// éteingage de la LED user
+			perror("Erreur d'ecriture");
+
+		if(write(sys_led, "1", 1) == -1)    // allumage de la LED système
+			perror("Erreur d'ecriture");
+
+		sleep(1);							// attente d'une seconde
+
+		if(write(sys_led, "0", 1) == -1)	// éteingage de la LED système
+			perror("Erreur d'ecriture");
+
+		if(write(user_led, "1", 1) == -1)   // allumage de la LED user
+			perror("Erreur d'ecriture");
+
+		sleep(1);							// attente d'une seconde
+	}
+
+	close(sys_led);		// fermeture
+	close(user_led);	// des fichiers
+
+	return 0;
+}
+\end{lstlisting}
+
+
+\newpage
+
+\section{Exercice 3 : Boutons poussoirs}
+\subsection{Question 3.1}
+La cible dispose de trois boutons utilisateur (HOME, BACK, MENU) et un bouton de reset. On y accède via le fichier "\textit{/dev/input/event1}" dans lequel toutes les informations quant aux pressions et relâchement de ces boutons seront écrites.
+
+\subsection{Question 3.2}
+Pour tester en ligne de commande, on peut utiliser "\textit{evtest /dev/input/event1}" (voir figure \ref{32})
+\begin{figure}[h]\centering
+\includegraphics[width=0.5\textwidth]{screenstp6/32.PNG}
+\caption{Résultat du evtest sur /dev/input/event1} \label{32}
+\end{figure}
+
+Les valeurs sont soit à 1 soit à 0 selon l'état du bouton : pressé ou relâché.
+
+\subsection{Question 3.3}
+La structure input\_event est déclarée dans le fichier suivant : 
+
+\hspace{-0.8cm}"\textit{
+/opt/poky/1.7.3/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/usr/include/linux/input.h}" \medbreak
+Au début de notre fichier C, on ajoute donc : "\#include <linux/input.h>".
+Voici le programme que nous avons codé. Celui-ci lit les événements indiqués dans le fichier "/dev/input/event1", affiche ces événements dans le terminal et allume :
+
+\begin{itemize}
+\item La sys\_led en cas de pression sur le bouton MENU
+\item La user\_led en cas de pression sur le bouton BACK
+\item Les deux LEDs en cas de pression sur la touche HOME
+\end{itemize}
+
+\subsection{Question 3.4}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <linux/input.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+	struct input_event event_buttons;
+	int sys_led, user_led, buttons;
+
+	buttons = open("/dev/input/event1", O_RDONLY); 
+
+	if(buttons == -1)
+	{
+		perror("Erreur d'ouverture de l'un des fichiers");
+		return 0;
+	}
+
+	sys_led = open("/sys/class/leds/sys_led/brightness", O_RDWR);
+	user_led = open("/sys/class/leds/user_led/brightness", O_RDWR);
+
+	if(sys_led == -1 || user_led == -1)
+	{
+		perror("Erreur d'ouverture de l'un des fichiers");
+		return 0;
+	}
+
+	while(1)
+	{
+		
+		read(buttons, &event_buttons, sizeof(event_buttons));
+
+		int code = (int)event_buttons.code;
+		int value = (int)event_buttons.value;
+
+		switch(code)
+		{
+			case KEY_F1: // MENU
+				if(value == 1)
+				{
+					printf("MENU PUSH\n");
+					if(write(sys_led, "1", 1) == -1)
+						perror("Erreur d'ecriture");
+				}
+				else
+				{
+					printf("MENU RELEASE\n");
+					if(write(sys_led, "0", 1) == -1)
+						perror("Erreur d'ecriture");
+				}
+			break;
+
+			case KEY_ESC: // BACK
+				if(value == 1)
+				{
+					printf("BACK PUSH\n");
+					if(write(user_led, "1", 1) == -1)
+						perror("Erreur d'ecriture");
+				}
+				else
+				{
+					printf("BACK RELEASE\n");
+					if(write(user_led, "0", 1) == -1)
+						perror("Erreur d'ecriture");
+				}
+			break;
+
+			case KEY_HOME: // HOME
+				if(value == 1)
+				{
+					printf("HOME PUSH\n");
+					if(write(user_led, "1", 1) == -1)
+						perror("Erreur d'ecriture");
+					if(write(sys_led, "1", 1) == -1)
+						perror("Erreur d'ecriture");
+				}
+				else
+				{
+					printf("HOME RELEASE\n");
+					if(write(user_led, "0", 1) == -1)
+						perror("Erreur d'ecriture");
+					if(write(sys_led, "0", 1) == -1)
+						perror("Erreur d'ecriture");
+				}
+			break;
+		}
+	}
+	if(close(sys_led) == -1)
+		perror("Erreur de fermeture de l'un des fichiers");
+	if(close(user_led) == -1)
+		perror("Erreur de fermeture de l'un des fichiers");
+	if(close(buttons) == -1)
+		perror("Erreur de fermeture de l'un des fichiers");
+
+	return 0;
+}
+\end{lstlisting}
+
+
+\section{Exercice 4 : Charge CPU}
+\subsection{Question 4.1}
+Voici notre programme : 
+\begin{lstlisting}
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+ 
+#define TAILLE 10000
+
+int main()
+{
+	int j = 0, tempstotal = 0;
+	struct timeval debut, fin, res;
+	gettimeofday(&debut, NULL);
+	for(j = 0; j < TAILLE; j++)
+	{
+		usleep(1000);
+	}
+	gettimeofday(&fin, NULL);
+	timersub(&fin, &debut, &res);
+	int tempstotal = res.tv_sec* 1000000 + res.tv_usec;
+
+	printf("Temps total : %d\n, tempstotal);
+
+	return 0;
+}
+\end{lstlisting}
+
+On relève un temps de 10,9 ms.
+
+\newpage
+\subsection{Question 4.2}
+Voici notre programme modifié :
+\begin{lstlisting}
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+ 
+#define TAILLE 10000
+
+int main()
+{
+	int j = 0, min, max, moy = 0, tempstotal = 0;
+	int tab[TAILLE];
+	struct timeval debut, fin, res;
+		
+	for(j = 0; j < TAILLE; j++)
+	{
+		gettimeofday(&debut, NULL);
+		usleep(1000);
+		gettimeofday(&fin, NULL);
+		timersub(&fin, &debut, &res);
+		tab[j] = res.tv_sec* 1000000 + res.tv_usec;
+		moy += tab[j];
+	}
+
+	moy = moy / TAILLE - 1000;
+	min = tab[0];
+	max = tab[0];
+
+	for(j = 1; j < TAILLE; j++)
+	{
+		if(min > tab[j])
+			min = tab[j];
+
+		if(max < tab[j])
+			max = tab[j];
+	}
+	
+	min-=1000;
+	max-=1000;
+	printf("Moyenne : %d\nMaximum : %d\nMinimum : %d\n", moy, max, min);
+	return 0;
+}
+\end{lstlisting}
+
+Voici les temps relevés :
+
+\begin{itemize}
+\item Sans stress :
+\begin{itemize}
+\item Moyenne : 85 ms
+\item Maximum : 772 ms
+\item Minimum : 13 ms
+\end{itemize}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp6/42(sansstress).png}
+		\caption{Résultat sans stress}
+\end{figure}
+
+
+\item Avec stress :
+\begin{itemize}
+\item Moyenne : 766 ms
+\item Maximum : 304397 ms
+\item Minimum : 27 ms
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp6/42(avecstress).png}
+		\caption{Résultat avec stress}
+\end{figure}
+\end{itemize}
+
+On se rend compte qu'avec un stress, le temps maximum et par conséquent le temps moyen explosent. En effet, il arrive très fréquemment que notre programme soit interrompu au profit du stress que l'on a lancé en même temps. Notre tâche est donc fortement ralentie. Le minimum, lui, augmente mais beaucoup moins que le maximum car il est aussi possible que notre programme ne soit beaucoup interrompu sur une itération.
+
+On pourrait, pour améliorer ces résultats, rendre notre programme temps réel et lui assigner une priorité maximale.
+
+\end{document}
+

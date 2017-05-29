@@ -1,0 +1,601 @@
+\documentclass[a4paper,12pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+\usepackage[export]{adjustbox}
+
+\usepackage{geometry}
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{verbatim}
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{Dateiname}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+\usepackage{listings}
+\lstset{language=C} 
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  otherkeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
+
+
+
+
+%% NOTE POUR CLEMENT : UTILISE LE HEADER CI-DESSUS, IL EST MEILLEUR
+
+%%AJOUTS DE CLEMENT DANS LE HEADER :
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Clément BLANQUET et Rafik CHENNOUF}
+\rhead{Page \thepage}
+\cfoot{\footnotesize{MI11 - Rapport du TP2 Xenomai}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{titlesec}
+\makeatletter
+\titleformat{\chapter}[frame]
+  {\normalfont}{\filright\enspace \@chapapp~\thechapter\enspace}
+  {15pt}{\LARGE\bfseries\filcenter}
+\titlespacing*{\chapter}
+  {0pt}{0pt}{20pt}
+\makeatother
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+
+
+\author{Clément BLANQUET et Rafik CHENNOUF}
+\title{MI11 - Rapport TP 2 - Xenomai}
+
+\begin{document}
+
+\begin{titlepage}
+
+	\centering
+	\includegraphics[width=0.15\textwidth]{sigle_UTC.jpg}\par\vspace{1cm}
+	{\scshape\LARGE Université de Technologie de Compiègne \par\vspace{1cm}}	
+	{\scshape\Large MI11\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Rapport du TP2 Xenomai\par}
+	\vspace{2cm}
+	{\Large\itshape Clément BLANQUET et Rafik CHENNOUF\par}
+	\vspace{2cm}
+	\vfill
+% Bottom of the page
+	{\large Juin 2017}
+\end{titlepage}
+
+
+\renewcommand{\contentsname}{Sommaire} % Changer le nom de la table des matieres
+\tableofcontents
+% Les différentes tables
+\listoffigures        % Liste des figures
+
+
+
+
+\chapter{TP2 Xenomai}
+
+\section{Exercice : Pathfinder}
+
+\subsection{Question 1}
+
+La fonction \textit{create\_and\_start\_rt\_task} sert, comme son nom l'indique, à créer et lancer une tâche. Elle commence par créer la tâche (avec rt\_task\_create), puis lui assigne une période (avec rt\_task\_set\_periodic) et enfin la lance (rt\_task\_start).
+
+La fonction \textit{rt\_task} permet de simuler l'exécution d'une tâche temps réel en effectuant une attente active d'une durée d'une période grâce à la fonction busy\_wait.
+
+Elle permet d'obtenir les informations suivantes :
+\begin{itemize}
+\item à chaque nouvelle période, le nom de la tâche s'affiche
+\item la priorité de base et la priorité actuelle de la tâche
+\item à la fin de la période, le nom de la tâche s'affiche avec un "ok" (qui montre la fin de la période)
+\end{itemize}
+
+La structure \textit{task\_descriptor} permet d'obtenir des informations de la tâche en cours, c'est à dire :
+\begin{itemize}
+	\item la tâche elle même (de type RT\_TASK)
+	\item le pointeur vers la fonction associée
+	\item la période de la tâche
+	\item la durée d'exécution la tâche
+	\item la priorité de la tâche
+	\item si la tâche utilise une ressource ou non
+\end{itemize} 
+
+
+\subsection{Question 2}
+La fonction \textit{rt\_task\_name} sert à obtenir le nom de la tâche en cours grâce à la structure RT\_TASK\_INFO et son champ \textit{name}. Cette structure a d'autres champs :
+\begin{itemize}
+\item bprio : priorité de base (ne change pas au cours du temps)
+\item cprio : priorité actuelle (peut changer au cours du temps)
+\item status : statut de la tâche
+\item relpoint : temps restant avant la prochaine exécution
+\item exectime : temps d'exécution de la tâche depuis son lancement
+\item modeswitches : nombre de changements de mode primaire / secondaire
+\item ctxswitches : nombre de changements de contextes
+\item pagefaults : nombre de défauts de page
+\end{itemize}
+
+\subsection{Question 3}
+
+Voici notre fonction \textit{busy\_wait} :
+
+\begin{lstlisting}
+void busy_wait(RTIME time) 
+{ 
+  	static RT_TASK_INFO info;			// info sur la tâche
+  	rt_task_inquire(NULL,&info);		// initialisation des infos dont exectime
+  	RTIME begin = info.exectime;		// recuperation du temps d'execution initial (> 0)
+  
+  
+    while(info.exectime - begin < time)
+  		  rt_task_inquire(NULL,&info);	// initialisation des infos dont exectime
+}
+\end{lstlisting}
+
+On commence par acquérir les informations relatives à la tâche grâce à une structure RT\_TASK\_INFO et à la fonction rt\_task\_inquire. La champ \textit{exectime} de cette structure nous permet d'obtenir le temps d'exécution de la tâche depuis son lancement (donc il y a certainement eu plusieurs occurrences). On appelle ce temps \textit{begin}. Ce qu'on veut, c'est simuler le temps d'\textbf{une} exécution de la tâche.
+
+Pour cela, on va, dans une boucle, vérifier la différence entre le temps d'exécution actuel de la tâche (avec le champ \textit{exectime} de RT\_TASK\_INFO mis à jour) et le temps d'exécution de la tâche initial (qu'on a appelé \textit{begin}). Dès que cette différence atteint la durée voulue (durée d'exécution de la tâche donnée en paramètre), on peut sortir de la boucle et de la fonction. De cette façon, on a réalisé une attente active pendant la durée recherchée.
+
+\subsection{Question 4}
+
+On se sert de la fonction time\_since\_start dans la fonction rt\_task pour avoir un point de repère temporel :
+
+\begin{lstlisting}
+rt_printf("doing %s    time : %d\n",rt_task_name(), time_since_start());
+\end{lstlisting}
+
+\newpage
+Voici le résultat de l'exécution du programme :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{screenstp8/4.png}
+		\caption{Résultat avec ORDO\_BUS}
+\end{figure}
+
+Le timing est bon : 25ms d'exécution et 125ms de période.
+
+\subsection{Question 5}
+
+Pour une bonne coordination des tâches, le sémaphore doit être utilisé comme suit :
+\begin{itemize}
+\item Faire un sem\_p (-1) dans acquire\_resource et un sem\_v (+1) dans release\_resource sur le sémaphore
+\item Initialisation du sémaphore à 0 (bloque tout)
+\item Initialisation de toutes les tâches (et donc toutes les tâches sont bloquées)
+\item Faire un sem\_v (+1) sur le sémaphore juste après ces initialisations (ce qui débloquera la tâche la plus prioritaire)
+\end{itemize}
+
+De cette façon, les tâches s'enchaîneront de la bonne manière selon leurs priorités.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp8/51.png}
+		\caption{Enchaînement avec meilleur cas pour METEO (40ms)}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp8/52.png}
+		\caption{Enchaînement avec pire cas pour METEO (60ms)}
+\end{figure}
+\newpage
+On se rend compte que, lors du meilleur cas pour la tâche METEO (soit 40ms), ORDO\_BUS n'a pas encore terminé sa période et n'est donc pas prêt pour exécution avant le début de la tâche PILOTAGE ou la fin de DISTRIB\_DONNEES. Dans le pire cas pour la tâche METEO (soit 60ms),  ORDO\_BUS a atteint sa période et est donc exécuté avant la tâche PILOTAGE et s'intercale entre le début et le fin de l'exécution de DISTRIB\_DONNEES.
+\newpage
+\subsection{Question 6}
+
+Pour être sur qu'entre deux exécutions de ORDO\_BUS, DISTRIB\_DONNEES s'est exécutée entièrement, nous pouvons utiliser une seconde sémaphore en mode S\_PRIO (comme la première) qui vaut 1 avant la création des tâches pour que la tâche ORDO\_BUS puisse s'exécuter au début. Nous créons ensuite deux nouvelles fonctions \textbf{rt\_task\_ordo\_bus} et \textbf{rt\_task\_distrib\_donnees} pour remplacer la fonction de base \textbf{rt\_task}. Dans la fonction \textbf{rt\_task\_distrib\_donnees}, lors de l'exécution de la tâche DISTRIB\_DONNEES, il faut incrémenter la sémaphore pour prévenir la tâche ORDO\_BUS que la tâche DISTRIB\_DONNEES est en cours d'exécution. Si la tâche DISTRIB\_DONNEES est en cours d'exécution et qu'on est en train d'exécuter la tâche ORDO\_BUS alors il faut lancer un reset et terminer le programme. Pour cela, dans la fonction \textbf{rt\_task\_ordo\_bus}, il faut vérifier si une unité du sémaphore est disponible, si c'est le cas alors on exécute la tâche normalement sinon on lance un reset et on termine le programme. Il faut faire attention de ne pas bloquer la tâche ORDO\_BUS sur le sémaphore car la suite du code doit pouvoir s'exécuter. 
+
+\subsection{Question 7}
+
+Nous avons testé notre programme pour le cas extrême du temps d'exécution de METEO (60ms) sans terminer notre programme après le reset afin de mieux voir ce qu'il se passe. Voici le résultat obtenu :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screenstp8/7.png}
+		\caption{Reset avec le cas extrême pour METEO (60ms)}
+\end{figure}
+
+On voit que le reset se place entre le début de la tâche DISTRIB\_DONNEES et le début de la tâche ORDO\_BUS ce qui valide le fonctionnement de la solution.\newline
+
+Cependant, on remarque que lorsque la tâche METEO démarre elle s'empare du sémaphore puis elle est préemptée par la tâche ORDO\_BUS de plus haute priorité. A la fin de la tâche ORDO\_BUS, la tâche DISTRIB\_DONNEES démarre mais elle est bloquée par le sémaphore car c'est la tâche METEO qui le possède. Ensuite, après les exécutions des tâches RADIO et CAMERA, la tâche METEO reprend la main et se termine en libérant le sémaphore ce qui permet à la tâche DISTRIB\_DONNEES de reprendre son exécution avant le Reset. Ceci est problématique car une tâches de plus haute priorité (DISTRIB\_DONNEES) ne peut pas avoir accès au processeur car une tâche de plus faible priorité (METEO) l'utilise. C'est ce qu'on appelle une inversion de priorité. 
+Le chronogramme suivant illustre ce qu'il se passe :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp8/7_chrono.png}
+		\caption{Chronogramme illustrant l'inversion de priorité}
+\end{figure}
+
+\subsection{Question 8}
+
+Afin de résoudre ce problème, nous pouvons utiliser un mutex à la place de notre premier sémaphore. 
+En effet, un mutex hérite de la priorité la plus élevée parmi celles de toutes les tâches qui le demandent et une tâche s'exécute avec la priorité la plus élevée parmi celles de tous les mutex qu'il tient. 
+
+\subsection{Question 9}
+
+Après lancement du programme, nous obtenons le résultat suivant :
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1\textwidth]{screenstp8/9.png}
+		\caption{Résultat avec un mutex}
+\end{figure}
+
+On voit bien que la tâche METEO a hérité de la priorité de la tâche DISTRIB\_DONNEES (6) ce qui lui permet de reprendre son exécution normalement et de se terminer. Ensuite la tâche DISTRIB\_DONNEES prend la main et s'exécute. Il n'y a plus du tout d'inversion de priorité.
+
+\subsection{Question 10}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <sys/mman.h>
+
+#include <native/task.h>
+#include <native/timer.h>
+#include <native/sem.h>
+#include <native/mutex.h>
+#include <rtdk.h>
+
+#define TASK_MODE T_JOINABLE
+#define TASK_STKSZ 0
+
+RTIME init_time;
+RT_SEM sem;
+RT_SEM semReset;
+RT_MUTEX mutex;
+
+
+typedef struct task_descriptor{
+  RT_TASK task;
+  void (*task_function)(void*);			
+  RTIME period;
+  RTIME duration;
+  int priority;
+  bool use_resource;
+} task_descriptor;
+
+///////////////////////////////////////////////////////////
+char* rt_task_name(void) {
+  static RT_TASK_INFO info;
+  rt_task_inquire(NULL,&info);
+
+  return info.name;
+}
+
+///////////////////////////////////////////////////////////
+int time_since_start(void) {
+  return (rt_timer_read()-init_time)/1000000;
+}
+
+///////////////////////////////////////////////////////////
+void acquire_resource(void) {
+
+  // Version non fonctionnelle avec sémaphore
+	// rt_sem_p (&sem, TM_INFINITE );		
+	
+	// Version fonctionnelle avec mutex
+	rt_mutex_acquire (&mutex, TM_INFINITE); 
+}
+
+///////////////////////////////////////////////////////////
+void release_resource(void) {
+
+  // Version non fonctionnelle avec sémaphore
+	//  rt_sem_v (&sem);	
+		
+	// Version fonctionnelle avec mutex
+	rt_mutex_release(&mutex);	
+}
+
+///////////////////////////////////////////////////////////
+void busy_wait(RTIME time) 
+{ 
+  	static RT_TASK_INFO info;			// Info sur la tâche
+		
+		// Initialisation des infos dont exectime
+  	rt_task_inquire(NULL,&info);	
+			
+		// Recuperation du temps d'execution initial (> 0)
+  	RTIME begin = info.exectime;		
+  
+  
+    while(info.exectime - begin < time)
+		{
+				// Mise à jour des infos dont exectime
+  		  rt_task_inquire(NULL,&info);	
+		}
+}
+
+
+void rt_task(void *cookie) { 												
+  struct task_descriptor* params=(struct task_descriptor*)cookie;
+
+  rt_printf("started task %s, period %ims, duration %ims, use resource %i\n",rt_task_name(),(int)(params->period/1000000),(int)(params->duration/1000000),params->use_resource);
+
+  while(1) {
+    rt_task_wait_period(NULL);
+    if(params->use_resource) acquire_resource();
+    rt_printf("doing %s    time : %d\n",rt_task_name(), time_since_start());
+    busy_wait(params->duration);
+    
+    static RT_TASK_INFO info;			// Info sur la tâche
+  	rt_task_inquire(NULL,&info);		// Initialisation des infos 
+  	
+	// Test du mutex avec priorité de base et priorité courrante
+  	rt_printf("Name : %s  Base prio : %d  Current prio : %d\n", info.name, info.bprio, info.cprio);
+    
+    rt_printf("doing %s ok    time : %d\n",rt_task_name(), time_since_start());
+    if(params->use_resource) release_resource();
+  }
+}
+
+// Fonction de la tâche ORDO_BUS implémentant le RESET
+void rt_task_ordo_bus(void *cookie) { 									
+
+  struct task_descriptor* params=(struct task_descriptor*)cookie;
+
+  rt_printf("started task %s, period %ims, duration %ims, use resource %i\n",rt_task_name(),(int)(params->period/1000000),(int)(params->duration/1000000),params->use_resource);
+
+  while(1) {
+    rt_task_wait_period(NULL);
+    if(params->use_resource) acquire_resource();
+	
+// Si la décrémentation n'est pas possible, on ne bloque pas la tâche
+    if(rt_sem_p (&semReset, TM_NONBLOCK ) == -EWOULDBLOCK )		
+	{
+ 	   rt_printf("RESET\n\n\n\n\n\n\n\n\n\n\n");	// Affichage du RESET
+	   exit(-1);									// Exit du programme
+	}
+   
+    rt_printf("doing %s    time : %d\n",rt_task_name(), time_since_start());
+    busy_wait(params->duration);
+    
+    static RT_TASK_INFO info;			
+  	rt_task_inquire(NULL,&info);		
+  	
+	// Test du mutex avec priorité de base et priorité courrante
+  	rt_printf("Name : %s  Base prio : %d  Current prio : %d\n", info.name, info.bprio, info.cprio);
+    
+    rt_printf("doing %s ok    time : %d\n",rt_task_name(), time_since_start());
+    if(params->use_resource) release_resource();
+  }
+}
+
+
+// Fonction de la tâche DISTRIB_DONNEES implémentant le RESET
+void rt_task_distrib_donnees(void *cookie) { 											
+
+  struct task_descriptor* params=(struct task_descriptor*)cookie;
+
+  rt_printf("started task %s, period %ims, duration %ims, use resource %i\n",rt_task_name(),(int)(params->period/1000000),(int)(params->duration/1000000),params->use_resource);
+
+  while(1) {
+    rt_task_wait_period(NULL);
+    if(params->use_resource) acquire_resource();
+    rt_printf("doing %s    time : %d\n",rt_task_name(), time_since_start());
+    busy_wait(params->duration);
+    
+    static RT_TASK_INFO info;			
+  	rt_task_inquire(NULL,&info);		
+  	
+		// Test du mutex avec priorité de base et priorité courante
+  	rt_printf("Name : %s  Base prio : %d  Current prio : %d\n", info.name, info.bprio, info.cprio);
+    
+    rt_printf("doing %s ok    time : %d\n",rt_task_name(), time_since_start());
+	
+		// Incrémentation du sémaphore pour le RESET
+    rt_sem_v (&semReset); 
+		
+    if(params->use_resource) release_resource();
+    
+  
+  }
+  
+}
+
+
+int create_and_start_rt_task(struct task_descriptor* desc,char* name) {
+  int status=rt_task_create(&desc->task,name,TASK_STKSZ,desc->priority,TASK_MODE);
+	if(status!=0) {
+		printf("error creating task %s\n",name);
+		return status;
+	}
+
+  status=rt_task_set_periodic(&desc->task,TM_NOW,desc->period);
+  if(status!=0) {
+		printf("error setting period on task %s\n",name);
+		return status;
+	}
+	
+	status=rt_task_start(&desc->task,desc->task_function,desc);
+  if(status!=0) {
+		printf("error starting task %s\n",name);
+	}
+  return status;
+}
+
+
+
+int main(void) {  
+ 
+  /* Avoids memory swapping for this program */
+  mlockall(MCL_CURRENT|MCL_FUTURE);
+
+  rt_print_auto_init(1);
+
+  init_time=rt_timer_read();
+  
+	// Version non fonctionnelle avec sémaphore
+  //rt_sem_create (&sem, "sem", 0, S_PRIO);
+	
+	// Version fonctionnelle avec mutex
+  rt_mutex_create (&mutex, "mutex"); 		
+	
+	// Sémaphore pour le RESET
+  rt_sem_create (&semReset, "semReset", 1, S_PRIO);	
+  
+// Initialisation, création et lancement de la tâche ORDO_BUS
+  task_descriptor* ORDO_BUS_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  ORDO_BUS_Descriptor->task_function = rt_task_ordo_bus;
+  ORDO_BUS_Descriptor->priority = 7;
+  ORDO_BUS_Descriptor->duration = 25000000; 
+  ORDO_BUS_Descriptor->period = 125000000;
+  ORDO_BUS_Descriptor->use_resource = 0;
+  
+  create_and_start_rt_task(ORDO_BUS_Descriptor, "ORDO_BUS");  
+  
+  
+  // Initialisation, création et lancement de la tâche DISTRIB_DONNEES
+  task_descriptor* DISTRIB_DONNEES_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  DISTRIB_DONNEES_Descriptor->task_function = rt_task_distrib_donnees;
+  DISTRIB_DONNEES_Descriptor->priority = 6;
+  DISTRIB_DONNEES_Descriptor->duration = 25000000; 
+  DISTRIB_DONNEES_Descriptor->period = 125000000;
+  DISTRIB_DONNEES_Descriptor->use_resource = 1;
+  
+  create_and_start_rt_task(DISTRIB_DONNEES_Descriptor, "DISTRIB_DONNEES");  
+  
+
+  // Initialisation, création et lancement de la tâche PILOTAGE
+  task_descriptor* PILOTAGE_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  PILOTAGE_Descriptor->task_function = rt_task;
+  PILOTAGE_Descriptor->priority = 5;
+  PILOTAGE_Descriptor->duration = 25000000; 
+  PILOTAGE_Descriptor->period = 250000000;
+  PILOTAGE_Descriptor->use_resource = 1;
+  
+  create_and_start_rt_task(PILOTAGE_Descriptor, "PILOTAGE");  
+  
+  
+  // Initialisation, création et lancement de la tâche RADIO
+  task_descriptor* RADIO_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  RADIO_Descriptor->task_function = rt_task;
+  RADIO_Descriptor->priority = 4;
+  RADIO_Descriptor->duration = 25000000; 
+  RADIO_Descriptor->period = 250000000;
+  RADIO_Descriptor->use_resource = 0;
+  
+  create_and_start_rt_task(RADIO_Descriptor, "RADIO"); 
+  
+  
+  // Initialisation, création et lancement de la tâche CAMERA
+  task_descriptor* CAMERA_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  CAMERA_Descriptor->task_function = rt_task;
+  CAMERA_Descriptor->priority = 3;
+  CAMERA_Descriptor->duration = 25000000; 
+  CAMERA_Descriptor->period = 250000000;
+  CAMERA_Descriptor->use_resource = 0;
+  
+  create_and_start_rt_task(CAMERA_Descriptor, "CAMERA"); 
+  
+  
+  // Initialisation, création et lancement de la tâche MESURES
+  task_descriptor* MESURES_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  MESURES_Descriptor->task_function = rt_task;
+  MESURES_Descriptor->priority = 2;
+  MESURES_Descriptor->duration = 50000000; 
+  MESURES_Descriptor->period = 5000000000;
+  MESURES_Descriptor->use_resource = 1;
+  
+  create_and_start_rt_task(MESURES_Descriptor, "MESURES"); 
+  
+  
+  // Initialisation, création et lancement de la tâche METEO
+  task_descriptor* METEO_Descriptor = (task_descriptor*)malloc(sizeof(task_descriptor));
+  METEO_Descriptor->task_function = rt_task;
+  METEO_Descriptor->priority = 1;
+  METEO_Descriptor->duration = 60000000; // 40000000
+  METEO_Descriptor->period = 5000000000;
+  METEO_Descriptor->use_resource = 1;
+  
+  create_and_start_rt_task(METEO_Descriptor, "METEO"); 
+  
+  // Version non fonctionnelle avec sémaphore
+  // rt_sem_v (&sem); // Incrémentation du sémaphore principal
+    
+  getchar();
+  
+  return  EXIT_SUCCESS;
+}
+\end{lstlisting}
+
+
+\end{document}
+
