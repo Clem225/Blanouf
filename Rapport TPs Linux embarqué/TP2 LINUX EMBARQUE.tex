@@ -53,7 +53,8 @@
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
-\lstset{ %
+
+\lstset{language=C++,
   backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
   basicstyle=\footnotesize,        % the size of the fonts that are used for the code
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
@@ -66,7 +67,7 @@
   frame=single,                    % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\color{blue},       % keyword style
-  language=Octave,                 % the language of the code
+  language=C++,                 % the language of the code
   otherkeywords={*,...},            % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
@@ -334,18 +335,20 @@ int main()
 	struct input_event event_buttons;
 	int sys_led, user_led, buttons;
 
+	//ouverture du fichier gerant les evenements des boutons
 	buttons = open("/dev/input/event1", O_RDONLY); 
 
-	if(buttons == -1)
+	if(buttons == -1) //Test en cas d'erreur d'ouverture
 	{
 		perror("Erreur d'ouverture de l'un des fichiers");
 		return 0;
 	}
 
+	//ouverture des fichiers pour gerer les LEDs
 	sys_led = open("/sys/class/leds/sys_led/brightness", O_RDWR);
 	user_led = open("/sys/class/leds/user_led/brightness", O_RDWR);
 
-	if(sys_led == -1 || user_led == -1)
+	if(sys_led == -1 || user_led == -1) //Test en cas d'erreur d'ouverture
 	{
 		perror("Erreur d'ouverture de l'un des fichiers");
 		return 0;
@@ -353,64 +356,65 @@ int main()
 
 	while(1)
 	{
-		
+		//lecture du fichier d'evenements boutons
 		read(buttons, &event_buttons, sizeof(event_buttons));
 
-		int code = (int)event_buttons.code;
-		int value = (int)event_buttons.value;
+		int code = (int)event_buttons.code; //lequel des boutons
+		int value = (int)event_buttons.value; //pression ou relachement
 
 		switch(code)
 		{
 			case KEY_F1: // MENU
-				if(value == 1)
+				if(value == 1) //pression
 				{
-					printf("MENU PUSH\n");
-					if(write(sys_led, "1", 1) == -1)
+					printf("MENU PUSH\n"); //afficher message
+					if(write(sys_led, "1", 1) == -1) //allumer LED
 						perror("Erreur d'ecriture");
 				}
-				else
+				else //relachement
 				{
-					printf("MENU RELEASE\n");
-					if(write(sys_led, "0", 1) == -1)
+					printf("MENU RELEASE\n"); //afficher message
+					if(write(sys_led, "0", 1) == -1) //eteindre LED
 						perror("Erreur d'ecriture");
 				}
 			break;
 
 			case KEY_ESC: // BACK
-				if(value == 1)
+				if(value == 1) //pression
 				{
-					printf("BACK PUSH\n");
-					if(write(user_led, "1", 1) == -1)
+					printf("BACK PUSH\n"); //afficher message
+					if(write(user_led, "1", 1) == -1) //allumer LED
 						perror("Erreur d'ecriture");
 				}
-				else
+				else //relachement
 				{
-					printf("BACK RELEASE\n");
-					if(write(user_led, "0", 1) == -1)
+					printf("BACK RELEASE\n"); //afficher message
+					if(write(user_led, "0", 1) == -1) //eteindre LED
 						perror("Erreur d'ecriture");
 				}
 			break;
 
 			case KEY_HOME: // HOME
-				if(value == 1)
+				if(value == 1) //pression
 				{
 					printf("HOME PUSH\n");
-					if(write(user_led, "1", 1) == -1)
+					if(write(user_led, "1", 1) == -1) //allumer LED
 						perror("Erreur d'ecriture");
-					if(write(sys_led, "1", 1) == -1)
+					if(write(sys_led, "1", 1) == -1) //allumer LED
 						perror("Erreur d'ecriture");
 				}
-				else
+				else //relachement
 				{
 					printf("HOME RELEASE\n");
-					if(write(user_led, "0", 1) == -1)
+					if(write(user_led, "0", 1) == -1) //eteindre LED
 						perror("Erreur d'ecriture");
-					if(write(sys_led, "0", 1) == -1)
+					if(write(sys_led, "0", 1) == -1) //eteindre LED
 						perror("Erreur d'ecriture");
 				}
 			break;
 		}
 	}
+	//Fermetures des fichiers
 	if(close(sys_led) == -1)
 		perror("Erreur de fermeture de l'un des fichiers");
 	if(close(user_led) == -1)
@@ -434,28 +438,34 @@ Voici notre programme :
 #include <sys/stat.h>
 #include <sys/time.h>
  
-#define TAILLE 10000
+#define TAILLE 10000 // Taille de la boucle
 
 int main()
 {
 	int j = 0, tempstotal = 0;
 	struct timeval debut, fin, res;
-	gettimeofday(&debut, NULL);
-	for(j = 0; j < TAILLE; j++)
+	gettimeofday(&debut, NULL); // Prise de temps avant attente
+	for(j = 0; j < TAILLE; j++) // Attente
 	{
 		usleep(1000);
 	}
-	gettimeofday(&fin, NULL);
-	timersub(&fin, &debut, &res);
-	int tempstotal = res.tv_sec* 1000000 + res.tv_usec;
+	gettimeofday(&fin, NULL); // Prise de temps après attente
+	timersub(&fin, &debut, &res); // Différence entre temps fin et début
+	int tempstotal = res.tv_sec* 1000000 + res.tv_usec; // Obtention du temps en microsecondes
 
-	printf("Temps total : %d\n, tempstotal);
+	printf("Temps total : %d\n", tempstotal); //Affichage
 
 	return 0;
 }
 \end{lstlisting}
 
-On relève un temps de 10,9 ms.
+On relève un temps de 10863658 us, soit environ 10,9 s.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics{screenstp6/41.png}
+		\caption{Résultat d'une boucle de 10 000 usleep(1000)}
+\end{figure}
 
 \newpage
 \subsection{Question 4.2}
@@ -476,31 +486,31 @@ int main()
 	int tab[TAILLE];
 	struct timeval debut, fin, res;
 		
-	for(j = 0; j < TAILLE; j++)
+	for(j = 0; j < TAILLE; j++) // Attente
 	{
-		gettimeofday(&debut, NULL);
+		//Cette fois on prend les temps à l'intérieur de la boucle
+		gettimeofday(&debut, NULL); 
 		usleep(1000);
 		gettimeofday(&fin, NULL);
 		timersub(&fin, &debut, &res);
-		tab[j] = res.tv_sec* 1000000 + res.tv_usec;
-		moy += tab[j];
+		// On stocke les temps dans un tableau
+		tab[j] = res.tv_sec* 1000000 + res.tv_usec; 
+		moy += tab[j]; // Pour calcul ultérieur de la moyenne
 	}
-
-	moy = moy / TAILLE - 1000;
+	moy = moy / TAILLE - 1000; // Calcul moyenne
 	min = tab[0];
 	max = tab[0];
-
+	// Recherche des min et max
 	for(j = 1; j < TAILLE; j++)
 	{
 		if(min > tab[j])
 			min = tab[j];
-
 		if(max < tab[j])
 			max = tab[j];
 	}
-	
-	min-=1000;
-	max-=1000;
+	// Conversion en millisecondes
+	min=min/1000; 
+	max=max/1000;
 	printf("Moyenne : %d\nMaximum : %d\nMinimum : %d\n", moy, max, min);
 	return 0;
 }
@@ -509,34 +519,23 @@ int main()
 Voici les temps relevés :
 
 \begin{itemize}
-\item Sans stress :
+\item \textbf{Sans stress} :
 \begin{itemize}
-\item Moyenne : 85 ms
-\item Maximum : 772 ms
-\item Minimum : 13 ms
+\item Moyenne : 1.085 ms
+\item Maximum : 1.772 ms
+\item Minimum : 1.013 ms
 \end{itemize}
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=0.4\textwidth]{screenstp6/42(sansstress).png}
-		\caption{Résultat sans stress}
-\end{figure}
 
 
-\item Avec stress :
+\item \textbf{Avec stress} :
 \begin{itemize}
-\item Moyenne : 766 ms
-\item Maximum : 304397 ms
-\item Minimum : 27 ms
+\item Moyenne : 1.766 ms
+\item Maximum : 305.397 ms
+\item Minimum : 1.027 ms
+\end{itemize}
 \end{itemize}
 
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=1\textwidth]{screenstp6/42(avecstress).png}
-		\caption{Résultat avec stress}
-\end{figure}
-\end{itemize}
-
-On se rend compte qu'avec un stress, le temps maximum et par conséquent le temps moyen explosent. En effet, il arrive très fréquemment que notre programme soit interrompu au profit du stress que l'on a lancé en même temps. Notre tâche est donc fortement ralentie. Le minimum, lui, augmente mais beaucoup moins que le maximum car il est aussi possible que notre programme ne soit beaucoup interrompu sur une itération.
+On se rend compte qu'avec un stress, la moyenne augmente et le temps maximum explose. En effet, il arrive que notre programme soit interrompu au profit du stress que l'on a lancé en même temps. Notre tâche est donc fortement ralentie. Le minimum, lui, augmente très peu car il est aussi possible que notre programme ne soit pas beaucoup interrompu sur une itération.
 
 On pourrait, pour améliorer ces résultats, rendre notre programme temps réel et lui assigner une priorité maximale.
 

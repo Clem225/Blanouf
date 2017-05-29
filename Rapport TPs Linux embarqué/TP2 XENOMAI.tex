@@ -66,7 +66,7 @@
   frame=single,                    % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\color{blue},       % keyword style
-  language=Octave,                 % the language of the code
+  language=C++,                 % the language of the code
   otherkeywords={*,...},            % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
@@ -198,16 +198,17 @@ Voici notre fonction \textit{busy\_wait} :
 \begin{lstlisting}
 void busy_wait(RTIME time) 
 { 
-  	static RT_TASK_INFO info;			// info sur la tâche
-  	rt_task_inquire(NULL,&info);		// initialisation des infos dont exectime
-  	RTIME begin = info.exectime;		// recuperation du temps d'execution initial (> 0)
+  	static RT_TASK_INFO info; // info sur la tâche
+  	// initialisation des infos dont exectime
+  	rt_task_inquire(NULL,&info); 
+  	// recuperation du temps d'execution depuis le debut
+  	RTIME begin = info.exectime; 
   
-  
-    while(info.exectime - begin < time)
-  		  rt_task_inquire(NULL,&info);	// initialisation des infos dont exectime
-}
+    //Tant que le temps d'execution n'est pas terminé
+    while(info.exectime - begin < time) 
+  		  rt_task_inquire(NULL,&info); // mise à jour des infos
 \end{lstlisting}
-
+\vspace{-0.4cm}
 On commence par acquérir les informations relatives à la tâche grâce à une structure RT\_TASK\_INFO et à la fonction rt\_task\_inquire. La champ \textit{exectime} de cette structure nous permet d'obtenir le temps d'exécution de la tâche depuis son lancement (donc il y a certainement eu plusieurs occurrences). On appelle ce temps \textit{begin}. Ce qu'on veut, c'est simuler le temps d'\textbf{une} exécution de la tâche.
 
 Pour cela, on va, dans une boucle, vérifier la différence entre le temps d'exécution actuel de la tâche (avec le champ \textit{exectime} de RT\_TASK\_INFO mis à jour) et le temps d'exécution de la tâche initial (qu'on a appelé \textit{begin}). Dès que cette différence atteint la durée voulue (durée d'exécution de la tâche donnée en paramètre), on peut sortir de la boucle et de la fonction. De cette façon, on a réalisé une attente active pendant la durée recherchée.
@@ -217,7 +218,7 @@ Pour cela, on va, dans une boucle, vérifier la différence entre le temps d'exécu
 On se sert de la fonction time\_since\_start dans la fonction rt\_task pour avoir un point de repère temporel :
 
 \begin{lstlisting}
-rt_printf("doing %s    time : %d\n",rt_task_name(), time_since_start());
+rt_printf("doing %s time : %d\n",rt_task_name(), time_since_start());
 \end{lstlisting}
 
 \newpage

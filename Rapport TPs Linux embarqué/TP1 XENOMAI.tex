@@ -66,7 +66,7 @@
   frame=single,                    % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\color{blue},       % keyword style
-  language=Octave,                 % the language of the code
+  language=C++,                 % the language of the code
   otherkeywords={*,...},            % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
@@ -177,7 +177,7 @@ Voici le code qui permet de créer une tâche temps réel :
 
 RT_TASK task_printf;
 
-void task_hello()
+void task_hello() // Notre future tache temps reel
 {
 	while(1)
 	{
@@ -191,7 +191,7 @@ int main()
 	mlockall(MCL_CURRENT|MCL_FUTURE);
 	rt_print_auto_init(1);
 	int err;
-	
+	//Creation de la tache temps reel
 	err = rt_task_create(&task_printf, "hello world", TASK_STKSZ, TASK_PRIO, TASK_MODE);
 	if(!err)
 		rt_task_start(&task_printf, &task_hello, NULL);
@@ -293,12 +293,12 @@ Voici le code du programme lançant deux tâches Xenomai qui afficheront chacune u
 RT_TASK task_printf;
 RT_TASK task_printf2;
 
-void task_hello()
+void task_hello() //Premiere tache temps reel
 {
 	rt_printf("Hello\n");
 }
 
-void task_world()
+void task_world() //Deuxieme tache temps reel
 {
 	rt_printf("World !\n");
 	rt_task_sleep(rt_timer_ns2ticks(1000000000));
@@ -310,15 +310,15 @@ int main()
 	mlockall(MCL_CURRENT|MCL_FUTURE);
 	rt_print_auto_init(1);
 	int err1, err2;
-	
+	//Creation des deux taches temps reel
 	err1 = rt_task_create(&task_printf, "hello", TASK_STKSZ, TASK_PRIO, TASK_MODE);
 	err2 = rt_task_create(&task_printf2, "world", TASK_STKSZ, TASK_PRIO, TASK_MODE);
 	if(!err1 && !err2)
 	{
-		rt_task_start(&task_printf, &task_hello, NULL);
-		rt_task_join(&task_printf);	
-		rt_task_start(&task_printf2, &task_world, NULL);
-		rt_task_join(&task_printf2);	
+		rt_task_start(&task_printf, &task_hello, NULL); //Lancement tache
+		rt_task_join(&task_printf);	//Attente tache
+		rt_task_start(&task_printf2, &task_world, NULL); //Lancement tache
+		rt_task_join(&task_printf2); //Attente tache	
 	}
 		
 	getchar();
@@ -327,7 +327,7 @@ int main()
 }
 \end{lstlisting}
 
-
+\vspace{-0.5cm}
 Le résultat est le suivant :
 \begin{lstlisting}
 root@devkit8600-xenomai:~# ./synchro
