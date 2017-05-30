@@ -274,7 +274,7 @@ Nous avons testé notre programme pour le cas extrême du temps d'exécution de MET
 
 On voit que le reset se place entre le début de la tâche DISTRIB\_DONNEES et le début de la tâche ORDO\_BUS ce qui valide le fonctionnement de la solution.\newline
 
-Cependant, on remarque que lorsque la tâche METEO démarre elle s'empare du sémaphore puis elle est préemptée par la tâche ORDO\_BUS de plus haute priorité. A la fin de la tâche ORDO\_BUS, la tâche DISTRIB\_DONNEES démarre mais elle est bloquée par le sémaphore car c'est la tâche METEO qui le possède. Ensuite, après les exécutions des tâches RADIO et CAMERA, la tâche METEO reprend la main et se termine en libérant le sémaphore ce qui permet à la tâche DISTRIB\_DONNEES de reprendre son exécution avant le Reset. Ceci est problématique car une tâches de plus haute priorité (DISTRIB\_DONNEES) ne peut pas avoir accès au processeur car une tâche de plus faible priorité (METEO) l'utilise. C'est ce qu'on appelle une inversion de priorité. 
+Cependant, on remarque que lorsque la tâche METEO démarre elle s'empare du sémaphore puis elle est préemptée par la tâche ORDO\_BUS de plus haute priorité. A la fin de la tâche ORDO\_BUS, la tâche DISTRIB\_DONNEES démarre mais elle est bloquée par le sémaphore car c'est la tâche METEO qui le possède. Ensuite, après les exécutions des tâches RADIO et CAMERA, la tâche METEO reprend la main et se termine en libérant le sémaphore ce qui permet à la tâche DISTRIB\_DONNEES de reprendre son exécution avant le Reset. Ceci est problématique car une tâche de plus haute priorité (DISTRIB\_DONNEES) ne peut pas avoir accès au processeur car une tâche de plus faible priorité (METEO) l'utilise. C'est ce qu'on appelle une inversion de priorité. 
 Le chronogramme suivant illustre ce qu'il se passe :
 
 \begin{figure}[h]
@@ -496,7 +496,7 @@ int create_and_start_rt_task(struct task_descriptor* desc,char* name) {
 
 int main(void) {  
  
-  /* Avoids memory swapping for this program */
+  //Avoids memory swapping for this program
   mlockall(MCL_CURRENT|MCL_FUTURE);
 
   rt_print_auto_init(1);
