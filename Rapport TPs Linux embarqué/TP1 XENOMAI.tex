@@ -272,8 +272,8 @@ Le fichier de statistiques Xenomai donne :
 \textbf{Interprétation des statistiques Xenomai :} On constate que : 
 \begin{itemize}
 \item Lorsqu'on crée une tâche temps réel qui n'utilise aucune fonction temps réel (dans notre exemple, les fonctions \textit{sleep} et \textit{printf}), elle n'apparaît pas dans le fichier de statistiques. Elle n'est en fait absolument pas temps réel.
-\item Lorsque, dans cette même tâche, on rend la fonction \textit{sleep} temps réel (en la remplaçant par \textit{rt\_task\_sleep}), elle apparaît dans le fichier de statistiques. On constate que son nombre de changements de contexte (9) est très inférieur  au nombre de changements de contexte du ROOT (282), ce qui signifie que ... A COMPLETER
-\item Lorsque les fonctions \textit{sleep} et \textit{printf} ont été remplacées par leurs équivalents temps réel (\textit{rt\_task\_sleep} et \textit{rt\_printf}), le nombre changements de contextes de la tâche est égal à celui de ROOT (46), ce qui montre alors que la tâche est "entièrement" temps réel.
+\item Lorsque, dans cette même tâche, on rend la fonction \textit{sleep} temps réel (en la remplaçant par \textit{rt\_task\_sleep}), elle apparaît dans le fichier de statistiques. On constate que son nombre de changements de contexte (9) est très inférieur  au nombre de changements de contexte du ROOT (282), ce qui signifie que notre tâche temps-réel a bien la priorité sur a tâche ROOT (Linux). La tâche temps-réel est rarement interrompue. De plus, notre tâche a un nombre de changement de modes (MSW) égal à 4. Elle passe donc plusieurs fois du mode primaire, qui correspond à un mode temps-réel dur, à un mode secondaire qui correspond à un mode temps-réel mou et vise versa.
+\item Lorsque les fonctions \textit{sleep} et \textit{printf} ont été remplacées par leurs équivalents temps réel (\textit{rt\_task\_sleep} et \textit{rt\_printf}), le nombre changements de contextes de la tâche est égal à celui de ROOT (46) mais nous remarquons surtout qu'il n'y a pas eu de changements de mode.
 \end{itemize}
 
 \section{Exercice 2 : Synchronisation}
@@ -339,7 +339,7 @@ root@devkit8600-xenomai:~#
 
 
 \subsection{Question 2.2}
-Pour le moment, les priorités des tâches n'ont aucune influence. En effet, elles sont lancées dans l'ordre dans lequel elles se trouvent dans notre code : après le \textit{rt\_task\_start}, rien ne "bloque" l'exécution de la tâche; les tâches se lancent donc l'une après l'autre comme on l'a défini. Pour afficher les messages de le désordre, il faut donc inverser les deux tâches le code. On peut aussi utiliser des sémaphores, comme vu dans les questions suivantes.
+Pour le moment, les priorités des tâches n'ont aucune influence. En effet, elles sont lancées dans l'ordre dans lequel elles se trouvent dans notre code : après le \textit{rt\_task\_start}, rien ne "bloque" l'exécution de la tâche; les tâches se lancent donc l'une après l'autre comme on l'a défini. Pour afficher les messages dans le désordre, il faut donc inverser les deux tâches dans le code. On peut aussi utiliser des sémaphores, comme vu dans les questions suivantes.
 
 \subsection{Question 2.3}
 Il faut initialiser le sémaphore à 0 de manière à bloquer les tâches.
@@ -562,7 +562,7 @@ La tâche métronome possède la plus haute priorité comme on peut le voir ci-desso
 
 Initialement, les tâches 'Hello' et 'World' sont bloquées.
 A chaque activation de la tâche métronome, le sémaphore est incrémenté de 2. A la première incrémentation, c'est la tâche 'Hello' qui prend la main puisque elle a une priorité supérieure à la tâche 'World'. La tâche 'Hello' décrémente le sémaphore et affiche 'Hello'.
-Ensuite, la tâche métronome reprend son exécution puisque la tache 'World' est bloquée et elle incrémente une seconde fois le sémaphore. La tâche 'World' est donc débloquée, elle décrémente le sémaphore, affiche 'World !' puis incrémente le sémaphore pour débloquer la tâche métronome qui va reprendre son exécution en décrémentant le sémaphore et en faisant une attente d'une seconde avant de relancer le même processus. *** CLEEEEEEEEEEEEEEEEEEEEEEEEMENT : TU PEUX CONFIRMER CE QUE JE DIS J'AI UN DOUTE ***        REPONSE DE CLEMENT : JE CROIS QUE CEST BON
+Ensuite, la tâche métronome reprend son exécution puisque la tache 'World' est bloquée et elle incrémente une seconde fois le sémaphore. La tâche 'World' est donc débloquée, elle décrémente le sémaphore, affiche 'World !' puis incrémente le sémaphore pour débloquer la tâche métronome qui va reprendre son exécution en décrémentant le sémaphore et en faisant une attente d'une seconde avant de relancer le même processus.
 
 \subsection{Question 2.7}
 
