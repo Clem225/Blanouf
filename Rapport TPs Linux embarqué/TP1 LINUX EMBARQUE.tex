@@ -412,7 +412,7 @@ unset LDFLAGS
 \end{verbatim} 
 
 Le fichier ci-dessus sert à mettre en place l'environnement de compilation de manière à avoir les bons préfixes pour une compilation croisée.
-Le préfixe la chaîne de compilation croisée est \textit{arm-poky-linux-gnueabi-}.
+Le préfixe de la chaîne de compilation croisée est \textit{arm-poky-linux-gnueabi-}.
 
 \subsection{Question 5.3}
 
@@ -451,13 +451,13 @@ Dans notre cas, nous avons utilisé le mode \textit{built-in}.\newline
 
 Nous avons ensuite compiler notre noyau avec la commande suivante : \textit{make ARCH=arm uImage -j2}.
 
-\newpage
-
 \subsection{Question 5.5}
 
 Le résultat de la compilation se trouve dans \textit{arch/arm/boot/uImage}.
 
 Nous avons ensuite copier le fichier uImage dans /tftpboot pour qu'il soit utilisé par la cible puis nous l'avons démarré.
+
+\newpage
 
 \subsection{Question 5.6}
 
