@@ -385,7 +385,7 @@ Les fichiers de \textit{libxml2} installés par le gestionnaire de paquets se tr
 \end{figure}
 
 Ce dossier contient des fichiers \textit{shared object} (.so) qui sont des librairies/bibliothèques partagées dynamiques.
-Les .so sont des bibliothèques qui se chargent en mémoire au moment de l'exécution d'un programme qui les utilisent. Si plusieurs programmes les utilisant sont lancés en même temps, une seule instance de la bibliothèque dynamique réside en mémoire.
+Les .so sont des bibliothèques qui se chargent en mémoire au moment de l'exécution d'un programme qui les utilise. Si plusieurs programmes les utilisant sont lancés en même temps, une seule instance de la bibliothèque dynamique réside en mémoire.
 \newpage
 
 \section{Exercice 5 : Compilation manuelle du noyau}
@@ -405,7 +405,7 @@ n'existe pas ce n'est pas opérationnel.
 
 \subsection{Question 5.2}
 
-Nous avons ensuite compiler manuellement le noyau via la chaîne de compilation croisée en exécutant le script suivant :
+Nous avons ensuite compilé manuellement le noyau via la chaîne de compilation croisée en exécutant le script suivant :
 \begin{verbatim} 
 source /opt/poky/1.7.3/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi
 unset LDFLAGS
@@ -449,13 +449,13 @@ Ce driver peut être activé via deux modes, \textit{modularizes features} ou \t
 Quant au deuxième mode, le driver sera directement intégré au kernel et il sera disponible tout le temps. Le kernel sera donc plus gros, plus lent et utilisera plus de mémoire.
 Dans notre cas, nous avons utilisé le mode \textit{built-in}.\newline
 
-Nous avons ensuite compiler notre noyau avec la commande suivante : \textit{make ARCH=arm uImage -j2}.
+Nous avons ensuite compilé notre noyau avec la commande suivante : \textit{make ARCH=arm uImage -j2}.
 
 \subsection{Question 5.5}
 
 Le résultat de la compilation se trouve dans \textit{arch/arm/boot/uImage}.
 
-Nous avons ensuite copier le fichier uImage dans /tftpboot pour qu'il soit utilisé par la cible puis nous l'avons démarré.
+Nous avons ensuite copié le fichier uImage dans /tftpboot pour qu'il soit utilisé par la cible puis nous l'avons démarré.
 
 \newpage
 
