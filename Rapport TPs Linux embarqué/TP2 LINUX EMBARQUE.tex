@@ -157,7 +157,7 @@
 
 \subsection{Question 1.1}
 
-Après avoir compilé notre programme \textit{Hello World} avec \textbf{gcc} nous avons exécute la commande file pour obtenir des informations sur l'exécutable. Nous nous sommes rendu compte que cet exécutable a été compilé pour une architecture classique x86/64 et non ARM. C'est pour cela que le programme ne peut pas s'exécuter sur la cible. 
+Après avoir compilé notre programme \textit{Hello World} avec \textbf{gcc} nous avons exécuté la commande file pour obtenir des informations sur l'exécutable. Nous nous sommes rendus compte que cet exécutable a été compilé pour une architecture classique x86/64 et non ARM. C'est pour cela que le programme ne peut pas s'exécuter sur la cible. 
 
 \begin{figure}[h]
 	\centering
@@ -266,7 +266,7 @@ int main()
 
 	while(1)
 	{
-		if(write(user_led, "0", 1) == -1)	// éteingage de la LED user
+		if(write(user_led, "0", 1) == -1)	// extinction de la LED user
 			perror("Erreur d'ecriture");
 
 		if(write(sys_led, "1", 1) == -1)    // allumage de la LED système
@@ -274,7 +274,7 @@ int main()
 
 		sleep(1);							// attente d'une seconde
 
-		if(write(sys_led, "0", 1) == -1)	// éteingage de la LED système
+		if(write(sys_led, "0", 1) == -1)	// extinction de la LED système
 			perror("Erreur d'ecriture");
 
 		if(write(user_led, "1", 1) == -1)   // allumage de la LED user
