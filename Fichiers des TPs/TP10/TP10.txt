@@ -1,0 +1,2 @@
+ProdConso1 : Le consommateur est plus lent que le prod 
+ProdConso2 : le consommateur est plus rapide 
