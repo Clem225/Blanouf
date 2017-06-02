@@ -65,9 +65,9 @@ void s_wait( ushort n )
 		_sem[n].file.taches[_sem[n].file.fin_file] = _tache_c;		// si e(s) < 0 alors bloquer la tâche ayant effectué la requête et mettre celle-ci dans la file f(s) ( à vérifier)
 		_sem[n].file.fin_file = _sem[n].file.fin_file + 1;		// incrémente la fin de la file
 		_sem[n].file.fin_file = (_sem[n].file.fin_file) % MAX_TACHES; // si fin_file < MAX_TACHES => fin_file sinon => on revient au debut de la file
+	
+		dort();	 //  C DANS LE IF PUTAIN !!!
 	}
-
-	dort();		// dort() fait un _lock()_ aussi => probleme ?
 
 	_unlock_();
 }
@@ -91,9 +91,9 @@ void s_signal ( ushort n )
 		tache = _sem[n].file.taches[_sem[n].file.debut_file]; 	// si e(s) <= 0 alors sortir une tâche de la file f(s) et la relancer (à vérifier)
 		_sem[n].file.debut_file = _sem[n].file.debut_file + 1;		// incrémente début de la file
 		_sem[n].file.debut_file = (_sem[n].file.debut_file) % MAX_TACHES; // si debut_file < MAX_TACHES => debut_file sinon => on revient à la fin de la file
+	
+		reveille(tache);		 //  C DANS LE IF PUTAIN !!!
 	}
-
-	reveille(tache);		// reveille() fait un _lock()_ aussi => probleme ?
 
 	_unlock_();
 }
