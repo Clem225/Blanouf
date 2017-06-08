@@ -147,7 +147,7 @@ int main()
   puts("*******************DEBUT*********************\n\n\n\n\n");
 
   s_init();
-  sem1 = s_cree(1);		// prod
+  sem1 = s_cree(0);		// prod ==> 0 pas 1
   sem2 = s_cree(0);		// conso
   start(tacheStart);
 
