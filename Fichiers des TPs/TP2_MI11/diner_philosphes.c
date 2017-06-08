@@ -42,9 +42,6 @@ TACHE	tacheStart(void)
     	//for(i = 0; i < 100000; i++);
     }
 
-
-	while(1);
-
 	fin_tache();
 }
 
