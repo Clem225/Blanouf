@@ -6,7 +6,7 @@
  */
 
 
-/*#include "serialio.h"
+#include "serialio.h"
 #include "noyau.h"
 #include "sem.h"
 
@@ -119,4 +119,4 @@ int main()
   start(tacheStart);
 
   return(0);
-}*/
+}
