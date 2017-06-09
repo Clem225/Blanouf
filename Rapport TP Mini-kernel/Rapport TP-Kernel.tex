@@ -1,0 +1,393 @@
+\documentclass[a4paper,12pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+\usepackage[export]{adjustbox}
+
+\usepackage{geometry}
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{verbatim}
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{Dateiname}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+\usepackage{listings}
+\lstset{language=C++} 
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=C++,                 % the language of the code
+  otherkeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
+
+
+
+
+%% NOTE POUR CLEMENT : UTILISE LE HEADER CI-DESSUS, IL EST MEILLEUR
+
+%%AJOUTS DE CLEMENT DANS LE HEADER :
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Clément BLANQUET et Rafik CHENNOUF}
+\rhead{Page \thepage}
+\cfoot{\footnotesize{MI11 - Rapport des TPs : Réalisation d'un mini noyau temps réel}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{titlesec}
+\makeatletter
+\titleformat{\chapter}[frame]
+  {\normalfont}{\filright\enspace \@chapapp~\thechapter\enspace}
+  {15pt}{\LARGE\bfseries\filcenter}
+\titlespacing*{\chapter}
+  {0pt}{0pt}{20pt}
+\makeatother
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+
+
+\author{Clément BLANQUET et Rafik CHENNOUF}
+\title{MI11 - Rapport des TPs : Réalisation d'un mini noyau temps réel}
+
+\begin{document}
+
+\begin{titlepage}
+
+	\centering
+	\includegraphics[width=0.15\textwidth]{sigle_UTC.jpg}\par\vspace{1cm}
+	{\scshape\LARGE Université de Technologie de Compiègne \par\vspace{1cm}}	
+	{\scshape\Large MI11\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Rapport des TPs : Réalisation d'un mini noyau temps réel\par}
+	\vspace{2cm}
+	{\Large\itshape Clément BLANQUET et Rafik CHENNOUF\par}
+	\vspace{2cm}
+	\vfill
+% Bottom of the page
+	{\large Juin 2017}
+\end{titlepage}
+
+
+\renewcommand{\contentsname}{Sommaire} % Changer le nom de la table des matieres
+\tableofcontents
+% Les différentes tables
+\listoffigures        % Liste des figures
+
+
+
+
+\chapter{Rapport TP 2 - Partie 3 et 4}
+
+Le but de ce TP est d'implémenter des fonctions d'exclusions mutuelles afin que plusieurs tâches ne puissent pas accéder à une section critique en même temps au risque de créer un interblocage.  
+
+
+\section{Exercice 1 : Exclusion mutuelle}
+
+Tout d'abord, il est possible de faire du partage de ressources en agissant directement sur les tâches dépendantes en les faisant s'endormir ou se réveiller selon la situation. Dès qu'une tâche a terminée son accès à la mémoire partagée elle s'endort et réveille l'autre tâche afin qu'elle puisse y avoir accès et vis-versa.
+
+\subsection{Suspension d'une tâche}
+
+L'endormissement d'une tâche se fait via la primitive \textit{dort()} du fichier \textbf{noyau.c}.
+Le but de cette fonction est de suspendre la tâche courante qui passe donc de l'état \textbf{EXEC} pour 'exécuter' à l'état \textbf{SUSP} pour 'suspendre'. La tâche est ensuite retirée de la file ds tâches et un appel à l'ordonnanceur est réalisé afin de charger la tâche suivante. De plus, toutes ces opérations constituent une section critique qui ne doivent pas être exécutées en même temps par plusieurs fonctions. C'est pour cela qu'il faut les protéger avec un \textit{mutex} ou un \textit{lock}.\newline
+
+Ci-dessous le code de la fonction \textit{dort()} :
+
+\begin{lstlisting}
+void  dort(void)
+{
+	_lock_();				// section critique
+
+	CONTEXTE *p = &_contexte[_tache_c];
+	p->status = SUSP;	// suspension
+
+	retire(_tache_c);	// retirer la tâche
+	schedule();
+
+	_unlock_();
+}
+\end{lstlisting}
+
+\subsection{Réveil d'une tâche}
+
+Le réveil d'une tâche se fait via la primitive \textit{reveille()} du fichier \textbf{noyau.c}.
+Cette primitive fonctionne de la même manière que la fonction \textit{dort()} vue précédemment sauf que l'état de la tâche courante est passé en mode EXEC au lieu de SUSP afin que la tâche puisse être exécutable par l'ordonnanceur après l'avoir ajoutée dans la file.\newline
+
+Ci-dessous le code de la fonction \textit{reveille()} :
+
+\begin{lstlisting}
+void reveille(uint16_t t)
+{
+
+	// on vérifie que la tâche existe et est suspendue
+	if(t > MAX_TACHES || _contexte[t].status != SUSP)	 
+		return;
+
+	_lock_();		// section critique
+
+	CONTEXTE *p = &_contexte[t];
+	p->status = EXEC;		// exécution
+
+	ajoute(t);		// ajout dans la file
+	schedule();
+
+	_unlock_();
+}
+\end{lstlisting}
+
+\subsection{Modèle de communications producteur/consommateur.}
+
+Afin de tester nos deux primitives \textit{dort()} et \textit{reveille()}, nous avons implémenté le modèle de communications producteur/consommateur. Tout d'abord le programme comporte deux tâches; la première, le producteur, produit des entiers dans une file circulaire, la seconde, le consommateur, retire ces entiers de la file et les affiche.\newline
+
+Pour faire cela, nous disposons d'une FIFO sous forme d'un tableau d'entiers de taille fixée. On distingue 4 cas possibles :
+
+1) Le producteur a tellement produit que la file est pleine => il s'endort.
+2) Le producteur a produit au moins un entier, la file est non vide => il réveille le consommateur pour qu'il consomme un ou des entiers.
+3) La file est vide car le producteur n'y a rien produit => le consommateur s'endort.
+4) Il reste encore de la place dans la file, la file est non pleine => le producteur se réveille pour produire des entiers.
+
+Pour gérer tous ces cas, nous possédons une variable qui compte le nombre de places libres et qui est, au début du programme, initialisée à la taille du tableau. Lorsque le nombre de places libres est supérieur ou égal à 1, le producteur produit un entier dans la file puis décrémente le nombre de places libres. De même, si le nombre de places libres est inférieur à la taille totale de la file alors le consommateur consomme un entier puis incrémente le nombre de places libres.\newline
+Le cas 1 se produit lorsque la file est pleine, c'est à dire lorsque le nombre de places libres est égal à 0. 
+Le cas 2 se produit lorsque la file est non vide,  c'est à dire lorsque le nombre de places libres est inférieur à la taille totale de la file.
+Le cas 3 se produit lorsque la file est vide,  c'est à dire lorsque le nombre de places libres est égal à la taille totale de la file.
+Le cas 4 se produit lorsque la file est non pleine, c'est à dire lorsque le nombre de places libres est égal à 1.\newline
+
+En résumé, le producteur produit des entiers dans la file tant que celle-ci n'est pas pleine sinon il s'endort et le consommateur lit ces entiers tant que la file n'est pas vide sinon il s'endort. Lorsqu'il y a la moindre place dans la file, le consommateur réveille le producteur et lorsqu'il y a le moindre entier dans la file, le producteur réveille le consommateur.
+A noté aussi que l'accès à la file représente une zone critique qu'il faut protéger via un \textit{lock}.
+Initialement, seul le producteur est réveillé et le consommateur est endormi car il faut pouvoir produire au moins un entier.\newline
+
+Nous avons testé deux cas de figures, un cas où le producteur est plus rapide que le consommateur et le cas inverse.\newline
+
+Ci-dessous le code du modèle de communications producteur/consommateur dans le cas où le consommateur est plus rapide que le producteur :
+
+\begin{lstlisting}
+#define TAILLE_TABLEAU 3	
+
+TACHE tacheStart();
+TACHE tacheProd();
+TACHE tacheConso();
+uint16_t prod, conso;
+uint16_t fifo[TAILLE_TABLEAU];	// la file
+uint16_t nb_places_libres = TAILLE_TABLEAU;
+
+TACHE	tacheStart(void)		// tâche de démarrage
+{
+  puts("------> EXEC tache Start");
+  prod = cree(tacheProd);
+  conso = cree(tacheConso);
+
+  active(prod);
+  active(conso);
+
+  fin_tache();
+}
+
+TACHE	tacheProd(void)		// tâche producteur
+{
+  puts("------> EXEC tache Prod");
+
+  uint16_t j=0,k,i=0;
+
+  while(1)
+  {
+	  for (k=0; k<30000; k++);		// producteur plus lent
+
+	  if (nb_places_libres>=1)		// production d'un entier
+	  {
+		  _lock_();									// zone critique
+		  printf("**PROD** -> Production : fifo[%d] = %d\n", i, j);
+		  fifo[i]=j;
+		  _unlock_();
+		  j++;
+
+		  nb_places_libres--;
+
+		  i++;
+		  if (i==TAILLE_TABLEAU)	// i = indice de la file
+			  i=0;
+	  }
+	  else			// file pleine
+	  {
+		  _lock_();
+		  puts("**PROD** -> Producteur dort (Cas 1 : File pleine)\n");
+		  _unlock_();
+
+		  dort();		// producteur s'endort
+	  }
+
+	  if (nb_places_libres<TAILLE_TABLEAU)	// file non vide
+	  {
+		  _lock_();
+		  puts("**PROD** -> Reveil du conso (Cas 2 : File non vide)\n");
+		  _unlock_();
+
+		  reveille(conso);		// consommateur se réveille
+	  }
+
+  }
+
+  fin_tache();
+}
+
+TACHE	tacheConso(void)		// tâche consommateur
+{
+  uint16_t k,i=0;
+
+  puts("------> EXEC tache Conso");
+
+  dort();		// consommateur dort initialement
+
+  while(1)
+  {
+	  for (k=0; k<10000; k++);	// consommateur plus rapide
+
+	  if (nb_places_libres==TAILLE_TABLEAU)	// file vide
+	  {
+		  _lock_();
+		  puts("**CONSO** -> Consommateur dort (Cas 3 : File vide)\n");
+		  _unlock_();
+
+		  dort();		// consommateur s'endort
+	  }
+	  else
+	  {
+		  _lock_();
+		  printf("**CONSO** -> Lecture de fifo[%d] = %d\n", i, fifo[i]);
+		  _unlock_();
+
+		  nb_places_libres++;
+
+		  i++;
+		  if (i==TAILLE_TABLEAU)	// i = indice de la file
+			  i=0;
+	  }
+
+	  if (nb_places_libres==1)	// file non pleine
+	  {
+		  _lock_();
+		  puts("**CONSO** -> Reveil prod (Cas 4 : File non pleine)\n");
+		  _unlock_();
+
+		  reveille(prod);		// producteur se réveille
+	  }
+  }
+
+  fin_tache();
+}
+
+int main()
+{
+  serial_init(115200);
+  puts("Test noyau");
+  puts("Noyau preemptif");
+  puts("*******************DEBUT*********************\n\n\n\n\n");
+
+  printf("TAILLE DU TABLEAU : %d\n", TAILLE_TABLEAU);
+
+  start(tacheStart);
+  return(0);
+}
+\end{lstlisting}
+
+Le résultat obtenu lorsque le consommateur est plus rapide que le producteur est donné à la page 9.\newline
+
+
+\begin{figure}[hbt]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screens/conso_plus_rapide_sem.png}
+		\caption{Consommateur plus rapide que le producteur}
+\end{figure}
+
+
+Initialement, le producteur écrit l'entier 0 à la case 0 de la file puis il réveille le consommateur (Cas 2 : file non vide). Le consommateur qui est très rapide s'empresse aussitôt de lire l'entier 0 à la case 0 puis s'endort (Cas 3 : file vide). Ensuite, le producteur écrit l'entier 1 à la case 1 de la file puis il réveille le consommateur pour qu'il lise cet entier.\\
+Comme le consommateur est plus rapide que le producteur, nous obtenu une succession d'écriture/lecture. Dès qu'un entier est présent dans la file, le consommateur le lit.\newline
+
+Nous pouvons aussi tester le cas où le producteur est plus rapide que le consommateur (page 10).\newline
+
+Dans ce cas, le producteur enchaîne deux écritures à la suite (entier 0 à la case 0 et entier 1 à la case 1) car il est plus rapide que le consommateur qui n'a pas le temps de lire le premier entier. Après cela, le consommateur peut enfin lire l'entier 0 à la case 0 puis le producteur reprend la main et enchaîne de nouveau deux écritures (entier 2 à la case 2 et entier 3 à la case 0). Le consommateur se réveille et lit donc l'entier 1 à la case 1, on se retrouve donc dans le cas 4 (file non pleine). Le producteur reprend la main et écrit l'entier 4 à la case 1 qui vient d'être libérée par le consommateur puis il s'endort (Cas 1 : file pleine). Le producteur aura toujours une longueur d'avance sur le consommateur et sera souvent endormi à cause d'une file pleine.
+
+
+
+\newpage
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screens/prod_plus_rapide_sem.png}
+		\caption{Producteur plus rapide que le consommateur}
+\end{figure}
+
+\end{document}
+
