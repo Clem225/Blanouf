@@ -61,7 +61,7 @@ TACHE	tacheD(void)
   }
 }*/
 
-/*#define TAILLE_TABLEAU 3
+#define TAILLE_TABLEAU 3
 
 TACHE tacheStart();
 TACHE tacheProd();
@@ -189,5 +189,5 @@ int main()
   puts("*******************DEBUT*********************\n\n\n\n\n");
   start(tacheStart);
   return(0);
-}*/
+}
 
