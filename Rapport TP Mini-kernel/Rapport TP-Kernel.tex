@@ -116,6 +116,8 @@
 \def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
 \makeatother
 
+\usepackage{animate}
+\usepackage{hyperref}
 
 
 
@@ -362,31 +364,45 @@ int main()
 }
 \end{lstlisting}
 
-Le résultat obtenu lorsque le consommateur est plus rapide que le producteur est donné à la page 9.\newline
+Le résultat obtenu lorsque le consommateur est plus rapide que le producteur est donné sur la figure \ref{conso_plus_rapide}.\newline
 
+Initialement, le producteur écrit l'entier 0 à la case 0 de la file puis il réveille le consommateur (Cas 2 : file non vide). Le consommateur qui est très rapide s'empresse aussitôt de lire l'entier 0 à la case 0 puis s'endort (Cas 3 : file vide). Ensuite, le producteur écrit l'entier 1 à la case 1 de la file puis il réveille le consommateur pour qu'il lise cet entier.\\
+Comme le consommateur est plus rapide que le producteur, nous obtenu une succession d'écriture/lecture. Dès qu'un entier est présent dans la file, le consommateur le lit. Cliquez sur l'animation suivante pour voir le résultat de notre programme (nécessite de lire ce PDF avec Adobe Acrobat Reader) :
 
-\begin{figure}[hbt]
+\begin{figure}[h]
 	\centering
-		\includegraphics[width=0.4\textwidth]{screens/conso_plus_rapide_sem.png}
+		\animategraphics{1}{animations/conso_plus_rapide/prod-}{1}{12}
 		\caption{Consommateur plus rapide que le producteur}
+		\label{anim_conso_plus_rapide}
+\end{figure}
+
+\newpage
+
+Nous pouvons aussi tester le cas où le producteur est plus rapide que le consommateur (figure \ref{prod_plus_rapide}).\newline
+
+Dans ce cas, le producteur enchaîne deux écritures à la suite (entier 0 à la case 0 et entier 1 à la case 1) car il est plus rapide que le consommateur qui n'a pas le temps de lire le premier entier. Après cela, le consommateur peut enfin lire l'entier 0 à la case 0 puis le producteur reprend la main et enchaîne de nouveau deux écritures (entier 2 à la case 2 et entier 3 à la case 0). Le consommateur se réveille et lit donc l'entier 1 à la case 1, on se retrouve donc dans le cas 4 (file non pleine). Le producteur reprend la main et écrit l'entier 4 à la case 1 qui vient d'être libérée par le consommateur puis il s'endort (Cas 1 : file pleine). Le producteur aura toujours une longueur d'avance sur le consommateur et sera souvent endormi à cause d'une file pleine. Cliquez sur l'animation suivante pour voir le résultat de notre programme (nécessite de lire ce PDF avec Adobe Acrobat Reader) :
+
+\begin{figure}[h]
+	\centering
+		\animategraphics{1}{animations/prod_plus_rapide/prod-}{1}{15}
+		\caption{Producteur plus rapide que le consommateur}
+		\label{anim_conso_plus_rapide}
 \end{figure}
 
 
-Initialement, le producteur écrit l'entier 0 à la case 0 de la file puis il réveille le consommateur (Cas 2 : file non vide). Le consommateur qui est très rapide s'empresse aussitôt de lire l'entier 0 à la case 0 puis s'endort (Cas 3 : file vide). Ensuite, le producteur écrit l'entier 1 à la case 1 de la file puis il réveille le consommateur pour qu'il lise cet entier.\\
-Comme le consommateur est plus rapide que le producteur, nous obtenu une succession d'écriture/lecture. Dès qu'un entier est présent dans la file, le consommateur le lit.\newline
 
-Nous pouvons aussi tester le cas où le producteur est plus rapide que le consommateur (page 10).\newline
-
-Dans ce cas, le producteur enchaîne deux écritures à la suite (entier 0 à la case 0 et entier 1 à la case 1) car il est plus rapide que le consommateur qui n'a pas le temps de lire le premier entier. Après cela, le consommateur peut enfin lire l'entier 0 à la case 0 puis le producteur reprend la main et enchaîne de nouveau deux écritures (entier 2 à la case 2 et entier 3 à la case 0). Le consommateur se réveille et lit donc l'entier 1 à la case 1, on se retrouve donc dans le cas 4 (file non pleine). Le producteur reprend la main et écrit l'entier 4 à la case 1 qui vient d'être libérée par le consommateur puis il s'endort (Cas 1 : file pleine). Le producteur aura toujours une longueur d'avance sur le consommateur et sera souvent endormi à cause d'une file pleine.
-
-
-
-\newpage
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{screens/conso_plus_rapide_sem.png}
+		\caption{Consommateur plus rapide que le producteur}
+		\label{conso_plus_rapide}
+\end{figure}
 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.4\textwidth]{screens/prod_plus_rapide_sem.png}
 		\caption{Producteur plus rapide que le consommateur}
+		\label{prod_plus_rapide}
 \end{figure}
 
 \end{document}
