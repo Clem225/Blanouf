@@ -152,6 +152,467 @@
 
 
 
+
+
+\chapter{Rapport TP 1 - Partie 1 et 2}
+
+\section{1ère partie : Ordonnanceur de tâches}
+
+Voici comment nous avons codé les fonctions \textit{file\_init()}, \textit{ajoute(n)}, \textit{suivant()} et \textit{retire(n)} :
+
+\subsection{file\_init()}
+Cette fonction permet simplement d'initialiser la file FIFO de tâches.
+\begin{lstlisting}
+void	file_init( void )
+{
+	int i;
+	_queue=F_VIDE;
+
+	for (i=0;i<MAX_TACHES;i++)
+		_file[i]=F_VIDE;
+}
+\end{lstlisting}
+
+Dans cette fonction, on se contente d'initialiser la queue da la file FIFO à la valeur F\_VIDE (F\_VIDE = MAX\_TACHES = 8), ce qui signifie que la file est vide. De plus, on initialise chaque case du tableau représentant la file à la même valeur, indiquant que chaque case est vide.
+
+
+\subsection{ajoute(n)}
+Cette fonction permet d'ajouter une tâche en fin de file.
+\begin{lstlisting}
+void	ajoute ( uint16_t n )
+{
+	if(n > MAX_TACHES - 1) // Si le numéro de la tâche est trop grand
+		return;
+
+	if(_queue == F_VIDE) // Si la file est vide
+	{
+		_queue = n;
+		_file[_queue] = n;
+	}
+	else // La file n'est pas vide
+	{
+		uint16_t tmp = _file[_queue];
+		_file[_queue] = n;
+		_file[n] = tmp;
+		_queue = n;
+	}
+}
+\end{lstlisting}
+
+La fonction \textit{ajoute} prend en argument un entier qui représente le numéro de la tâche à ajouter.\smallbreak
+
+On commence par regarder si le numéro de la tâche à ajouter est cohérent (inférieur ou égal à 7). Si ce n'est pas le cas, on sort de la fonction.\smallbreak
+
+Sinon, si la file est vide (\_queue = F\_vide), la queue devient la tâche qui vient d'être ajoutée et le successeur de cette tâche est elle-même.\smallbreak
+
+Enfin, si la file n'est pas vide, on veut ajouter la nouvelle tâche en fin de file. Autrement dit, la queue doit valeur cette même nouvelle tâche. On commence par sauvegarder dans un tampon le successeur de la queue actuelle. Ensuite, on désigne la nouvelle tâche comme étant le successeur de la queue actuelle. De plus, on désigne le successeur de la nouvelle tâche comme étant la tâche sauvegardée dans le tampon, anciennement successeur de la queue actuelle. Enfin, on désigne notre nouvelle tâche comme étant la queue.\smallbreak
+
+De cette façon, la nouvelle tâche s'est intercalée entre l'ancienne queue et son ancien successeur, et est devenue la nouvelle queue.
+
+
+\subsection{suivant()}
+Cette fonction retourne la tâche à activer, et met à jour \_queue pour qu'elle pointe sur la suivante.
+\begin{lstlisting}
+uint16_t	suivant( void )
+{
+	_queue = _file[_queue];
+	return _queue;
+}
+\end{lstlisting}
+
+Ici on assigne à la queue son successeur (donc la tâche à activer) puis on la retourne.
+
+
+\subsection{retire(n)}
+Cette fonction permet de retirer une tâche de la file sans en modifier l'ordre.
+\begin{lstlisting}
+void	retire( uint16_t t )
+{
+	int i = 0;
+
+	if(t > MAX_TACHES || _queue == F_VIDE)
+		return;
+
+	while(_file[i] != t)
+		i++;				// i = prédecesseur de t 
+							  // ex : ( 1 -> 0 -> 2 ) => avec t = 0, i = 1
+
+	if(i == MAX_TACHES)
+		return;
+
+	_file[i] = _file[t];	// 1 -> 2
+	_file[t] = F_VIDE;
+	//_queue = _file[i];
+
+	if(t == _queue)
+	{
+
+		if(t == i)			// si le prédecesseur est lui même => une seule tâche => queue => on vide
+			_queue = F_VIDE;
+		else
+			_queue = i;		// la queue devient le prédecesseur de la tâche qu'on retire
+	}
+}
+\end{lstlisting}
+
+La fonction prend en argument le numéro de la tâche à retirer. On commence donc par vérifier que ce numéro est cohérent (inférieur ou égal à 7) et que la file n'est pas vide auquel cas il est impossible de retirer un élément.\smallbreak
+
+Une fois cette vérification effectuée, on cherche le prédecesseur de la tâche à retirer. Si on ne trouve rien, cela signifie que la tâche n'existe pas et on sort donc de la fonction.\smallbreak
+
+Sinon, on "saute au dessus" de la tâche à retirer, c'est à dire qu'on fixe le successeur du prédécesseur de cette tâche comme étant le successeur de cette même tâche.\smallbreak
+
+Enfin, on doit vérifier si la tâche retirée était la queue ou non.
+\begin{itemize}
+\item Si oui
+	\begin{itemize}
+	\item Si la file ne contient qu'un élément (donc le prédécesseur de la tâche est la tâche elle-même), on assigne à \_queue la valeur F\_VIDE (car la file est alors vide)
+	\item Sinon, la queue devient le prédécesseur de la tâche que l'on a retiré.
+	\end{itemize}
+\item Sinon, ne rien faire de plus.
+\end{itemize}
+
+
+\subsection{affic\_file()}
+Cette fonction permet d'afficher la file.
+\begin{lstlisting}
+void affic_file( void )
+{
+	int i = 0;
+
+	while (_file[i] == F_VIDE) // Recherche du premier élément de la file
+		i++;
+
+	int temp = i; // temp ==> premier élément de la file
+
+	while (_file[i] !=temp) // Tant qu'on a pas fait tout le tour de la file
+	{
+		if (i==_queue)
+			printf(" %d(Q) -> ", i); // Si l'élément i est la queue, afficher un "(Q)" à côté
+		else
+				printf(" %d -> ", i); // Sinon l'afficher normalement
+		i=_file[i]; // Passer à l'élément suivant
+	}
+	// Affichage du dernier élément
+	if (i==_queue)
+		printf(" %d (Q) -> ", i);
+	else
+		printf(" %d -> ", i);
+
+	printf("\n");
+}
+\end{lstlisting}
+
+On commence par chercher le premier élément de la file. Ensuite, on effectue une boucle d'affichage tant qu'un tour complet de la file n'a pas été effectué. On affiche "(Q)" à côté de la tâche sur laquelle la queue pointe.
+
+
+
+\subsection{Test de ces fonctions}
+Nous avons pu tester le bon fonctionnement de ces fonctions grâce au fichier de test \textit{testfile.c} suivant :
+\begin{lstlisting}
+#include "noyau.h"
+#include "serialio.h"
+
+
+int main()
+{
+	serial_init(115200);
+	
+	printf("***********************************\n");
+
+	file_init();
+
+	// Ajouts des différentes tâches comme dans l'exemple du sujet
+	ajoute(3);
+	ajoute(5);
+	ajoute(1);
+	ajoute(0);
+	ajoute(2);
+
+	affic_file(); // Affichage de la file
+
+	affic_queue(); // Affichage de la queue
+	printf("Suivant() \n");
+	suivant(); // On fait un "suivant()"
+	affic_queue(); // On vérifie la queue après le "suivant()"
+
+	affic_file(); // Affichage de la file avec la nouvelle queue
+
+	printf("Retire 0 : \n");
+	retire(0); // On retire la tâche 0
+	affic_file(); // Affichage de la file après le "retire(0)"
+	printf("Ajoute 6 : \n");
+	ajoute(6); // On ajoute 6
+	affic_file(); // Affichage de la file après le "ajoute(6)"
+
+	return 0;
+}
+\end{lstlisting}
+\newpage
+A l'exécution, on obtient :
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{screens/tp1/Exo1_NEW.PNG}
+		\caption{Résultat de testfile.c}
+		\label{testfile}
+\end{figure}
+
+C'est bien le résultat attendu. En effet, au départ la queue vaut 2 Car c'est la dernière tâche à avoir été ajoutée. Après le suivant, la valeur de la queue change et devient le successeur de 2 à savoir 3, ce qui s'affiche correctement. Le \textit{retire(0)} fonctionne bien aussi puisque la tâche 0 a disparu de la file et les autres tâches ont leurs successeurs et prédécesseurs bien mis à jour. Enfin, le ajoute(6) ajoute bien la tâche 6 en fin de file en mettant à jour la queue.
+
+\newpage
+\section{2ème partie : gestion et commutation de tâches}
+Dans cette seconde partie, nous devons réaliser  les  primitives de  gestion  des  tâches  du  mini  noyau  temps réel, ainsi que le système de commutation de tâches. Tout cela est écrit dans le fichier \textit{noyau.c}.
+
+Les codes nous étant fournis, nous devons les expliquer. Notons tout d'abord les variables internes au noyau :
+
+\begin{lstlisting}
+static int compteurs[MAX_TACHES]; // Compteurs d'activations 
+volatile uint16_t _tache_c;       // numéro de tache courante 
+uint32_t  _tos;                   // adresse du sommet de pile 
+int  _ack_timer = 1;          // = 1 si il faut acquitter le timer 
+\end{lstlisting}
+
+\subsection{Fonction noyau\_exit()}
+\begin{lstlisting}
+void	noyau_exit(void)
+{
+  int j;
+  _irq_disable_();                // Désactiver les interruptions 
+  printf("Sortie du noyau\n");
+  for (j=0; j < MAX_TACHES; j++)
+    printf("\nActivations tache %d : %d", j, compteurs[j]);
+  for(;;);                        // Terminer l'exécution 
+}
+\end{lstlisting}
+
+Commençons par la fonction \textit{noyau\_exit()} qui permet de sortir du noyau (donc d'arrêter tout).
+Les interruptions sont désactivées et juste avant de sortir du noyau (en faisant une boucle infinie), on affiche le nombre de fois que chaque tâche a été activée grâce au tableau \textit{compteurs}.
+
+\subsection{Fonction fin\_tache()}
+\begin{lstlisting}
+void  fin_tache(void)
+{
+  // on interdit les interruptions
+  _irq_disable_();
+  // la tache est enlevee de la file des taches
+  _contexte[_tache_c].status = CREE;
+  retire(_tache_c);
+  schedule();
+}
+\end{lstlisting}
+
+Cette fonction permet de rendre une tâche inactive alors qu'elle était active jusqu'alors. Pour cela, après avoir interdit les interruptions, on change son statut à "CREE" ce qui fait que la tâche n'est plus prête à être exécutée. Elle reste tout de même connue du noyau et est simplement en attente. On la retire de la FIFO grâce à notre fonction \textit{retire()} créée dans la première partie. A la fin, on lance la fonction \textit{schedule()} (que l'on étudiera par la suite) pour que les tâches suivantes soient puissent s'exécuter. En fait, on appelle cette fonction à la fin de chaque tâche pour y mettre fin.
+
+\subsection{Fonction cree(TACHE\_ADR adr\_tache)}
+\begin{lstlisting}
+uint16_t cree( TACHE_ADR adr_tache )
+{
+  CONTEXTE *p;                    // pointeur d'une case de _contexte 
+  static   uint16_t tache = -1;   // contient numero dernier cree 
+
+
+  _lock_();                       // debut section critique 
+  tache++;                        // numero de tache suivant 
+
+  if (tache >= MAX_TACHES)        // sortie si depassement 
+    noyau_exit();
+
+  p = &_contexte[tache];          // contexte de la nouvelle tache 
+
+  p->sp_ini = _tos;               // allocation d'une pile a la tache 
+  _tos -= PILE_TACHE + PILE_IRQ;  // decrementation du pointeur de pile pour la prochaine tache
+
+  _unlock_();                     // fin section critique 
+
+  p->tache_adr = adr_tache;       // memorisation adresse debut de tache 
+  p->status = CREE; 		          // mise a l'etat CREE 
+  return(tache);                  // tache est un uint16_t 
+}
+\end{lstlisting}
+
+La fonction \textit{cree} permet de créer une tâche et de lui allouer une pile et un numéro.
+
+
+\subsection{Fonction active( uint16\_t tache )}
+\begin{lstlisting}
+void  active( uint16_t tache )
+{
+  CONTEXTE *p = &_contexte[tache]; // acces au contexte tache
+
+  if (p->status == NCREE)
+    noyau_exit();                 // sortie du noyau 
+
+  _lock_();                       // debut section critique 
+  if (p->status == CREE)          // n'active que si receptif 
+  {
+    p->status = PRET;             // changement d'etat, mise a l'etat PRET 
+    ajoute(tache);                // ajouter la tache dans la liste 
+    schedule();                // activation d'une tache prete 
+  }
+  _unlock_();                     // fin section critique 
+}
+\end{lstlisting}
+Cette fonction place une tâche dans la file d'attente des tâches éligibles.  Elle prend en entrée le numéro de la tâche.
+
+On vérifie d'abord si la tâche est bien créée. Si c'est le cas, alors on va modifier le statut de la tâche (de CREE à PRET) et l'ajouter à notre FIFO (on rentre donc dans une section critique). On finit par lancer un \textit{schedule()} pour activer la prochaine tâche.
+
+
+
+\subsection{Fonction scheduler}
+\begin{lstlisting}
+void __attribute__((naked)) scheduler( void )
+{
+  register CONTEXTE *p;
+  register unsigned int sp asm("sp");  // Pointeur de pile  
+
+  // Sauvegarder le contexte complet sur la pile IRQ  
+  __asm__ __volatile__(
+      "stmfd  sp, {r0-r14}^\t\n"  // Sauvegarde registres mode system  
+      "nop\t\n"                   // Attendre un cycle  
+      "sub    sp, sp, #60\t\n"    // Ajustement pointeur de pile  
+      "mrs    r0, spsr\t\n"       // Sauvegarde de spsr_irq  
+      "stmfd  sp!, {r0, lr}\t\n");// et de lr_irq  
+
+  if (_ack_timer)                 // Réinitialiser le timer si nécessaire  
+  {
+    register struct imx_timer* tim1 = (struct imx_timer *) TIMER1_BASE;
+    tim1->tstat &=~TSTAT_COMP;
+  }
+  else
+  {
+    _ack_timer = 1;
+  }
+
+  _contexte[_tache_c].sp_irq = sp;// memoriser le pointeur de pile  
+  _tache_c = suivant();           // recherche du suivant  
+  if (_tache_c == F_VIDE)
+  {
+    printf("Plus rien à ordonnancer.\n");
+    noyau_exit();                 // Sortie du noyau  
+  }
+  compteurs[_tache_c]++;          // Incrémenter le compteur d'activations   
+  p = &_contexte[_tache_c];       // p pointe sur la nouvelle tache courante 
+
+  if (p->status == PRET)          // tache prete ?  
+  {
+    sp = p->sp_ini;               // Charger sp_irq initial  
+    _set_arm_mode_(ARMMODE_SYS);  // Passer en mode système  
+    sp = p->sp_ini - PILE_IRQ;    // Charger sp_sys initial  
+    p->status = EXEC;             // status tache -> execution  
+    _irq_enable_();               // autoriser les interuptions    
+    (*p->tache_adr)();            // lancement de la tâche  
+  }
+  else
+  {
+    sp = p->sp_irq;               // tache deja en execution, restaurer sp_irq  
+  }
+
+  // Restaurer le contexte complet depuis la pile IRQ  
+  __asm__ __volatile__(
+      "ldmfd  sp!, {r0, lr}\t\n"  // Restaurer lr_irq  
+      "msr    spsr, r0\t\n"       // et spsr_irq  
+      "ldmfd  sp, {r0-r14}^\t\n"  // Restaurer registres mode system  
+      "nop\t\n"                   // Attendre un cycle  
+      "add    sp, sp, #60\t\n"    // Ajuster pointeur de pile irq  
+      "subs   pc, lr, #4\t\n");   // Retour d'exception  
+}
+\end{lstlisting}
+
+
+A EXPLIQUER
+A EXPLIQUER
+A EXPLIQUER
+A EXPLIQUER
+A EXPLIQUER
+A EXPLIQUER
+
+
+
+\subsection{Fonction schedule()}
+\begin{lstlisting}
+void  schedule( void )
+{
+  _lock_();                         // Debut section critique  
+
+  // On simule une exception irq pour forcer un appel correct à scheduler(). 
+  _ack_timer = 0;
+  _set_arm_mode_(ARMMODE_IRQ);      // Passer en mode IRQ  
+  __asm__ __volatile__(
+      "mrs  r0, cpsr\t\n"           // Sauvegarder cpsr dans spsr  
+      "msr  spsr, r0\t\n"
+      "add  lr, pc, #4\t\n"         // Sauvegarder pc dans lr et 																		// l'ajuster  
+      "b    scheduler\t\n"          // Saut à scheduler  
+      );
+  _set_arm_mode_(ARMMODE_SYS);      // Repasser en mode system  
+
+  _unlock_();                       // Fin section critique  
+}
+\end{lstlisting}
+La fonction \textit{schedule()} permet en fait de faire un appel à la fonction \textit{scheduler()}. Dans un section critique, elle commence par passer en mode IRQ (car la fonction \textit{scheduler} doit s'exécuter dans ce mode). Ensuite, comme on l'a vu en cours, lors d'un changement de tâche, on doit :
+\begin{itemize}
+\item Copier cpsr dans spsr\_mode : 
+\begin{lstlisting}
+"mrs  r0, cpsr\t\n" 
+"msr  spsr, r0\t\n"
+\end{lstlisting}
+\vspace{-0.6cm}
+
+\item Changer cpsr
+	\begin{itemize}
+	\item Passage en mode d?exception
+	\item Interdiction des IRQ / FIQ si nécessaire
+	\end{itemize}
+\item Sauver pc (r15) dans lr\_mode (r14\_mode)
+\item Charger l'adresse du vecteur dans pc
+\item A la fin du traitement :
+	\begin{itemize}
+	\item Restaurer cpsr depuis spsr\_mode
+	\item Restaurer pc depuis lr\_mode
+	\end{itemize}
+\end{itemize}
+
+
+
+\subsection{Fonction start( TACHE\_ADR adr\_tache )}
+\begin{lstlisting}
+void	start( TACHE_ADR adr_tache )
+{
+  short j;
+  register unsigned int sp asm("sp");
+  struct imx_timer* tim1 = (struct imx_timer *) TIMER1_BASE;
+  struct imx_aitc* aitc = (struct imx_aitc *) AITC_BASE;
+
+  for (j=0; j<MAX_TACHES; j++)
+  {
+    _contexte[j].status = NCREE;    // initialisation de l'etat des taches 
+  }
+  _tache_c = 0;                     // initialisation de la tache courante 
+  file_init();                      // initialisation de la file           
+
+  _tos = sp;                        // Haut de la pile des tâches 
+  _set_arm_mode_(ARMMODE_IRQ);      // Passer en mode IRQ 
+  sp = _tos;                        // sp_irq initial 
+  _set_arm_mode_(ARMMODE_SYS);      // Repasser en mode SYS 
+
+  _irq_disable_();                  // on interdit les interruptions 
+
+  // Initialisation du timer à 100 Hz 
+  tim1->tcmp = 10000;
+  tim1->tprer = 0;
+  tim1->tctl |= TCTL_TEN | TCTL_IRQEN | TCTL_CLKSOURCE_PERCLK16;
+
+  // Initialisation de l'AITC 
+  aitc->intennum = TIMER1_INT;
+
+  active(cree(adr_tache));          // creation et activation premiere tache 
+}
+\end{lstlisting}
+
+Cette fonction permet de lancer la première tâche et donc de lancer le système.
+
+On commence par initialiser les statuts des tâches à "NCREE", la FIFO et la tâche courante à 0.
+
+
+
 \chapter{Rapport TP 2 - Partie 3 et 4}
 
 Le but de ce TP est d'implémenter des fonctions d'exclusions mutuelles afin que plusieurs tâches ne puissent pas accéder à une section critique en même temps au risque de créer un interblocage.  
@@ -404,6 +865,225 @@ Dans ce cas, le producteur enchaîne deux écritures à la suite (entier 0 à la cas
 		\caption{Producteur plus rapide que le consommateur}
 		\label{prod_plus_rapide}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
+\chapter{Rapport TP3 - Parties 5 et 6}
+\section{5ème partie : le dîner des philosophes}
+
+
+
+
+\section{6ème partie : communication par tubes}
+Dans cette partie nous devons réaliser un système de communication par tube. De chaque côté du tube ne se trouve qu'une seule et unique tâche.
+
+Commençons par le fichier \textit{pipe.h} :
+\begin{lstlisting}
+#ifndef PIPE_H_
+#define PIPE_H_
+
+#include "noyau.h"
+
+#define MAX_PIPES 5 //Nombre de tubes
+#define SIZE_PIPE 10 //Taille de chaque tube
+
+typedef struct
+{
+	ushort pr_w , pr_r ; // redacteur & lecteur du tube  
+	ushort ocupp ;  // donnees restantes  
+	uchar is, ie ;    // pointeurs d?entree / sortie  
+	uchar tube[SIZE_PIPE] ; // Tampon  
+} PIPE;
+
+PIPE  _pipe[MAX_PIPES] ;   // Variables tubes  
+
+
+//Allocation du conduit
+unsigned int p_open(unsigned int redacteur, unsigned int lecteur); 
+//Libération du tube
+void p_close (unsigned int conduit); 
+//Lecture dans un tube
+void p_read  (int tube, uchar* donnees, int quantite); 
+//Ecriture dans un tube
+void p_write(int tube, uchar* donnees, int quantite); 
+//Initialisation des tubes
+void init_pipes();
+\end{lstlisting}
+
+Nous avons choisi un nombre de tubes égal à 5 et une taille de 10 pour chaque tube.
+
+\subsection{Fonction init\_pipes}
+\begin{lstlisting}
+void init_pipes()
+{
+	unsigned int i;
+	for (i=0;i<MAX_PIPES;i++)
+		_pipe[i].pr_w=MAX_TACHES; //Tube inutilisé
+}
+\end{lstlisting}
+La fonction \textit{init\_pipes()} initialise tous les tubes au départ en leur assignant la constante MAX\_TACHES comme écrivain, ce qui signifie qu'ils sont inutilisés.
+
+\subsection{Fonction p\_open}
+\begin{lstlisting}
+//Ouvre un nouveau pipe
+unsigned int p_open(unsigned int redacteur, unsigned int lecteur)
+{
+	//VérifIier si les tâches sont créées
+	if (_contexte[redacteur].status == NCREE || _contexte[lecteur].status == NCREE)
+		return -1;
+
+	//Vérifier qu'il n'existe pas de tube avec ces 2 taches
+	unsigned int i;
+	for (i=0 ; i<MAX_PIPES ; i++)
+	{
+		if (_pipe[i].pr_w == redacteur && _pipe[i].pr_r == lecteur)
+			//Il existe un tube avec ces 2 taches
+			return -1;
+	}
+
+	//Trouver un tube non utilisé
+	i=0;
+	while ( (_pipe[i].pr_w != MAX_TACHES) && (i < MAX_PIPES) )
+		i++;
+	if (i == MAX_PIPES) //Aucun tube n'est libre
+		return -2;
+
+	//Initialisation du tube
+	_pipe[i].pr_w = redacteur;
+	_pipe[i].pr_r = lecteur;
+	_pipe[i].is = _pipe[i].ie = 0;
+	_pipe[i].ocupp = 0; //Données restantes (0 au départ)
+
+
+	//Retourner le numéro du tube créé
+	return i;
+}
+\end{lstlisting}
+
+Cette fonction permet d'ouvrir un nouveau tube. Elle prend comme arguments la tâche lectrice et la tâche rédactrice. 
+
+On commence par vérifier si ces deux tâches existent, et qu'il n'existe pas déjà de tube entre ces deux tâches. Ensuite, on cherche un tube non utilisé dans le tableau de tube \textit{\_pipe}. Une fois trouvé, on attribue les valeurs adéquates aux champs pr\_w, pr\_r, is, ie (tous les deux à zéro) et occup (à zéro aussi) du tube.
+
+
+\subsection{Fonction p\_close}
+\begin{lstlisting}
+//Ferme un pipe
+void p_close (unsigned int conduit)
+{
+	_pipe[conduit].pr_w = MAX_TACHES;
+}
+\end{lstlisting}
+La fonction \textit{p\_close} permet de ferme un tube en le rendant inutilisé en attribuant la valeur MAX\_TACHES à son écrivain.
+
+
+\subsection{Fonction p\_read}
+\begin{lstlisting}
+//Lit un certain nombre de données sur un pipe
+void p_read  (int tube, uchar* donnees, int quantite)
+{
+	//Vérifier que le tube existe et que la tâche en est propriétaire
+	if ( (_pipe[tube].pr_r != _tache_c) )
+	{
+		printf("Tache non autorisee a lire dans le pipe\n");
+		return;
+	}
+
+	//Lire les données à partir du tampon
+	int i = 0;
+	for (i=0 ; i < quantite ; i++)
+	{
+		//Vérifier que le tampon n?est pas vide, sinon endormir la tache
+		if (_pipe[tube].ocupp == 0)
+		{
+			printf("Tampon vide ==> endormissement de la tache %d\n", _pipe[tube].pr_r);
+			dort();
+		}
+
+		donnees[i] = _pipe[tube].tube[_pipe[tube].is];
+		_pipe[tube].is++;
+		_pipe[tube].ocupp--;
+
+		//Si  le  tube  était  plein  et  si
+		//la  tâche  écrivain  est  suspendue	sur  une
+		//écriture  dans  ce  tube alors la réveiller 
+		if ( (_pipe[tube].ocupp+1 == SIZE_PIPE) && (_contexte[_pipe[tube].pr_w].status == SUSP) )
+			reveille(_pipe[tube].pr_w);
+	}
+}
+\end{lstlisting}
+
+La fonction \textit{p\_read} lit une certaine quantité de données sur un tube. Elle prend comme argument le tube en question, un tableau de données et la quantité à lire.
+
+On commence une fois de plus par une vérification. On vérifie si le tube demandé existe et si la tâche qui veut y lire en a bien le droit (c'est à dire on vérifie si le champ pr\_r du tube est bien la tâche courante).
+
+Ensuite, on peut commencer à lire les données du tube. Sachant que nos tubes sont des tableaux de caractères et qu'on lit une certaine quantité, on fait une boucle allant de 0 à cette quantité pour lire caractère par caractère.
+
+A chaque lecture du tube, on vérifie s'il est vide ou non. S'il l'est, on l'endort. Sinon, on peut procéder à la lecture du caractère (dà l'emplacement de sortie "is"). On incrément le champ \textit{is} du tube et on décrémente la champ \textit{ocupp} car on vient de lire un caractère.
+
+Enfin, si  le  tube  était  plein  et  si la  tâche  écrivain  est  suspendue sur une écriture dans ce tube (c'est à dire si l'écrivain, lors d'une tentation d'écriture est tombé sur un tube plein) alors on la réveille. De cette façon, une écriture sur un tube plein ne posera pas de problème : le rédacteur attendra simplement (en s'endormant) que le lecteur lise une donnée dans le tube et le réveille.
+
+
+
+\subsection{Fonction p\_write}
+\begin{lstlisting}
+//Ecrit un certain nombre de données sur un pipe
+void p_write(int tube, uchar* donnees, int quantite)
+{
+	//Vérifier que le tube existe et que la tâche en est propriétaire
+	if ( (_pipe[tube].pr_w != _tache_c) )
+	{
+		printf("Tache non autorisee a ecrire dans le pipe\n");
+		return;
+	}
+
+	//Copie des données dans le tube
+	int i;
+	for (i=0 ; i < quantite ; i++)
+	{
+		//Vérifier qu?il y a de la place dans le tampon, sinon endormir la tache
+		if (_pipe[tube].ocupp == SIZE_PIPE)
+		{
+			printf("Plus de place dans le tampon ==> endormissement de la tache %d\n", _pipe[tube].pr_w);
+			dort();
+		}
+
+		//Copie des données
+		_pipe[tube].tube[_pipe[tube].ie] = donnees[i];
+		_pipe[tube].ie++;
+		_pipe[tube].ocupp++;
+
+		//Si le tube était vide et si
+		//la tache lectrice est suspendue sur
+		//une lecture de ce tube alors la réveiller
+		if ( (_pipe[tube].ocupp-1 == 0) && (_contexte[_pipe[tube].pr_r].status == SUSP) )
+			reveille(_pipe[tube].pr_r);
+	}
+
+}
+\end{lstlisting}
+
+La fonction \textit{p\_write} écrit une certaine quantité de données sur un tube.  Elle prend en argument le tube désiré, un tableau de données et une quantité de données à écrire.
+
+Tout comme pour la lecture, on vérifie si le tube demandé existe et si la tâche qui veut y écrire en a bien le droit (c'est à dire on vérifie si le champ pr\_w du tube est bien la tâche courante).
+
+On peut ensuite commencer à écrire dans le tube. On procède de la même manière que la lecture c'est à dire caractère par caractère.
+
+Si le tube est plein, on endort le rédacteur jusqu'à ce que le lecteur le réveille après avoir lu un caractère. Sinon, on peut copier le caractère dans le tube (à l'emplacement d'entrée "ie"). On incrémente ie et ocupp comme il se doit.
+
+Enfin, si le tube était vide et si la tache lectrice est suspendue sur une lecture de ce tube (c'est à dire si un lecteur, en tentant de lire, est tombé sur un tube vide) alors on la réveille. De cette façon, une lecture sur un tube vide ne posera pas de problème : le lecteur attendra simplement (en s'endormant) que le rédacteur écrive dans le tube et le réveille.
+
+
+
+
+
+
 
 \end{document}
 
