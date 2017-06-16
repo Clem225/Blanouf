@@ -1,0 +1,83 @@
+RAPPORT TP VALIDATION
+
+EXO1
+
+Q1
+
+Le taux d'utilisation du processeur est t = 18. Le jeu de tâche est donc bien ordonnançable.
+
+Q2
+
+Selon l'algortihme Rate Monotonic, la tâche la plus prioritaire est celle qui a la plus petite période. 
+La tâche la plus prioritaire est donc la tâche T2 (P=5), suivi de T3 (P=10) puis T1 (P=29).
+
+Q3
+
+Voir code
+
+Q4
+
+Voir screen
+
+Ce qu'on constate, c'est qu'en mode préemptif, les tâches respectent toutes leurs deadlines, tandis qu'en non-préemptif, la tâche T2 rate sa deadline.
+
+Q5
+
+En mode préemptif, les deradlines sont toutes respectées mais la tâche T1 se termine beaucoup plus tard.
+En mode non préemptif, 2 tâches (T3 et T2) ratent leur deadline.
+
+
+Exercice 2
+Q1
+
+Q2
+
+
+Q3
+Le nombre d'unités de temps libre est de 1 (lol)
+Pour le calculer : taux d'utilisation du processeur * temps total
+
+Q4
+En version préemtpive, les tâches respectent leurs échéances mais pas en mode non-préemptif.
+
+Q5
+Ce n'est pas ordonnançable. En effet, il n'y avait qu'un espace libre vcomme on l'a calculé à la question 3. Du coup, avec les tâches apériodiques qui préemptent les tâches périodiques, le système n'est pas orodnnançable.
+
+Exercice 3
+
+Q1
+
+On peut déterminer la priorité selon la période (Rate Monotonic), le plus petit temps de réponse dynamique (Earliest Deadline First) ou encore la plus petite laxité dynamique (Least Laxity First).
+On choisit comme premier critère la période de la tâche (plus elle est petite, plus c'est prioritaire) et en second critère la durée d'exécution de la tâche (plus elle est grande,  plus c'est prioritaire).
+
+Ordonnancement :
+
+1) dpy (T = 6ms)
+getPA et getSO2 ont T = 10ms
+	==> getSO2 : C = 2
+	==> getPA : C = 1
+2) getSO2 (P = 10, C = 2)
+3) getPA (P = 10, C = 1)
+4) check (P = 12ms)
+5) getECG (P = 40ms)
+
+Q2
+
+Q3
+
+Selon cheddar, c'est ordonnançable (screen)
+
+Q4
+
+Non, getPA ne se lance même pas.
+
+Q5
+
+Selon l'exercice 1, getPA, check et getECG sont ordonnançables sur le cpu_b.
+
+Q6
+
+
+
+
+
