@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.19)  10 JUN 2017 01:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.19)  18 JUN 2017 20:55
 entering extended mode
 **"Rapport TP-Kernel.tex"
 ("Rapport TP-Kernel.tex"
@@ -370,19 +370,19 @@ Package: titlesec 2016/03/21 v2.10.2 Sectioning titles
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\titlesec\frame.tss"
 File: frame.tss 2016/03/15
 ) ("Rapport TP-Kernel.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 126.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 128.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -434,14 +434,14 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \degres on input line 126.
-LaTeX Info: Redefining \dots on input line 126.
-LaTeX Info: Redefining \up on input line 126.
+LaTeX Info: Redefining \degres on input line 128.
+LaTeX Info: Redefining \dots on input line 128.
+LaTeX Info: Redefining \up on input line 128.
 \c@lstlisting=\count125
 <sigle_UTC.jpg, id=1, 367.3725pt x 283.0575pt>
 File: sigle_UTC.jpg Graphic file (type jpg)
  <use sigle_UTC.jpg>
-Package pdftex.def Info: sigle_UTC.jpg used on input line 131.
+Package pdftex.def Info: sigle_UTC.jpg used on input line 133.
 (pdftex.def)             Requested size: 62.73549pt x 48.33508pt.
  [1
 
@@ -478,49 +478,10 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [1
+
+])
 \tf@toc=\write3
- [1
-
-] ("Rapport TP-Kernel.lof")
-\tf@lof=\write4
- [2
-
-]
-Chapitre 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 164--166
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 174.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
-File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 174.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 175.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 175.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 175.
-
-Underfull \hbox (badness 10000) in paragraph at lines 186--188
-
- []
-
-[3
-
-]
-Overfull \hbox (6.00328pt too wide) in paragraph at lines 211--211
-|[]\T1/lmr/bx/n/14.4 Modèle de com-mu-ni-ca-tions pro-duc-teur/-con-som-ma-teur.| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 213--214
-
- []
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -528,68 +489,299 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 222--227
+[2] ("Rapport TP-Kernel.lof")
+\tf@lof=\write4
+ [3
+
+]
+Chapitre 1.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 182.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 182.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 182.
+[4
+
+] [5] [6] [7]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 318.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 318.
+ [8]
+<screens/tp1/Exo1_NEW.PNG, id=38, 161.85469pt x 103.88812pt>
+File: screens/tp1/Exo1_NEW.PNG Graphic file (type png)
+ <use screens/tp1/Exo1_NEW.PNG>
+Package pdftex.def Info: screens/tp1/Exo1_NEW.PNG used on input line 352.
+(pdftex.def)             Requested size: 209.12683pt x 134.23816pt.
+ [9 <./screens/tp1/Exo1_NEW.PNG>] [10] [11] [12] [13] [14] [15] [16]
+Chapitre 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 626--628
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--231
+Underfull \hbox (badness 10000) in paragraph at lines 648--650
+
+ []
+
+[17
+
+]
+Overfull \hbox (6.00328pt too wide) in paragraph at lines 673--673
+|[]\T1/lmr/bx/n/14.4 Modèle de com-mu-ni-ca-tions pro-duc-teur/-con-som-ma-teur.| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 675--676
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 684--689
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+Underfull \hbox (badness 10000) in paragraph at lines 690--693
 
  []
 
-[5] [6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 365--366
+
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
 
  []
 
-<screens/conso_plus_rapide_sem.png, id=35, 236.38312pt x 689.57625pt>
+[19] [20] [21]
+Underfull \hbox (badness 10000) in paragraph at lines 827--828
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 841--842
+
+ []
+
+[23] <screens/conso_plus_rapide_sem.png, id=88, 236.38312pt x 689.57625pt>
 File: screens/conso_plus_rapide_sem.png Graphic file (type png)
  <use screens/conso_plus_rapide_sem.png>
-Package pdftex.def Info: screens/conso_plus_rapide_sem.png used on input line 370.
+Package pdftex.def Info: screens/conso_plus_rapide_sem.png used on input line 856.
 (pdftex.def)             Requested size: 167.2989pt x 488.05582pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--377
 
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 378--379
-
- []
-
-[8] <screens/prod_plus_rapide_sem.png, id=40, 241.65282pt x 697.8572pt>
+<screens/prod_plus_rapide_sem.png, id=89, 241.65282pt x 697.8572pt>
 File: screens/prod_plus_rapide_sem.png Graphic file (type png)
  <use screens/prod_plus_rapide_sem.png>
-Package pdftex.def Info: screens/prod_plus_rapide_sem.png used on input line 388.
+Package pdftex.def Info: screens/prod_plus_rapide_sem.png used on input line 865.
 (pdftex.def)             Requested size: 167.2989pt x 483.15118pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9 <./screens/conso_plus_rapide_sem.png>] [10 <./screens/prod_plus_rapide_sem.png>] ("Rapport TP-Kernel.aux") ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 880--881
+
+ []
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 911--912
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 913--914
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 929--930
+
+ []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 956--957
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 968--969
+
+ []
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 1004--1005
+
+ []
+
+[27] [28] [29] [30]
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1185--1186
+
+ []
+
+[31] [32] [33] [34]
+Underfull \hbox (badness 10000) in paragraph at lines 1369--1370
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1371--1373
+
+ []
+
+[35] <screens/prod_plus_rapide_sem_2prod_meme_vitesse_1conso.png, id=128, 182.93344pt x 603.75563pt>
+File: screens/prod_plus_rapide_sem_2prod_meme_vitesse_1conso.png Graphic file (type png)
+
+<use screens/prod_plus_rapide_sem_2prod_meme_vitesse_1conso.png>
+Package pdftex.def Info: screens/prod_plus_rapide_sem_2prod_meme_vitesse_1conso.png used on input line 1380.
+(pdftex.def)             Requested size: 167.2989pt x 552.18225pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<screens/conso_plus_rapide_sem_2prod_meme_vitesse_1conso.png, id=129, 204.765pt x 633.11531pt>
+File: screens/conso_plus_rapide_sem_2prod_meme_vitesse_1conso.png Graphic file (type png)
+
+<use screens/conso_plus_rapide_sem_2prod_meme_vitesse_1conso.png>
+Package pdftex.def Info: screens/conso_plus_rapide_sem_2prod_meme_vitesse_1conso.png used on input line 1389.
+(pdftex.def)             Requested size: 167.2989pt x 517.30309pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1398--1399
+
+ []
+
+[36] [37] [38] [39] [40] <screens/prod_plus_rapide_sem_2conso_meme_vitesse_1prod.png, id=146, 180.675pt x 643.6547pt>
+File: screens/prod_plus_rapide_sem_2conso_meme_vitesse_1prod.png Graphic file (type png)
+
+<use screens/prod_plus_rapide_sem_2conso_meme_vitesse_1prod.png>
+Package pdftex.def Info: screens/prod_plus_rapide_sem_2conso_meme_vitesse_1prod.png used on input line 1592.
+(pdftex.def)             Requested size: 146.39133pt x 521.52441pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<screens/conso_plus_rapide_sem_2conso_meme_vitesse_1prod.png, id=147, 188.20313pt x 548.80031pt>
+File: screens/conso_plus_rapide_sem_2conso_meme_vitesse_1prod.png Graphic file (type png)
+
+<use screens/conso_plus_rapide_sem_2conso_meme_vitesse_1prod.png>
+Package pdftex.def Info: screens/conso_plus_rapide_sem_2conso_meme_vitesse_1prod.png used on input line 1601.
+(pdftex.def)             Requested size: 167.2989pt x 487.87804pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1610--1611
+
+ []
+
+[41] [42] [43] [44] [45]
+Underfull \hbox (badness 10000) in paragraph at lines 1852--1853
+
+ []
+
+[46]
+<screens/prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png, id=167, 192.72pt x 679.78969pt>
+File: screens/prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png Graphic file (type png)
+
+<use screens/prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png>
+Package pdftex.def Info: screens/prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png used on i
+nput line 1866.
+(pdftex.def)             Requested size: 146.39133pt x 516.36546pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<screens/prod_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png, id=168, 188.95593pt x 554.82281pt>
+File: screens/prod_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png Graphic file (type png)
+
+<use screens/prod_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png>
+Package pdftex.def Info: screens/prod_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png used on input li
+ne 1875.
+(pdftex.def)             Requested size: 167.2989pt x 491.23405pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<screens/conso_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse.png, id=169, 192.72pt x 525.46312pt>
+File: screens/conso_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse.png Graphic file (type png)
+
+<use screens/conso_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse.png>
+Package pdftex.def Info: screens/conso_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse.png used on input line 188
+4.
+(pdftex.def)             Requested size: 167.2989pt x 456.14699pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[47 <./screens/conso_plus_rapide_sem.png>] [48 <./screens/prod_plus_rapide_sem.png>] [49 <./screens/prod_plus_rapide_sem
+_2prod_meme_vitesse_1conso.png>] [50 <./screens/conso_plus_rapide_sem_2prod_meme_vitesse_1conso.png>] [51 <./screens/pro
+d_plus_rapide_sem_2conso_meme_vitesse_1prod.png>] [52 <./screens/conso_plus_rapide_sem_2conso_meme_vitesse_1prod.png>]
+[53 <./screens/prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png>] [54 <./screens/prod_plus_
+rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png>] [55 <./screens/conso_plus_rapide_sem_2prod_meme_vitesse_2
+conso_meme_vitesse.png>]
+Chapitre 3.
+<screens/philo_table.png, id=208, 496.10344pt x 423.08063pt>
+File: screens/philo_table.png Graphic file (type png)
+ <use screens/philo_table.png>
+Package pdftex.def Info: screens/philo_table.png used on input line 1905.
+(pdftex.def)             Requested size: 250.95476pt x 214.01877pt.
+ [56
+
+ <./screens/philo_table.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1911--1912
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1913--1917
+
+ []
+
+[57] [58] [59] <screens/philo_pense_meme_vitesse.png, id=224, 265.74281pt x 218.31563pt>
+File: screens/philo_pense_meme_vitesse.png Graphic file (type png)
+
+<use screens/philo_pense_meme_vitesse.png>
+Package pdftex.def Info: screens/philo_pense_meme_vitesse.png used on input line 2049.
+(pdftex.def)             Requested size: 209.12683pt x 171.80786pt.
+ [60 <./screens/philo_pense_meme_vitesse.png>] [61] [62] [63] [64] [65]
+[66] ("Rapport TP-Kernel.aux")
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6993 strings out of 493698
- 96114 string characters out of 3141994
- 334593 words of memory out of 3000000
- 10152 multiletter control sequences out of 15000+200000
+ 7299 strings out of 493698
+ 102406 string characters out of 3141994
+ 465593 words of memory out of 3000000
+ 10446 multiletter control sequences out of 15000+200000
  81913 words of font info for 64 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 46i,12n,97p,694b,1745s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Progr
-am Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.e
-nc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
-blic/lm/lmcsc10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
-Output written on "Rapport TP-Kernel.pdf" (11 pages, 269424 bytes).
+ 46i,12n,97p,1403b,1757s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips
+/lm/lm-mathit.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/enc/dvips/lm/lm-ec.enc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files (x86)/Mi
+KTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr12
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
+blic/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/lm/lmsy7.pfb>
+Output written on "Rapport TP-Kernel.pdf" (67 pages, 578616 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
+ 285 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

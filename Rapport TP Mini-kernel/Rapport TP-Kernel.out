@@ -1,0 +1,35 @@
+\BOOKMARK [0][-]{chapter.1}{Rapport TP 1 - Partie 1 et 2}{}% 1
+\BOOKMARK [1][-]{section.1.1}{1\350re partie : Ordonnanceur de t\342ches}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{file\137init\(\)}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{ajoute\(n\)}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.3}{suivant\(\)}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.4}{retire\(n\)}{section.1.1}% 6
+\BOOKMARK [2][-]{subsection.1.1.5}{affic\137file\(\)}{section.1.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.6}{Test de ces fonctions}{section.1.1}% 8
+\BOOKMARK [1][-]{section.1.2}{2\350me partie : gestion et commutation de t\342ches}{chapter.1}% 9
+\BOOKMARK [2][-]{subsection.1.2.1}{Fonction noyau\137exit\(\)}{section.1.2}% 10
+\BOOKMARK [2][-]{subsection.1.2.2}{Fonction fin\137tache\(\)}{section.1.2}% 11
+\BOOKMARK [2][-]{subsection.1.2.3}{Fonction cree\(TACHE\137ADR adr\137tache\)}{section.1.2}% 12
+\BOOKMARK [2][-]{subsection.1.2.4}{Fonction active\( uint16\137t tache \)}{section.1.2}% 13
+\BOOKMARK [2][-]{subsection.1.2.5}{Fonction scheduler}{section.1.2}% 14
+\BOOKMARK [2][-]{subsection.1.2.6}{Fonction schedule\(\)}{section.1.2}% 15
+\BOOKMARK [2][-]{subsection.1.2.7}{Fonction start\( TACHE\137ADR adr\137tache \)}{section.1.2}% 16
+\BOOKMARK [0][-]{chapter.2}{Rapport TP 2 - Partie 3 et 4}{}% 17
+\BOOKMARK [1][-]{section.2.1}{Exercice 1 : Exclusion mutuelle}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.1.1}{Suspension d'une t\342che}{section.2.1}% 19
+\BOOKMARK [2][-]{subsection.2.1.2}{R\351veil d'une t\342che}{section.2.1}% 20
+\BOOKMARK [2][-]{subsection.2.1.3}{Mod\350le de communications producteur/consommateur.}{section.2.1}% 21
+\BOOKMARK [1][-]{section.2.2}{Exercice 2 : S\351maphores}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.2.1}{Impl\351mentation}{section.2.2}% 23
+\BOOKMARK [2][-]{subsection.2.2.2}{Producteur/Consommateur}{section.2.2}% 24
+\BOOKMARK [2][-]{subsection.2.2.3}{2 Producteurs/ 1 Consommateur}{section.2.2}% 25
+\BOOKMARK [2][-]{subsection.2.2.4}{1 Producteur/ 2 Consommateurs}{section.2.2}% 26
+\BOOKMARK [2][-]{subsection.2.2.5}{2 Producteurs/ 2 Consommateurs}{section.2.2}% 27
+\BOOKMARK [0][-]{chapter.3}{Rapport TP3 - Parties 5 et 6}{}% 28
+\BOOKMARK [1][-]{section.3.1}{5\350me partie : le d\356ner des philosophes}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.2}{6\350me partie : communication par tubes}{chapter.3}% 30
+\BOOKMARK [2][-]{subsection.3.2.1}{Fonction init\137pipes}{section.3.2}% 31
+\BOOKMARK [2][-]{subsection.3.2.2}{Fonction p\137open}{section.3.2}% 32
+\BOOKMARK [2][-]{subsection.3.2.3}{Fonction p\137close}{section.3.2}% 33
+\BOOKMARK [2][-]{subsection.3.2.4}{Fonction p\137read}{section.3.2}% 34
+\BOOKMARK [2][-]{subsection.3.2.5}{Fonction p\137write}{section.3.2}% 35

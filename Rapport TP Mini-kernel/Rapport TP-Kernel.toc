@@ -1,6 +1,36 @@
 \select@language {french}
-\contentsline {chapter}{\numberline {1}Rapport TP 2 - Partie 3 et 4}{3}
-\contentsline {section}{\numberline {}Exercice 1 : Exclusion mutuelle}{3}
-\contentsline {subsection}{\numberline {1.1}Suspension d'une t\^ache}{3}
-\contentsline {subsection}{\numberline {1.2}R\'eveil d'une t\^ache}{4}
-\contentsline {subsection}{\numberline {1.3}Mod\`ele de communications producteur/consommateur.}{4}
+\contentsline {chapter}{\numberline {1}Rapport TP 1 - Partie 1 et 2}{4}
+\contentsline {section}{\numberline {}1\`ere partie : Ordonnanceur de t\^aches}{4}
+\contentsline {subsection}{\numberline {1.1}file\_init()}{4}
+\contentsline {subsection}{\numberline {1.2}ajoute(n)}{4}
+\contentsline {subsection}{\numberline {1.3}suivant()}{5}
+\contentsline {subsection}{\numberline {1.4}retire(n)}{6}
+\contentsline {subsection}{\numberline {1.5}affic\_file()}{7}
+\contentsline {subsection}{\numberline {1.6}Test de ces fonctions}{8}
+\contentsline {section}{\numberline {}2\`eme partie : gestion et commutation de t\^aches}{10}
+\contentsline {subsection}{\numberline {2.1}Fonction noyau\_exit()}{10}
+\contentsline {subsection}{\numberline {2.2}Fonction fin\_tache()}{10}
+\contentsline {subsection}{\numberline {2.3}Fonction cree(TACHE\_ADR adr\_tache)}{11}
+\contentsline {subsection}{\numberline {2.4}Fonction active( uint16\_t tache )}{12}
+\contentsline {subsection}{\numberline {2.5}Fonction scheduler}{12}
+\contentsline {subsection}{\numberline {2.6}Fonction schedule()}{14}
+\contentsline {subsection}{\numberline {2.7}Fonction start( TACHE\_ADR adr\_tache )}{15}
+\contentsline {chapter}{\numberline {2}Rapport TP 2 - Partie 3 et 4}{17}
+\contentsline {section}{\numberline {}Exercice 1 : Exclusion mutuelle}{17}
+\contentsline {subsection}{\numberline {1.1}Suspension d'une t\^ache}{17}
+\contentsline {subsection}{\numberline {1.2}R\'eveil d'une t\^ache}{18}
+\contentsline {subsection}{\numberline {1.3}Mod\`ele de communications producteur/consommateur.}{18}
+\contentsline {section}{\numberline {}Exercice 2 : S\'emaphores}{24}
+\contentsline {subsection}{\numberline {2.1}Impl\'ementation}{24}
+\contentsline {subsection}{\numberline {2.2}Producteur/Consommateur}{28}
+\contentsline {subsection}{\numberline {2.3}2 Producteurs/ 1 Consommateur}{31}
+\contentsline {subsection}{\numberline {2.4}1 Producteur/ 2 Consommateurs}{36}
+\contentsline {subsection}{\numberline {2.5}2 Producteurs/ 2 Consommateurs}{41}
+\contentsline {chapter}{\numberline {3}Rapport TP3 - Parties 5 et 6}{56}
+\contentsline {section}{\numberline {}5\`eme partie : Le d\IeC {\^\i }ner des philosophes}{56}
+\contentsline {section}{\numberline {}6\`eme partie : Communication par tubes}{61}
+\contentsline {subsection}{\numberline {2.1}Fonction init\_pipes}{62}
+\contentsline {subsection}{\numberline {2.2}Fonction p\_open}{62}
+\contentsline {subsection}{\numberline {2.3}Fonction p\_close}{63}
+\contentsline {subsection}{\numberline {2.4}Fonction p\_read}{63}
+\contentsline {subsection}{\numberline {2.5}Fonction p\_write}{64}

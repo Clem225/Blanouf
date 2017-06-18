@@ -1,4 +1,16 @@
 \select@language {french}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Consommateur plus rapide que le producteur}}{9}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Producteur plus rapide que le consommateur}}{10}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces R\'esultat de testfile.c}}{9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Consommateur plus rapide que le producteur}}{47}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Producteur plus rapide que le consommateur}}{48}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces 2 producteurs plus rapide que le consommateur}}{49}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Consommateur plus rapide que les 2 producteurs}}{50}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Producteur plus rapide que les 2 consommateurs}}{51}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces 2 consommateurs plus rapide que le producteur}}{52}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces 2 producteurs et 2 consommateurs \`a la m\^eme vitesse}}{53}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces 2 producteurs plus rapides que les 2 consommateurs}}{54}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces 2 consommateurs plus rapides que les 2 producteurs}}{55}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces La table des philosophes}}{56}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Le d\IeC {\^\i }ner des philosophes}}{60}
