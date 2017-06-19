@@ -1,0 +1,66 @@
+thread T1
+end T1;
+
+thread implementation T1.impl
+	properties
+		Dispatch_Protocol => Periodic ;
+		Period => 30 ms; --29 ms
+		Compute_Execution_Time => 1 ms .. 6 ms; --1 ms .. 7 ms
+		Deadline => 30 ms; --29 ms
+		Cheddar_Properties::Dispatch_Absolute_Time => 0 ms;
+end T1.Impl;
+
+thread T2
+end T2;
+
+thread implementation T2.impl
+	properties
+		Dispatch_Protocol => Periodic ;
+		Period => 5 ms;
+		Compute_Execution_Time => 1 ms .. 3 ms; --1 ms .. 1 ms
+		Deadline => 5 ms;
+		Cheddar_Properties::Dispatch_Absolute_Time => 0 ms;
+end T2.Impl;
+
+thread T3
+end T3;
+
+thread implementation T3.impl
+	properties
+		Dispatch_Protocol => Periodic ;
+		Period => 10 ms;
+		Compute_Execution_Time => 1 ms .. 2 ms;
+		Deadline => 10 ms;
+		Cheddar_Properties::Dispatch_Absolute_Time => 0 ms;
+end T3.Impl;
+
+process taches
+end taches;
+
+process implementation taches.impl
+	subcomponents
+		T1 : thread T1.impl;
+		T2 : thread T2.impl;
+		T3 : thread T3.impl;
+end taches.impl;
+
+processor cpu
+end cpu;
+
+processor implementation cpu.impl
+	properties 
+		Scheduling_Protocol => RATE_MONOTONIC_PROTOCOL;
+		Cheddar_Properties::Preemptive_Scheduler => False ;
+end cpu.impl;
+
+
+system top
+end top;
+
+system implementation top.impl
+	subcomponents
+		cpu : processor cpu.impl;
+		taches : process taches.impl;
+	properties
+		Actual_Processor_Binding => reference cpu applies to taches;
+end top.impl;
