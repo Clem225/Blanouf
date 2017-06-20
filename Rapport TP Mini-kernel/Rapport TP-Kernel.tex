@@ -541,28 +541,9 @@ void  schedule( void )
   _unlock_();                       // Fin section critique  
 }
 \end{lstlisting}
-La fonction \textit{schedule()} permet en fait de faire un appel à la fonction \textit{scheduler()}. Dans un section critique, elle commence par passer en mode IRQ (car la fonction \textit{scheduler} doit s'exécuter dans ce mode). Ensuite, comme on l'a vu en cours, lors d'un changement de tâche, on doit :
-\begin{itemize}
-\item Copier cpsr dans spsr\_mode : 
-\begin{lstlisting}
-"mrs  r0, cpsr\t\n" 
-"msr  spsr, r0\t\n"
-\end{lstlisting}
-\vspace{-0.6cm}
+La fonction \textit{schedule()} permet en fait de faire un appel à la fonction \textit{scheduler()}. Dans un section critique, elle commence par passer en mode IRQ (car la fonction \textit{scheduler} doit s'exécuter dans ce mode). 
 
-\item Changer cpsr
-	\begin{itemize}
-	\item Passage en mode d?exception
-	\item Interdiction des IRQ / FIQ si nécessaire
-	\end{itemize}
-\item Sauver pc (r15) dans lr\_mode (r14\_mode)
-\item Charger l'adresse du vecteur dans pc
-\item A la fin du traitement :
-	\begin{itemize}
-	\item Restaurer cpsr depuis spsr\_mode
-	\item Restaurer pc depuis lr\_mode
-	\end{itemize}
-\end{itemize}
+********A COMPLETER STP *********************
 
 
 
@@ -2251,6 +2232,122 @@ On peut ensuite commencer à écrire dans le tube. On procède de la même manière q
 Si le tube est plein, on endort le rédacteur jusqu'à ce que le lecteur le réveille après avoir lu un caractère. Sinon, on peut copier le caractère dans le tube (à l'emplacement d'entrée "ie"). On incrémente ie et ocupp comme il se doit.
 
 Enfin, si le tube était vide et si la tache lectrice est suspendue sur une lecture de ce tube (c'est à dire si un lecteur, en tentant de lire, est tombé sur un tube vide) alors on la réveille. De cette façon, une lecture sur un tube vide ne posera pas de problème : le lecteur attendra simplement (en s'endormant) que le rédacteur écrive dans le tube et le réveille.
+
+\subsection{Test de ces fonctions}
+Pour tester notre système de tubes, on réalise un programme de deux tâches : la tâche A et la tâche B. Deux tubes leur sont associés : un de A vers B et l'autre de B vers A. Le déroulement du programme est le suivant :
+\begin{itemize}
+\item La tâche A envoie le message "salut" à la tâche B via le premier tube
+\item La tâche B reçoit ce message via ce même tube
+\item La tâche B envoie ce message reçu à la tâche A via le deuxième tube
+\item La tâche A reçoit le message via le deuxième tube.
+\end{itemize}
+
+Voici le code associé :
+
+\begin{lstlisting}
+#include "pipe.h"
+#include "noyau.h"
+#define TAILLE_MESSAGE 10
+
+//definitions des fonctions citées précédemment
+
+TACHE tacheStart();
+TACHE tacheA();
+TACHE tacheB();
+uint16_t tA, tB;
+int pipe1, pipe2;
+
+TACHE	tacheStart(void)
+{
+  puts("------> EXEC tache Start");
+
+  init_pipes();
+  puts("Pipes initialises\n");
+
+  tA = cree(tacheA);
+  tB = cree(tacheB);
+
+  pipe1 = p_open(tA,tB);	// pipe de A vers B
+  pipe2 = p_open(tB,tA);	// pipe de B vers A
+
+  active(tA);
+  active(tB);
+
+
+  fin_tache();
+}
+
+TACHE tacheA()
+{
+	 puts("------> EXEC tache 1");
+
+	 uint16_t k;
+	 uchar envoiA[TAILLE_MESSAGE] = "salut";
+	 uchar recuA[TAILLE_MESSAGE] = "";
+
+	 for (k=0; k<30000; k++);
+
+     p_write(pipe1,envoiA,5);
+
+     _lock_();
+     printf("Tache 1 a envoye : %s\n", envoiA);
+	 _unlock_();
+
+	 p_read(pipe2,recuA,5);
+
+	 _lock_();
+	 printf("Tache 1 message recu : %s\n", recuA);
+	 _unlock_();
+
+
+	 fin_tache();
+}
+
+TACHE tacheB()
+{
+	 puts("------> EXEC tache 2");
+
+	 uint16_t k;
+	 uchar recuB[TAILLE_MESSAGE] = "";
+
+	 for (k=0; k<30000; k++);
+
+	 p_read(pipe1,recuB,5);
+
+	 _lock_();
+      printf("Tache 2 message recu : %s\n", recuB);
+	 _unlock_();
+
+	 p_write(pipe2,recuB,5);
+
+	 _lock_();
+	 printf("Tache 2 a envoye : %s\n", recuB);
+	 _unlock_();
+
+
+	 fin_tache();
+}
+
+
+int main()
+{
+	serial_init(115200);
+	puts("*******************DEBUT PIPE*********************\n\n");
+
+	start(tacheStart);
+}
+\end{lstlisting}
+
+Le résultat obtenu est le suivant :
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{screens/pipe.PNG}
+		\caption{Résultat du pipe}
+		\label{pipe}
+\end{figure}
+
+On constate que notre système de tubes fonctionne bien. La tâche B reçoit bien le message de A et est capable de lui renvoyer. La tâche A reçoit bien le retour de B.
+
 
 \end{document}
 
