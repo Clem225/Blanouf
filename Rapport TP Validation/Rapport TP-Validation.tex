@@ -155,7 +155,11 @@ Le taux d'utilisation du processeur est :
 \[
 \sum Ui = \frac{C1}{P1} + \frac{C2}{P2} + \frac{C3}{P3} = \frac{7}{29} + \frac{1}{5} + \frac {2}{10} \simeq 0.64.
 \]
-Sachant que l'on a trois tâches, la condition pour que le système soit ordonnançable est : 
+La condition pour que le système soit ordonnançable est :
+\[
+n*(2^{1/n}-1) > \sum Ui
+\] 
+Sachant que l'on a trois tâches :
 \[
 3*(2^{1/3}-1) > \sum Ui
 \]
@@ -236,7 +240,7 @@ system implementation top.impl
 		Actual_Processor_Binding => reference cpu applies to taches;
 end top.impl;
 \end{lstlisting}
-
+\newpage
 \section{Question 4}
 Version préemptive :
 \begin{figure}[h]
@@ -247,7 +251,7 @@ Version préemptive :
 \end{figure}
 
 On observe sur la figure \ref{ex1q41} que le système est bel est bien ordonnançable comme nous l'avions indiqué à la première question. On remarque également qu'il a besoin de 14 unités de temps pour que toutes les tâches se terminent au moins une fois.
-
+\newpage
 Version non préemptive :
 \begin{figure}[h]
 	\centering
