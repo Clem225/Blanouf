@@ -34,3 +34,4 @@
 \contentsline {subsection}{\numberline {2.3}Fonction p\_close}{63}
 \contentsline {subsection}{\numberline {2.4}Fonction p\_read}{63}
 \contentsline {subsection}{\numberline {2.5}Fonction p\_write}{64}
+\contentsline {subsection}{\numberline {2.6}Test de ces fonctions}{66}
