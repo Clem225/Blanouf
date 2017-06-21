@@ -92,9 +92,9 @@
 %%AJOUTS DE CLEMENT DANS LE HEADER :
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\lhead{Clément BLANQUET et Rafik CHENNOUF}
+\lhead{ClÃ©ment BLANQUET et Rafik CHENNOUF}
 \rhead{Page \thepage}
-\cfoot{\footnotesize{MI11 - Rapport des TPs : Réalisation d'un mini noyau temps réel}}
+\cfoot{\footnotesize{MI11 - Rapport des TPs : RÃ©alisation d'un mini noyau temps rÃ©el}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -122,8 +122,8 @@
 
 
 
-\author{Clément BLANQUET et Rafik CHENNOUF}
-\title{MI11 - Rapport des TPs : Réalisation d'un mini noyau temps réel}
+\author{ClÃ©ment BLANQUET et Rafik CHENNOUF}
+\title{MI11 - Rapport des TPs : RÃ©alisation d'un mini noyau temps rÃ©el}
 
 \begin{document}
 
@@ -131,12 +131,12 @@
 
 	\centering
 	\includegraphics[width=0.15\textwidth]{sigle_UTC.jpg}\par\vspace{1cm}
-	{\scshape\LARGE Université de Technologie de Compiègne \par\vspace{1cm}}	
+	{\scshape\LARGE UniversitÃ© de Technologie de CompiÃ¨gne \par\vspace{1cm}}	
 	{\scshape\Large MI11\par}
 	\vspace{1.5cm}
-	{\huge\bfseries Rapport des TPs : Réalisation d'un mini noyau temps réel\par}
+	{\huge\bfseries Rapport des TPs : RÃ©alisation d'un mini noyau temps rÃ©el\par}
 	\vspace{2cm}
-	{\Large\itshape Clément BLANQUET et Rafik CHENNOUF\par}
+	{\Large\itshape ClÃ©ment BLANQUET et Rafik CHENNOUF\par}
 	\vspace{2cm}
 	\vfill
 % Bottom of the page
@@ -146,7 +146,7 @@
 
 \renewcommand{\contentsname}{Sommaire} % Changer le nom de la table des matieres
 \tableofcontents
-% Les différentes tables
+% Les diffÃ©rentes tables
 \listoffigures        % Liste des figures
 
 
@@ -154,12 +154,12 @@
 
 \chapter{Rapport TP 1 - Partie 1 et 2}
 
-\section{1ère partie : Ordonnanceur de tâches}
+\section{1Ã¨re partie : Ordonnanceur de tÃ¢ches}
 
-Voici comment nous avons codé les fonctions \textit{file\_init()}, \textit{ajoute(n)}, \textit{suivant()} et \textit{retire(n)} :
+Voici comment nous avons codÃ© les fonctions \textit{file\_init()}, \textit{ajoute(n)}, \textit{suivant()} et \textit{retire(n)} :
 
 \subsection{file\_init()}
-Cette fonction permet simplement d'initialiser la file FIFO de tâches.
+Cette fonction permet simplement d'initialiser la file FIFO de tÃ¢ches.
 \begin{lstlisting}
 void	file_init( void )
 {
@@ -171,15 +171,15 @@ void	file_init( void )
 }
 \end{lstlisting}
 
-Dans cette fonction, on se contente d'initialiser la queue da la file FIFO à la valeur F\_VIDE (F\_VIDE = MAX\_TACHES = 8), ce qui signifie que la file est vide. De plus, on initialise chaque case du tableau représentant la file à la même valeur, indiquant que chaque case est vide.
+Dans cette fonction, on se contente d'initialiser la queue da la file FIFO Ã  la valeur F\_VIDE (F\_VIDE = MAX\_TACHES = 8), ce qui signifie que la file est vide. De plus, on initialise chaque case du tableau reprÃ©sentant la file Ã  la mÃªme valeur, indiquant que chaque case est vide.
 
 
 \subsection{ajoute(n)}
-Cette fonction permet d'ajouter une tâche en fin de file.
+Cette fonction permet d'ajouter une tÃ¢che en fin de file.
 \begin{lstlisting}
 void	ajoute ( uint16_t n )
 {
-	if(n > MAX_TACHES - 1) // Si le numéro de la tâche est trop grand
+	if(n > MAX_TACHES - 1) // Si le numÃ©ro de la tÃ¢che est trop grand
 		return;
 
 	if(_queue == F_VIDE) // Si la file est vide
@@ -197,19 +197,19 @@ void	ajoute ( uint16_t n )
 }
 \end{lstlisting}
 
-La fonction \textit{ajoute} prend en argument un entier qui représente le numéro de la tâche à ajouter.\smallbreak
+La fonction \textit{ajoute} prend en argument un entier qui reprÃ©sente le numÃ©ro de la tÃ¢che Ã  ajouter.\smallbreak
 
-On commence par regarder si le numéro de la tâche à ajouter est cohérent (inférieur ou égal à 7). Si ce n'est pas le cas, on sort de la fonction.\smallbreak
+On commence par regarder si le numÃ©ro de la tÃ¢che Ã  ajouter est cohÃ©rent (infÃ©rieur ou Ã©gal Ã  7). Si ce n'est pas le cas, on sort de la fonction.\smallbreak
 
-Sinon, si la file est vide (\_queue = F\_vide), la queue devient la tâche qui vient d'être ajoutée et le successeur de cette tâche est elle-même.\smallbreak
+Sinon, si la file est vide (\_queue = F\_vide), la queue devient la tÃ¢che qui vient d'Ãªtre ajoutÃ©e et le successeur de cette tÃ¢che est elle-mÃªme.\smallbreak
 
-Enfin, si la file n'est pas vide, on veut ajouter la nouvelle tâche en fin de file. Autrement dit, la queue doit valeur cette même nouvelle tâche. On commence par sauvegarder dans un tampon le successeur de la queue actuelle. Ensuite, on désigne la nouvelle tâche comme étant le successeur de la queue actuelle. De plus, on désigne le successeur de la nouvelle tâche comme étant la tâche sauvegardée dans le tampon, anciennement successeur de la queue actuelle. Enfin, on désigne notre nouvelle tâche comme étant la queue.\smallbreak
+Enfin, si la file n'est pas vide, on veut ajouter la nouvelle tÃ¢che en fin de file. Autrement dit, la queue doit valeur cette mÃªme nouvelle tÃ¢che. On commence par sauvegarder dans un tampon le successeur de la queue actuelle. Ensuite, on dÃ©signe la nouvelle tÃ¢che comme Ã©tant le successeur de la queue actuelle. De plus, on dÃ©signe le successeur de la nouvelle tÃ¢che comme Ã©tant la tÃ¢che sauvegardÃ©e dans le tampon, anciennement successeur de la queue actuelle. Enfin, on dÃ©signe notre nouvelle tÃ¢che comme Ã©tant la queue.\smallbreak
 
-De cette façon, la nouvelle tâche s'est intercalée entre l'ancienne queue et son ancien successeur, et est devenue la nouvelle queue.
+De cette faÃ§on, la nouvelle tÃ¢che s'est intercalÃ©e entre l'ancienne queue et son ancien successeur, et est devenue la nouvelle queue.
 
 
 \subsection{suivant()}
-Cette fonction retourne la tâche à activer, et met à jour \_queue pour qu'elle pointe sur la suivante.
+Cette fonction retourne la tÃ¢che Ã  activer, et met Ã  jour \_queue pour qu'elle pointe sur la suivante.
 \begin{lstlisting}
 uint16_t	suivant( void )
 {
@@ -218,11 +218,11 @@ uint16_t	suivant( void )
 }
 \end{lstlisting}
 
-Ici on assigne à la queue son successeur (donc la tâche à activer) puis on la retourne.
+Ici on assigne Ã  la queue son successeur (donc la tÃ¢che Ã  activer) puis on la retourne.
 
 
 \subsection{retire(n)}
-Cette fonction permet de retirer une tâche de la file sans en modifier l'ordre.
+Cette fonction permet de retirer une tÃ¢che de la file sans en modifier l'ordre.
 \begin{lstlisting}
 void	retire( uint16_t t )
 {
@@ -232,7 +232,7 @@ void	retire( uint16_t t )
 		return;
 
 	while(_file[i] != t)
-		i++;				// i = prédecesseur de t 
+		i++;				// i = prÃ©decesseur de t 
 							  // ex : ( 1 -> 0 -> 2 ) => avec t = 0, i = 1
 
 	if(i == MAX_TACHES)
@@ -243,27 +243,27 @@ void	retire( uint16_t t )
 	
 	if(t == _queue)
 	{
-		// si le prédécesseur est lui même => une seule tâche => queue => on vide
+		// si le prÃ©dÃ©cesseur est lui mÃªme => une seule tÃ¢che => queue => on vide
 		if(t == i)			
 			_queue = F_VIDE;
 		else
-			_queue = i;		// la queue devient le prédécesseur de la tâche qu'on retire
+			_queue = i;		// la queue devient le prÃ©dÃ©cesseur de la tÃ¢che qu'on retire
 	}
 }
 \end{lstlisting}
 
-La fonction prend en argument le numéro de la tâche à retirer. On commence donc par vérifier que ce numéro est cohérent (inférieur ou égal à 7) et que la file n'est pas vide auquel cas il est impossible de retirer un élément.\smallbreak
+La fonction prend en argument le numÃ©ro de la tÃ¢che Ã  retirer. On commence donc par vÃ©rifier que ce numÃ©ro est cohÃ©rent (infÃ©rieur ou Ã©gal Ã  7) et que la file n'est pas vide auquel cas il est impossible de retirer un Ã©lÃ©ment.\smallbreak
 
-Une fois cette vérification effectuée, on cherche le prédecesseur de la tâche à retirer. Si on ne trouve rien, cela signifie que la tâche n'existe pas et on sort donc de la fonction.\smallbreak
+Une fois cette vÃ©rification effectuÃ©e, on cherche le prÃ©decesseur de la tÃ¢che Ã  retirer. Si on ne trouve rien, cela signifie que la tÃ¢che n'existe pas et on sort donc de la fonction.\smallbreak
 
-Sinon, on "saute au dessus" de la tâche à retirer, c'est à dire qu'on fixe le successeur du prédécesseur de cette tâche comme étant le successeur de cette même tâche.\smallbreak
+Sinon, on "saute au dessus" de la tÃ¢che Ã  retirer, c'est Ã  dire qu'on fixe le successeur du prÃ©dÃ©cesseur de cette tÃ¢che comme Ã©tant le successeur de cette mÃªme tÃ¢che.\smallbreak
 
-Enfin, on doit vérifier si la tâche retirée était la queue ou non.
+Enfin, on doit vÃ©rifier si la tÃ¢che retirÃ©e Ã©tait la queue ou non.
 \begin{itemize}
 \item Si oui
 	\begin{itemize}
-	\item Si la file ne contient qu'un élément (donc le prédécesseur de la tâche est la tâche elle-même), on assigne à \_queue la valeur F\_VIDE (car la file est alors vide)
-	\item Sinon, la queue devient le prédécesseur de la tâche que l'on a retiré.
+	\item Si la file ne contient qu'un Ã©lÃ©ment (donc le prÃ©dÃ©cesseur de la tÃ¢che est la tÃ¢che elle-mÃªme), on assigne Ã  \_queue la valeur F\_VIDE (car la file est alors vide)
+	\item Sinon, la queue devient le prÃ©dÃ©cesseur de la tÃ¢che que l'on a retirÃ©.
 	\end{itemize}
 \item Sinon, ne rien faire de plus.
 \end{itemize}
@@ -276,24 +276,24 @@ void affic_file( void )
 {
 	int i = 0;
 
-	// Recherche du premier élément de la file
+	// Recherche du premier Ã©lÃ©ment de la file
 	while (_file[i] == F_VIDE) 
 		i++;
 
-	int temp = i; // temp ==> premier élément de la file
+	int temp = i; // temp ==> premier Ã©lÃ©ment de la file
 
 	// Tant qu'on a pas fait tout le tour de la file
 	while (_file[i] !=temp) 
 	{
-		// Si l'élément i est la queue, afficher un "(Q)" à côté
+		// Si l'Ã©lÃ©ment i est la queue, afficher un "(Q)" Ã  cÃ´tÃ©
 		if (i==_queue)
 			printf(" %d(Q) -> ", i); 
 		else
 				printf(" %d -> ", i); // Sinon l'afficher normalement
 				
-		i=_file[i]; // Passer à l'élément suivant
+		i=_file[i]; // Passer Ã  l'Ã©lÃ©ment suivant
 	}
-	// Affichage du dernier élément
+	// Affichage du dernier Ã©lÃ©ment
 	if (i==_queue)
 		printf(" %d (Q) -> ", i);
 	else
@@ -303,12 +303,12 @@ void affic_file( void )
 }
 \end{lstlisting}
 
-On commence par chercher le premier élément de la file. Ensuite, on effectue une boucle d'affichage tant qu'un tour complet de la file n'a pas été effectué. On affiche "(Q)" à côté de la tâche sur laquelle la queue pointe.
+On commence par chercher le premier Ã©lÃ©ment de la file. Ensuite, on effectue une boucle d'affichage tant qu'un tour complet de la file n'a pas Ã©tÃ© effectuÃ©. On affiche "(Q)" Ã  cÃ´tÃ© de la tÃ¢che sur laquelle la queue pointe.
 
 
 
 \subsection{Test de ces fonctions}
-Nous avons pu tester le bon fonctionnement de ces fonctions grâce au fichier de test \textit{testfile.c} suivant :
+Nous avons pu tester le bon fonctionnement de ces fonctions grÃ¢ce au fichier de test \textit{testfile.c} suivant :
 \begin{lstlisting}
 #include "noyau.h"
 #include "serialio.h"
@@ -322,7 +322,7 @@ int main()
 
 	file_init();
 
-	// Ajouts des différentes tâches comme dans l'exemple du sujet
+	// Ajouts des diffÃ©rentes tÃ¢ches comme dans l'exemple du sujet
 	ajoute(3);
 	ajoute(5);
 	ajoute(1);
@@ -334,41 +334,41 @@ int main()
 	affic_queue(); // Affichage de la queue
 	printf("Suivant() \n");
 	suivant(); // On fait un "suivant()"
-	affic_queue(); // On vérifie la queue après le "suivant()"
+	affic_queue(); // On vÃ©rifie la queue aprÃ¨s le "suivant()"
 
 	affic_file(); // Affichage de la file avec la nouvelle queue
 
 	printf("Retire 0 : \n");
-	retire(0); // On retire la tâche 0
-	affic_file(); // Affichage de la file après le "retire(0)"
+	retire(0); // On retire la tÃ¢che 0
+	affic_file(); // Affichage de la file aprÃ¨s le "retire(0)"
 	printf("Ajoute 6 : \n");
 	ajoute(6); // On ajoute 6
-	affic_file(); // Affichage de la file après le "ajoute(6)"
+	affic_file(); // Affichage de la file aprÃ¨s le "ajoute(6)"
 
 	return 0;
 }
 \end{lstlisting}
 \newpage
-A l'exécution, on obtient :
+A l'exÃ©cution, on obtient :
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.5\textwidth]{screens/tp1/Exo1_NEW.PNG}
-		\caption{Résultat de testfile.c}
+		\caption{RÃ©sultat de testfile.c}
 		\label{testfile}
 \end{figure}
 
-C'est bien le résultat attendu. En effet, au départ la queue vaut 2 car c'est la dernière tâche à avoir été ajoutée. Après le suivant, la valeur de la queue change et devient le successeur de 2 à savoir 3, ce qui s'affiche correctement. Le \textit{retire(0)} fonctionne bien aussi puisque la tâche 0 a disparu de la file et les autres tâches ont leurs successeurs et prédécesseurs bien mis à jour. Enfin, le ajoute(6) ajoute bien la tâche 6 en fin de file en mettant à jour la queue.
+C'est bien le rÃ©sultat attendu. En effet, au dÃ©part la queue vaut 2 car c'est la derniÃ¨re tÃ¢che Ã  avoir Ã©tÃ© ajoutÃ©e. AprÃ¨s le suivant, la valeur de la queue change et devient le successeur de 2 Ã  savoir 3, ce qui s'affiche correctement. Le \textit{retire(0)} fonctionne bien aussi puisque la tÃ¢che 0 a disparu de la file et les autres tÃ¢ches ont leurs successeurs et prÃ©dÃ©cesseurs bien mis Ã  jour. Enfin, le ajoute(6) ajoute bien la tÃ¢che 6 en fin de file en mettant Ã  jour la queue.
 
 \newpage
-\section{2ème partie : gestion et commutation de tâches}
-Dans cette seconde partie, nous devons réaliser  les  primitives de  gestion  des  tâches  du  mini  noyau  temps réel, ainsi que le système de commutation de tâches. Tout cela est écrit dans le fichier \textit{noyau.c}.
+\section{2Ã¨me partie : gestion et commutation de tÃ¢ches}
+Dans cette seconde partie, nous devons rÃ©aliser  les  primitives de  gestion  des  tÃ¢ches  du  mini  noyau  temps rÃ©el, ainsi que le systÃ¨me de commutation de tÃ¢ches. Tout cela est Ã©crit dans le fichier \textit{noyau.c}.
 
-Les codes nous étant fournis, nous devons les expliquer. Notons tout d'abord les variables internes au noyau :
+Les codes nous Ã©tant fournis, nous devons les expliquer. Notons tout d'abord les variables internes au noyau :
 
 \begin{lstlisting}
 static int compteurs[MAX_TACHES]; // Compteurs d'activations 
 CONTEXTE _contexte[MAX_TACHES];   // tableau des contextes 
-volatile uint16_t _tache_c;       // numéro de tache courante 
+volatile uint16_t _tache_c;       // numÃ©ro de tache courante 
 uint32_t  _tos;                   // adresse du sommet de pile 
 int  _ack_timer = 1;          // = 1 si il faut acquitter le timer 
 \end{lstlisting}
@@ -380,16 +380,16 @@ int  _ack_timer = 1;          // = 1 si il faut acquitter le timer
 void	noyau_exit(void)
 {
   int j;
-  _irq_disable_();                // Désactiver les interruptions 
+  _irq_disable_();                // DÃ©sactiver les interruptions 
   printf("Sortie du noyau\n");
   for (j=0; j < MAX_TACHES; j++)
     printf("\nActivations tache %d : %d", j, compteurs[j]);
-  for(;;);                        // Terminer l'exécution 
+  for(;;);                        // Terminer l'exÃ©cution 
 }
 \end{lstlisting}
 
-Commençons par la fonction \textit{noyau\_exit()} qui permet de sortir du noyau (donc d'arrêter tout).
-Les interruptions sont désactivées et juste avant de sortir du noyau (en faisant une boucle infinie), on affiche le nombre de fois que chaque tâche a été activée grâce au tableau \textit{compteurs}.
+CommenÃ§ons par la fonction \textit{noyau\_exit()} qui permet de sortir du noyau (donc d'arrÃªter tout).
+Les interruptions sont dÃ©sactivÃ©es et juste avant de sortir du noyau (en faisant une boucle infinie), on affiche le nombre de fois que chaque tÃ¢che a Ã©tÃ© activÃ©e grÃ¢ce au tableau \textit{compteurs}.
 
 \subsection{Fonction fin\_tache()}
 \begin{lstlisting}
@@ -404,7 +404,7 @@ void  fin_tache(void)
 }
 \end{lstlisting}
 
-Cette fonction permet de rendre une tâche inactive alors qu'elle était active jusqu'alors. Pour cela, après avoir interdit les interruptions, on change son statut à "CREE" ce qui fait que la tâche n'est plus prête à être exécutée. Elle reste tout de même connue du noyau et est simplement en attente. On la retire de la FIFO grâce à notre fonction \textit{retire()} créée dans la première partie. A la fin, on lance la fonction \textit{schedule()} (que l'on étudiera par la suite) pour que les tâches suivantes puissent s'exécuter. En fait, on appelle cette fonction à la fin de chaque tâche pour y mettre fin.
+Cette fonction permet de rendre une tÃ¢che inactive alors qu'elle Ã©tait active jusqu'alors. Pour cela, aprÃ¨s avoir interdit les interruptions, on change son statut Ã  "CREE" ce qui fait que la tÃ¢che n'est plus prÃªte Ã  Ãªtre exÃ©cutÃ©e. Elle reste tout de mÃªme connue du noyau et est simplement en attente. On la retire de la FIFO grÃ¢ce Ã  notre fonction \textit{retire()} crÃ©Ã©e dans la premiÃ¨re partie. A la fin, on lance la fonction \textit{schedule()} (que l'on Ã©tudiera par la suite) pour que les tÃ¢ches suivantes puissent s'exÃ©cuter. En fait, on appelle cette fonction Ã  la fin de chaque tÃ¢che pour y mettre fin.
 
 \subsection{Fonction cree(TACHE\_ADR adr\_tache)}
 \begin{lstlisting}
@@ -433,7 +433,7 @@ uint16_t cree( TACHE_ADR adr_tache )
 }
 \end{lstlisting}
 
-La fonction \textit{cree} permet de créer une tâche et de lui allouer une pile et un numéro. On commence tout d'abord par incrémenter le nombre de tâches créées via la variable \textit{tache}. On récupère ensuite le contexte de la nouvelle tâche via le pointeur \textit{p}. Le pointeur de pile associé à la tâche pointe à l'adresse du sommet de pile (\textit{\_tos}) ce qui permet d'allouer une pile à la tâche. On décrémente ensuite le pointeur de pile par la taille maximale de la pile d'une tâche + la taille maximale de la pile IRQ par tâche. Ceci permet d'allouer assez de place pour la tâche suivante. Enfin, on enregistre l'adresse de début de la tâche et on passe le statut de la tâche à "CREE".	
+La fonction \textit{cree} permet de crÃ©er une tÃ¢che et de lui allouer une pile et un numÃ©ro. On commence tout d'abord par incrÃ©menter le nombre de tÃ¢ches crÃ©Ã©es via la variable \textit{tache}. On rÃ©cupÃ¨re ensuite le contexte de la nouvelle tÃ¢che via le pointeur \textit{p}. Le pointeur de pile associÃ© Ã  la tÃ¢che pointe Ã  l'adresse du sommet de pile (\textit{\_tos}) ce qui permet d'allouer une pile Ã  la tÃ¢che. On dÃ©crÃ©mente ensuite le pointeur de pile par la taille maximale de la pile d'une tÃ¢che + la taille maximale de la pile IRQ par tÃ¢che. Ceci permet d'allouer assez de place pour la tÃ¢che suivante. Enfin, on enregistre l'adresse de dÃ©but de la tÃ¢che et on passe le statut de la tÃ¢che Ã  "CREE".	
 
 
 \subsection{Fonction active( uint16\_t tache )}
@@ -455,9 +455,9 @@ void  active( uint16_t tache )
   _unlock_();                     // fin section critique 
 }
 \end{lstlisting}
-Cette fonction place une tâche dans la file d'attente des tâches éligibles.  Elle prend en entrée le numéro de la tâche.
+Cette fonction place une tÃ¢che dans la file d'attente des tÃ¢ches Ã©ligibles.  Elle prend en entrÃ©e le numÃ©ro de la tÃ¢che.
 
-On vérifie d'abord si la tâche est bien créée. Si c'est le cas, alors on va modifier le statut de la tâche (de CREE à PRET) et l'ajouter à notre FIFO (on rentre donc dans une section critique). On finit par lancer un \textit{schedule()} pour activer la prochaine tâche.
+On vÃ©rifie d'abord si la tÃ¢che est bien crÃ©Ã©e. Si c'est le cas, alors on va modifier le statut de la tÃ¢che (de CREE Ã  PRET) et l'ajouter Ã  notre FIFO (on rentre donc dans une section critique). On finit par lancer un \textit{schedule()} pour activer la prochaine tÃ¢che.
 
 
 \subsection{Fonction scheduler}
@@ -475,7 +475,7 @@ void __attribute__((naked)) scheduler( void )
       "mrs    r0, spsr\t\n"       // Sauvegarde de spsr_irq  
       "stmfd  sp!, {r0, lr}\t\n");// et de lr_irq  
 
-  if (_ack_timer)                 // Réinitialiser le timer si nécessaire  
+  if (_ack_timer)                 // RÃ©initialiser le timer si nÃ©cessaire  
   {
     register struct imx_timer* tim1 = (struct imx_timer *) TIMER1_BASE;
     tim1->tstat &=~TSTAT_COMP;
@@ -489,20 +489,20 @@ void __attribute__((naked)) scheduler( void )
   _tache_c = suivant();           // recherche du suivant  
   if (_tache_c == F_VIDE)
   {
-    printf("Plus rien à ordonnancer.\n");
+    printf("Plus rien Ã  ordonnancer.\n");
     noyau_exit();                 // Sortie du noyau  
   }
-  compteurs[_tache_c]++;          // Incrémenter le compteur d'activations   
+  compteurs[_tache_c]++;          // IncrÃ©menter le compteur d'activations   
   p = &_contexte[_tache_c];       // p pointe sur la nouvelle tache courante 
 
   if (p->status == PRET)          // tache prete ?  
   {
     sp = p->sp_ini;               // Charger sp_irq initial  
-    _set_arm_mode_(ARMMODE_SYS);  // Passer en mode système  
+    _set_arm_mode_(ARMMODE_SYS);  // Passer en mode systÃ¨me  
     sp = p->sp_ini - PILE_IRQ;    // Charger sp_sys initial  
     p->status = EXEC;             // status tache -> execution  
     _irq_enable_();               // autoriser les interuptions    
-    (*p->tache_adr)();            // lancement de la tâche  
+    (*p->tache_adr)();            // lancement de la tÃ¢che  
   }
   else
   {
@@ -520,7 +520,7 @@ void __attribute__((naked)) scheduler( void )
 }
 \end{lstlisting}
 
-Cette fonction fait office d'ordonnanceur de tâches. On rappelle que cette fonction s'exécute en mode IRQ. On commence tout d'abord par sauvegarder le contexte complet sur la pile IRQ car nous allons modifié le pointeur de pile \textit{sp} du mode IRQ dans la fonction. On exécute ensuite la fonction \textit{suivant()} pour récupérer la tâche à activer. Si cette tâche est vide alors il n'y a plus rien à ordonnancer donc on quitte le noyau. Sinon, on incrémente le compteur d'activations associé à cette tâche pour spécifier que cette tâche a été activée une fois de plus. Pour activer la tâche, il faut qu'elle soit en mode "PRET" sinon cela veut dire que la tâche est déjà en exécution. Dans ce deuxième cas, on met juste à jour le pointeur de pile \textit{sp} du mode IRQ avec la valeur courante du pointeur de pile associé à la tâche. Dans le premier cas, si la tâche est en mode "PRET" alors il faut que le pointeur de pile \textit{sp} en mode SYSTEM pointe sur la pile associé à la tâche. Pour cela, on passe en mode SYSTEM puis on affecte au pointeur de pile \textit{sp} du mode SYSTEM la valeur initiale du pointeur de pile associé à la tâche - la taille maximale de la pile IRQ par tâche. On passe ensuite le statut de la tâche en "EXEC" pour qu'elle soit exécutable puis on exécute la tâche. Enfin, on restaure le contexte complet depuis la pile IRQ.
+Cette fonction fait office d'ordonnanceur de tÃ¢ches. On rappelle que cette fonction s'exÃ©cute en mode IRQ. On commence tout d'abord par sauvegarder le contexte complet sur la pile IRQ car nous allons modifiÃ© le pointeur de pile \textit{sp} du mode IRQ dans la fonction. On exÃ©cute ensuite la fonction \textit{suivant()} pour rÃ©cupÃ©rer la tÃ¢che Ã  activer. Si cette tÃ¢che est vide alors il n'y a plus rien Ã  ordonnancer donc on quitte le noyau. Sinon, on incrÃ©mente le compteur d'activations associÃ© Ã  cette tÃ¢che pour spÃ©cifier que cette tÃ¢che a Ã©tÃ© activÃ©e une fois de plus. Pour activer la tÃ¢che, il faut qu'elle soit en mode "PRET" sinon cela veut dire que la tÃ¢che est dÃ©jÃ  en exÃ©cution. Dans ce deuxiÃ¨me cas, on met juste Ã  jour le pointeur de pile \textit{sp} du mode IRQ avec la valeur courante du pointeur de pile associÃ© Ã  la tÃ¢che. Dans le premier cas, si la tÃ¢che est en mode "PRET" alors il faut que le pointeur de pile \textit{sp} en mode SYSTEM pointe sur la pile associÃ© Ã  la tÃ¢che. Pour cela, on passe en mode SYSTEM puis on affecte au pointeur de pile \textit{sp} du mode SYSTEM la valeur initiale du pointeur de pile associÃ© Ã  la tÃ¢che - la taille maximale de la pile IRQ par tÃ¢che. On passe ensuite le statut de la tÃ¢che en "EXEC" pour qu'elle soit exÃ©cutable puis on exÃ©cute la tÃ¢che. Enfin, on restaure le contexte complet depuis la pile IRQ.
 
 
 
@@ -530,21 +530,21 @@ void  schedule( void )
 {
   _lock_();                         // Debut section critique  
 
-  // On simule une exception irq pour forcer un appel correct à scheduler(). 
+  // On simule une exception irq pour forcer un appel correct Ã  scheduler(). 
   _ack_timer = 0;
   _set_arm_mode_(ARMMODE_IRQ);      // Passer en mode IRQ  
   __asm__ __volatile__(
       "mrs  r0, cpsr\t\n"           // Sauvegarder cpsr dans spsr  
       "msr  spsr, r0\t\n"
       "add  lr, pc, #4\t\n"         // Sauvegarder pc dans lr et 																		// l'ajuster  
-      "b    scheduler\t\n"          // Saut à scheduler  
+      "b    scheduler\t\n"          // Saut Ã  scheduler  
       );
   _set_arm_mode_(ARMMODE_SYS);      // Repasser en mode system  
 
   _unlock_();                       // Fin section critique  
 }
 \end{lstlisting}
-La fonction \textit{schedule()} permet en fait de faire un appel à la fonction \textit{scheduler()}. Dans une section critique, elle commence par passer en mode IRQ (car la fonction \textit{scheduler} doit s'exécuter dans ce mode). Ensuite, en assembleur, on sauvegarde le registre \textbf{CPSR} dans \textbf{SPSR}. On rappelle que le registre \textbf{SPSR} est disponible dans chaque mode d'exception dont IRQ. Il est destiné à recevoir la sauvegarde du registre \textbf{CPSR} du programme interrompu. On poursuit en sauvegardant \textbf{pc} dans \textbf{lr} et on l'ajuste car après l'exécution de \textit{scheduler} il faut revenir à ce niveau. On lance ensuite \textit{scheduler} et on repasse en mode SYSTEM.
+La fonction \textit{schedule()} permet en fait de faire un appel Ã  la fonction \textit{scheduler()}. Dans une section critique, elle commence par passer en mode IRQ (car la fonction \textit{scheduler} doit s'exÃ©cuter dans ce mode). Ensuite, en assembleur, on sauvegarde le registre \textbf{CPSR} dans \textbf{SPSR}. On rappelle que le registre \textbf{SPSR} est disponible dans chaque mode d'exception dont IRQ. Il est destinÃ© Ã  recevoir la sauvegarde du registre \textbf{CPSR} du programme interrompu. On poursuit en sauvegardant \textbf{pc} dans \textbf{lr} et on l'ajuste car aprÃ¨s l'exÃ©cution de \textit{scheduler} il faut revenir Ã  ce niveau. On lance ensuite \textit{scheduler} et on repasse en mode SYSTEM.
 
 
 \subsection{Fonction start( TACHE\_ADR adr\_tache )}
@@ -563,14 +563,14 @@ void	start( TACHE_ADR adr_tache )
   _tache_c = 0;                     // initialisation de la tache courante 
   file_init();                      // initialisation de la file           
 
-  _tos = sp;                        // Haut de la pile des tâches 
+  _tos = sp;                        // Haut de la pile des tÃ¢ches 
   _set_arm_mode_(ARMMODE_IRQ);      // Passer en mode IRQ 
   sp = _tos;                        // sp_irq initial 
   _set_arm_mode_(ARMMODE_SYS);      // Repasser en mode SYS 
 
   _irq_disable_();                  // on interdit les interruptions 
 
-  // Initialisation du timer à 100 Hz 
+  // Initialisation du timer Ã  100 Hz 
   tim1->tcmp = 10000;
   tim1->tprer = 0;
   tim1->tctl |= TCTL_TEN | TCTL_IRQEN | TCTL_CLKSOURCE_PERCLK16;
@@ -582,8 +582,8 @@ void	start( TACHE_ADR adr_tache )
 }
 \end{lstlisting}
 
-Cette fonction permet de lancer la première tâche et donc de lancer le système.
-On commence par initialiser les statuts des tâches à "NCREE", la FIFO et la tâche courante à 0. L'adresse du sommet de la pile (\textit{\_tos}) est ensuite mis à jour avec la valeur du pointeur de pile \textit{sp} en mode SYSTEM car on s'apprête à lancer la première tâche. On passe ensuite en mode IRQ pour mettre à jour le pointeur de pile \textit{sp} du mode IRQ qui lui pointe vers l'adresse du sommet de la pile. On repasse en mode SYSTEM puis on crée et on active la tâche pour lancer le système.
+Cette fonction permet de lancer la premiÃ¨re tÃ¢che et donc de lancer le systÃ¨me.
+On commence par initialiser les statuts des tÃ¢ches Ã  "NCREE", la FIFO et la tÃ¢che courante Ã  0. L'adresse du sommet de la pile (\textit{\_tos}) est ensuite mis Ã  jour avec la valeur du pointeur de pile \textit{sp} en mode SYSTEM car on s'apprÃªte Ã  lancer la premiÃ¨re tÃ¢che. On passe ensuite en mode IRQ pour mettre Ã  jour le pointeur de pile \textit{sp} du mode IRQ qui lui pointe vers l'adresse du sommet de la pile. On repasse en mode SYSTEM puis on crÃ©e et on active la tÃ¢che pour lancer le systÃ¨me.
 
 
 
@@ -595,17 +595,17 @@ On commence par initialiser les statuts des tâches à "NCREE", la FIFO et la tâch
 
 \chapter{Rapport TP 2 - Partie 3 et 4}
 
-Le but de ce TP est d'implémenter des fonctions d'exclusions mutuelles afin que plusieurs tâches ne puissent pas accéder à une section critique en même temps au risque de créer un interblocage.  
+Le but de ce TP est d'implÃ©menter des fonctions d'exclusions mutuelles afin que plusieurs tÃ¢ches ne puissent pas accÃ©der Ã  une section critique en mÃªme temps au risque de crÃ©er un interblocage.  
 
 
 \section{Exercice 1 : Exclusion mutuelle}
 
-Tout d'abord, il est possible de faire du partage de ressources en agissant directement sur les tâches dépendantes en les faisant s'endormir ou se réveiller selon la situation. Dès qu'une tâche a terminée son accès à la mémoire partagée elle s'endort et réveille l'autre tâche afin qu'elle puisse y avoir accès et vis-versa.
+Tout d'abord, il est possible de faire du partage de ressources en agissant directement sur les tÃ¢ches dÃ©pendantes en les faisant s'endormir ou se rÃ©veiller selon la situation. DÃ¨s qu'une tÃ¢che a terminÃ©e son accÃ¨s Ã  la mÃ©moire partagÃ©e elle s'endort et rÃ©veille l'autre tÃ¢che afin qu'elle puisse y avoir accÃ¨s et vis-versa.
 
-\subsection{Suspension d'une tâche}
+\subsection{Suspension d'une tÃ¢che}
 
-L'endormissement d'une tâche se fait via la primitive \textit{dort()} du fichier \textbf{noyau.c}.
-Le but de cette fonction est de suspendre la tâche courante qui passe donc de l'état \textbf{EXEC} pour 'exécuter' à l'état \textbf{SUSP} pour 'suspendre'. La tâche est ensuite retirée de la file ds tâches et un appel à l'ordonnanceur est réalisé afin de charger la tâche suivante. De plus, toutes ces opérations constituent une section critique qui ne doivent pas être exécutées en même temps par plusieurs fonctions. C'est pour cela qu'il faut les protéger avec un \textit{mutex} ou un \textit{lock}.\newline
+L'endormissement d'une tÃ¢che se fait via la primitive \textit{dort()} du fichier \textbf{noyau.c}.
+Le but de cette fonction est de suspendre la tÃ¢che courante qui passe donc de l'Ã©tat \textbf{EXEC} pour 'exÃ©cuter' Ã  l'Ã©tat \textbf{SUSP} pour 'suspendre'. La tÃ¢che est ensuite retirÃ©e de la file des tÃ¢ches et un appel Ã  l'ordonnanceur est rÃ©alisÃ© afin de charger la tÃ¢che suivante. De plus, toutes ces opÃ©rations constituent une section critique qui ne doivent pas Ãªtre exÃ©cutÃ©es en mÃªme temps par plusieurs fonctions. C'est pour cela qu'il faut les protÃ©ger avec un \textit{mutex} ou un \textit{lock}.\newline
 
 Ci-dessous le code de la fonction \textit{dort()} :
 
@@ -617,17 +617,17 @@ void  dort(void)
 	CONTEXTE *p = &_contexte[_tache_c];
 	p->status = SUSP;	// suspension
 
-	retire(_tache_c);	// retirer la tâche
+	retire(_tache_c);	// retirer la tÃ¢che
 	schedule();
 
 	_unlock_();
 }
 \end{lstlisting}
 
-\subsection{Réveil d'une tâche}
+\subsection{RÃ©veil d'une tÃ¢che}
 
-Le réveil d'une tâche se fait via la primitive \textit{reveille()} du fichier \textbf{noyau.c}.
-Cette primitive fonctionne de la même manière que la fonction \textit{dort()} vue précédemment sauf que l'état de la tâche courante est passé en mode EXEC au lieu de SUSP afin que la tâche puisse être exécutable par l'ordonnanceur après l'avoir ajoutée dans la file.\newline
+Le rÃ©veil d'une tÃ¢che se fait via la primitive \textit{reveille()} du fichier \textbf{noyau.c}.
+Cette primitive fonctionne de la mÃªme maniÃ¨re que la fonction \textit{dort()} vue prÃ©cÃ©demment sauf que l'Ã©tat de la tÃ¢che courante est passÃ© en mode EXEC au lieu de SUSP afin que la tÃ¢che puisse Ãªtre exÃ©cutable par l'ordonnanceur aprÃ¨s l'avoir ajoutÃ©e dans la file.\newline
 
 Ci-dessous le code de la fonction \textit{reveille()} :
 
@@ -635,14 +635,14 @@ Ci-dessous le code de la fonction \textit{reveille()} :
 void reveille(uint16_t t)
 {
 
-	// on vérifie que la tâche existe et est suspendue
+	// on vÃ©rifie que la tÃ¢che existe et est suspendue
 	if(t > MAX_TACHES || _contexte[t].status != SUSP)	 
 		return;
 
 	_lock_();		// section critique
 
 	CONTEXTE *p = &_contexte[t];
-	p->status = EXEC;		// exécution
+	p->status = EXEC;		// exÃ©cution
 
 	ajoute(t);		// ajout dans la file
 	schedule();
@@ -651,30 +651,30 @@ void reveille(uint16_t t)
 }
 \end{lstlisting}
 
-\subsection{Modèle de communications producteur/consommateur.}
+\subsection{ModÃ¨le de communications producteur/consommateur.}
 
-Afin de tester nos deux primitives \textit{dort()} et \textit{reveille()}, nous avons implémenté le modèle de communications producteur/consommateur. Tout d'abord le programme comporte deux tâches; la première, le producteur, produit des entiers dans une file circulaire, la seconde, le consommateur, retire ces entiers de la file et les affiche.\newline
+Afin de tester nos deux primitives \textit{dort()} et \textit{reveille()}, nous avons implÃ©mentÃ© le modÃ¨le de communications producteur/consommateur. Tout d'abord le programme comporte deux tÃ¢ches; la premiÃ¨re, le producteur, produit des entiers dans une file circulaire, la seconde, le consommateur, retire ces entiers de la file et les affiche.\newline
 
-Pour faire cela, nous disposons d'une FIFO sous forme d'un tableau d'entiers de taille fixée (3 dans notre cas). On distingue 4 cas possibles :
+Pour faire cela, nous disposons d'une FIFO sous forme d'un tableau d'entiers de taille fixÃ©e (3 dans notre cas). On distingue 4 cas possibles :
 
-1) Le producteur a tellement produit que la file est pleine => il s'endort.
-2) Le producteur a produit au moins un entier, la file est non vide => il réveille le consommateur pour qu'il consomme un ou des entiers.
-3) La file est vide car le producteur n'y a rien produit => le consommateur s'endort.
-4) Il reste encore de la place dans la file, la file est non pleine => le producteur se réveille pour produire des entiers.
+1) Le producteur a tellement produit que la file est pleine => il s'endort.\newline
+2) Le producteur a produit au moins un entier, la file est non vide => il rÃ©veille le consommateur pour qu'il consomme un ou des entiers.\newline
+3) La file est vide car le producteur n'y a rien produit => le consommateur s'endort.\newline
+4) Il reste encore de la place dans la file, la file est non pleine => le producteur se rÃ©veille pour produire des entiers.\newline
 
-Pour gérer tous ces cas, nous possédons une variable qui compte le nombre de places libres et qui est, au début du programme, initialisée à la taille du tableau. Lorsque le nombre de places libres est supérieur ou égal à 1, le producteur produit un entier dans la file puis décrémente le nombre de places libres. De même, si le nombre de places libres est inférieur à la taille totale de la file alors le consommateur consomme un entier puis incrémente le nombre de places libres.\newline
-Le cas 1 se produit lorsque la file est pleine, c'est à dire lorsque le nombre de places libres est égal à 0. 
-Le cas 2 se produit lorsque la file est non vide,  c'est à dire lorsque le nombre de places libres est inférieur à la taille totale de la file.
-Le cas 3 se produit lorsque la file est vide,  c'est à dire lorsque le nombre de places libres est égal à la taille totale de la file.
-Le cas 4 se produit lorsque la file est non pleine, c'est à dire lorsque le nombre de places libres est égal à 1.\newline
+Pour gÃ©rer tous ces cas, nous possÃ©dons une variable qui compte le nombre de places libres et qui est, au dÃ©but du programme, initialisÃ©e Ã  la taille du tableau. Lorsque le nombre de places libres est supÃ©rieur ou Ã©gal Ã  1, le producteur produit un entier dans la file puis dÃ©crÃ©mente le nombre de places libres. De mÃªme, si le nombre de places libres est infÃ©rieur Ã  la taille totale de la file alors le consommateur consomme un entier puis incrÃ©mente le nombre de places libres.\newline
+Le cas 1 se produit lorsque la file est pleine, c'est Ã  dire lorsque le nombre de places libres est Ã©gal Ã  0. 
+Le cas 2 se produit lorsque la file est non vide,  c'est Ã  dire lorsque le nombre de places libres est infÃ©rieur Ã  la taille totale de la file.
+Le cas 3 se produit lorsque la file est vide,  c'est Ã  dire lorsque le nombre de places libres est Ã©gal Ã  la taille totale de la file.
+Le cas 4 se produit lorsque la file est non pleine, c'est Ã  dire lorsque le nombre de places libres est Ã©gal Ã  1.\newline
 
-En résumé, le producteur produit des entiers dans la file tant que celle-ci n'est pas pleine sinon il s'endort et le consommateur lit ces entiers tant que la file n'est pas vide sinon il s'endort. Lorsqu'il y a la moindre place dans la file, le consommateur réveille le producteur et lorsqu'il y a le moindre entier dans la file, le producteur réveille le consommateur.
-A noté aussi que l'accès à la file représente une zone critique qu'il faut protéger via un \textit{lock}.
-Initialement, seul le producteur est réveillé et le consommateur est endormi car il faut pouvoir produire au moins un entier.\newline
+En rÃ©sumÃ©, le producteur produit des entiers dans la file tant que celle-ci n'est pas pleine sinon il s'endort et le consommateur lit ces entiers tant que la file n'est pas vide sinon il s'endort. Lorsqu'il y a la moindre place dans la file, le consommateur rÃ©veille le producteur et lorsqu'il y a le moindre entier dans la file, le producteur rÃ©veille le consommateur.
+A notÃ© aussi que l'accÃ¨s Ã  la file reprÃ©sente une zone critique qu'il faut protÃ©ger via un \textit{lock}.
+Initialement, seul le producteur est rÃ©veillÃ© et le consommateur est endormi car il faut pouvoir produire au moins un entier.\newline
 
-Nous avons testé deux cas de figures, un cas où le producteur est plus rapide que le consommateur et le cas inverse.\newline
+Nous avons testÃ© deux cas de figures, un cas oÃ¹ le producteur est plus rapide que le consommateur et le cas inverse.\newline
 
-Ci-dessous le code du modèle de communications producteur/consommateur dans le cas où le consommateur est plus rapide que le producteur :
+Ci-dessous le code du modÃ¨le de communications producteur/consommateur dans le cas oÃ¹ le consommateur est plus rapide que le producteur :
 
 \begin{lstlisting}
 #define TAILLE_TABLEAU 3	
@@ -686,7 +686,7 @@ uint16_t prod, conso;
 uint16_t fifo[TAILLE_TABLEAU];	// la file
 uint16_t nb_places_libres = TAILLE_TABLEAU;
 
-TACHE	tacheStart(void)		// tâche de démarrage
+TACHE	tacheStart(void)		// tÃ¢che de dÃ©marrage
 {
   puts("------> EXEC tache Start");
   prod = cree(tacheProd);
@@ -698,7 +698,7 @@ TACHE	tacheStart(void)		// tâche de démarrage
   fin_tache();
 }
 
-TACHE	tacheProd(void)		// tâche producteur
+TACHE	tacheProd(void)		// tÃ¢che producteur
 {
   puts("------> EXEC tache Prod");
 
@@ -737,7 +737,7 @@ TACHE	tacheProd(void)		// tâche producteur
 		  puts("**PROD** -> Reveil du conso (Cas 2 : File non vide)\n");
 		  _unlock_();
 
-		  reveille(conso);		// consommateur se réveille
+		  reveille(conso);		// consommateur se rÃ©veille
 	  }
 
   }
@@ -745,7 +745,7 @@ TACHE	tacheProd(void)		// tâche producteur
   fin_tache();
 }
 
-TACHE	tacheConso(void)		// tâche consommateur
+TACHE	tacheConso(void)		// tÃ¢che consommateur
 {
   uint16_t k,i=0;
 
@@ -784,7 +784,7 @@ TACHE	tacheConso(void)		// tâche consommateur
 		  puts("**CONSO** -> Reveil prod (Cas 4 : File non pleine)\n");
 		  _unlock_();
 
-		  reveille(prod);		// producteur se réveille
+		  reveille(prod);		// producteur se rÃ©veille
 	  }
   }
 
@@ -805,10 +805,10 @@ int main()
 }
 \end{lstlisting}
 
-Le résultat obtenu lorsque le consommateur est plus rapide que le producteur est donné sur la figure \ref{conso_plus_rapide}.\newline
+Le rÃ©sultat obtenu lorsque le consommateur est plus rapide que le producteur est donnÃ© sur la figure \ref{conso_plus_rapide}.\newline
 
-Initialement, le producteur écrit l'entier 0 à la case 0 de la file puis il réveille le consommateur (Cas 2 : file non vide). Le consommateur qui est très rapide s'empresse aussitôt de lire l'entier 0 à la case 0 puis s'endort (Cas 3 : file vide). Ensuite, le producteur écrit l'entier 1 à la case 1 de la file puis il réveille le consommateur pour qu'il lise cet entier.\\
-Comme le consommateur est plus rapide que le producteur, nous obtenu une succession d'écriture/lecture. Dès qu'un entier est présent dans la file, le consommateur le lit. Cliquez sur l'animation suivante pour voir le résultat de notre programme (nécessite de lire ce PDF avec Adobe Acrobat Reader) :
+Initialement, le producteur Ã©crit l'entier 0 Ã  la case 0 de la file puis il rÃ©veille le consommateur (Cas 2 : file non vide). Le consommateur qui est trÃ¨s rapide s'empresse aussitÃ´t de lire l'entier 0 Ã  la case 0 puis s'endort (Cas 3 : file vide). Ensuite, le producteur Ã©crit l'entier 1 Ã  la case 1 de la file puis il rÃ©veille le consommateur pour qu'il lise cet entier.\\
+Comme le consommateur est plus rapide que le producteur, nous obtenu une succession d'Ã©criture/lecture. DÃ¨s qu'un entier est prÃ©sent dans la file, le consommateur le lit. Cliquez sur l'animation suivante pour voir le rÃ©sultat de notre programme (nÃ©cessite de lire ce PDF avec Adobe Acrobat Reader) :
 
 \begin{figure}[h]
 	  \centering
@@ -819,9 +819,9 @@ Comme le consommateur est plus rapide que le producteur, nous obtenu une success
 
 \newpage
 
-Nous pouvons aussi tester le cas où le producteur est plus rapide que le consommateur (figure \ref{prod_plus_rapide}).\newline
+Nous pouvons aussi tester le cas oÃ¹ le producteur est plus rapide que le consommateur (figure \ref{prod_plus_rapide}).\newline
 
-Dans ce cas, le producteur enchaîne deux écritures à la suite (entier 0 à la case 0 et entier 1 à la case 1) car il est plus rapide que le consommateur qui n'a pas le temps de lire le premier entier. Après cela, le consommateur peut enfin lire l'entier 0 à la case 0 puis le producteur reprend la main et enchaîne de nouveau deux écritures (entier 2 à la case 2 et entier 3 à la case 0). Le consommateur se réveille et lit donc l'entier 1 à la case 1, on se retrouve donc dans le cas 4 (file non pleine). Le producteur reprend la main et écrit l'entier 4 à la case 1 qui vient d'être libérée par le consommateur puis il s'endort (Cas 1 : file pleine). Le producteur aura toujours une longueur d'avance sur le consommateur et sera souvent endormi à cause d'une file pleine. Cliquez sur l'animation suivante pour voir le résultat de notre programme (nécessite de lire ce PDF avec Adobe Acrobat Reader) :
+Dans ce cas, le producteur enchaÃ®ne deux Ã©critures Ã  la suite (entier 0 Ã  la case 0 et entier 1 Ã  la case 1) car il est plus rapide que le consommateur qui n'a pas le temps de lire le premier entier. AprÃ¨s cela, le consommateur peut enfin lire l'entier 0 Ã  la case 0 puis le producteur reprend la main et enchaÃ®ne de nouveau deux Ã©critures (entier 2 Ã  la case 2 et entier 3 Ã  la case 0). Le consommateur se rÃ©veille et lit donc l'entier 1 Ã  la case 1, on se retrouve donc dans le cas 4 (file non pleine). Le producteur reprend la main et Ã©crit l'entier 4 Ã  la case 1 qui vient d'Ãªtre libÃ©rÃ©e par le consommateur puis il s'endort (Cas 1 : file pleine). Le producteur aura toujours une longueur d'avance sur le consommateur et sera souvent endormi Ã  cause d'une file pleine. Cliquez sur l'animation suivante pour voir le rÃ©sultat de notre programme (nÃ©cessite de lire ce PDF avec Adobe Acrobat Reader) :
 
 \begin{figure}[h]
 	  \centering
@@ -850,15 +850,15 @@ Dans ce cas, le producteur enchaîne deux écritures à la suite (entier 0 à la cas
 
 \newpage
 
-La méthode d'exclusion mutuelle présentée précédemment avec endormissement et réveil des tâches peut poser problème dans le cas général. En effet, nous ne sommes pas à l'abri d'un interblocage des deux tâches si elles sont toutes les deux endormies et qu'elles attendent d'être réveillées. Ceci peut arriver puisque rien ne garantit qu'un signal de réveil ne soit pas interrompue. Une première tâche pourrait en principe envoyer son signal de réveil avant que la seconde tâche s'endorme ce qui engendrerait une attente infinie.
+La mÃ©thode d'exclusion mutuelle prÃ©sentÃ©e prÃ©cÃ©demment avec endormissement et rÃ©veil des tÃ¢ches peut poser problÃ¨me dans le cas gÃ©nÃ©ral. En effet, nous ne sommes pas Ã  l'abri d'un interblocage des deux tÃ¢ches si elles sont toutes les deux endormies et qu'elles attendent d'Ãªtre rÃ©veillÃ©es. Ceci peut arriver puisque rien ne garantit qu'un signal de rÃ©veil ne soit pas interrompue. Une premiÃ¨re tÃ¢che pourrait en principe envoyer son signal de rÃ©veil avant que la seconde tÃ¢che s'endorme ce qui engendrerait une attente infinie.
 
-\section{Exercice 2 : Sémaphores}
+\section{Exercice 2 : SÃ©maphores}
 
-Un deuxième outil plus efficace que le précédent pour gérer les problèmes de ressources partagées repose sur les sémaphores. Ce mécanisme permet de gérer l'envoi des signaux indépendamment de l'exécution des tâches.
+Un deuxiÃ¨me outil plus efficace que le prÃ©cÃ©dent pour gÃ©rer les problÃ¨mes de ressources partagÃ©es repose sur les sÃ©maphores. Ce mÃ©canisme permet de gÃ©rer l'envoi des signaux indÃ©pendamment de l'exÃ©cution des tÃ¢ches.
 
-\subsection{Implémentation}
+\subsection{ImplÃ©mentation}
 
-Un sémaphore est composé d'une FIFO de tâches en attente et d'une valeur représentant le nombre de ressources disponibles. Une FIFO est une structure circulaire composée d'une file de tâches, de l'indice de début de la file et de l'indice de fin de la file. Dans cet exercice, nous considérons un tableau de sémaphores. Ci-dessous le fichier header \textit{sem.h} :\newline
+Un sÃ©maphore est composÃ© d'une FIFO de tÃ¢ches en attente et d'une valeur reprÃ©sentant le nombre de ressources disponibles. Une FIFO est une structure circulaire composÃ©e d'une file de tÃ¢ches, de l'indice de dÃ©but de la file et de l'indice de fin de la file. Dans cet exercice, nous considÃ©rons un tableau de sÃ©maphores. Ci-dessous le fichier header \textit{sem.h} :\newline
 
 \begin{lstlisting}
 #ifndef SEM_H_
@@ -875,8 +875,8 @@ typedef struct {
 } FIFO;
 
 typedef struct {
-	FIFO file;     // File circulaire des tâches en attente 
-	short valeur ; // compteur du sémaphore e(s) 
+	FIFO file;     // File circulaire des tÃ¢ches en attente 
+	short valeur ; // compteur du sÃ©maphore e(s) 
 } SEMAPHORE ;
 
 void s_init( void );
@@ -889,9 +889,9 @@ void s_signal ( ushort n );
 \end{lstlisting}
 
 
-Un sémaphore se manipule via les cinq fonctions suivantes : \textit{s\_init}, \textit{s\_cree}, \textit{s\_close}, \textit{s\_wait} et \textit{s\_signal}, toutes définies dans le fichier \textbf{sem.c}.\newline
+Un sÃ©maphore se manipule via les cinq fonctions suivantes : \textit{s\_init}, \textit{s\_cree}, \textit{s\_close}, \textit{s\_wait} et \textit{s\_signal}, toutes dÃ©finies dans le fichier \textbf{sem.c}.\newline
 
-Tout d'abord la fonction \textit{s\_init} permet d'initialiser la valeur de notre tableau de sémaphores. Ici, nous avons choisi d'initialiser toutes nos sémaphores à -1000, nombre que nous considérons, dans cet exercice, inatteignable.\newline
+Tout d'abord la fonction \textit{s\_init} permet d'initialiser la valeur de notre tableau de sÃ©maphores. Ici, nous avons choisi d'initialiser toutes nos sÃ©maphores Ã  -1000, nombre que nous considÃ©rons, dans cet exercice, inatteignable.\newline
 
 \begin{lstlisting}
 SEMAPHORE _sem[MAX_SEM];
@@ -902,19 +902,19 @@ void s_init( void )
 
 	for(i = 0; i < MAX_SEM; i++)
 	{
-		_sem[i].valeur = -1000;		// non crée
+		_sem[i].valeur = -1000;		// non crÃ©e
 	}
 }
 \end{lstlisting}
 
-La seconde fonction \textit{s\_cree} nous sert à créer un sémaphore et à l'initialiser à une certaine valeur donnée.\newline
+La seconde fonction \textit{s\_cree} nous sert Ã  crÃ©er un sÃ©maphore et Ã  l'initialiser Ã  une certaine valeur donnÃ©e.\newline
 
 \begin{lstlisting}
 ushort s_cree( short v )
 {
 	int i = 0;
 
-  // si la valeur du sémaphore dépasse le nombre de tâches
+  // si la valeur du sÃ©maphore dÃ©passe le nombre de tÃ¢ches
 	if (v >= MAX_TACHES) 
 		return -1;			
 
@@ -925,7 +925,7 @@ ushort s_cree( short v )
 	if(i >= MAX_SEM)	// si on n'a pas trouver d'emplacement libre
 		return -1;			
 
-	// initialisation du sémaphore à la valeur v
+	// initialisation du sÃ©maphore Ã  la valeur v
 	_sem[i].valeur = v;	
 	_sem[i].file.debut_file = 0;	
 	_sem[i].file.fin_file = 0;
@@ -934,7 +934,7 @@ ushort s_cree( short v )
 }
 \end{lstlisting}
 
-La troisième fonction \textit{s\_close} réinitialise une sémaphore donnée. La valeur du sémaphore est remise à -1000 pour qu'on le considère non crée.\newline
+La troisiÃ¨me fonction \textit{s\_close} rÃ©initialise un sÃ©maphore donnÃ©. La valeur du sÃ©maphore est remise Ã  -1000 pour qu'on le considÃ¨re non crÃ©e.\newline
 
 \begin{lstlisting}
 void s_close( ushort n )
@@ -946,7 +946,7 @@ void s_close( ushort n )
 }
 \end{lstlisting}
 
-La fonction \textit{s\_wait} implémente l'opération P qui permet de prendre une ressource associée au sémaphore. On décrémente donc la valeur du sémaphore et si celle-ci est strictement inférieure à 0 alors on bloque/endort la tâche ayant effectué la requête et on la met dans la file des tâches en attente associée au sémaphore. Dans notre fonction les tâches sont ajoutées en fin de file.\newline
+La fonction \textit{s\_wait} implÃ©mente l'opÃ©ration P qui permet de prendre une ressource associÃ©e au sÃ©maphore. On dÃ©crÃ©mente donc la valeur du sÃ©maphore et si celle-ci est strictement infÃ©rieure Ã  0 alors on bloque/endort la tÃ¢che ayant effectuÃ© la requÃªte et on la met dans la file des tÃ¢ches en attente associÃ©e au sÃ©maphore. Dans notre fonction les tÃ¢ches sont ajoutÃ©es en fin de file.\newline
 
 \begin{lstlisting}
 void s_wait( ushort n )
@@ -954,35 +954,35 @@ void s_wait( ushort n )
 	if(n >= MAX_SEM || n < 0)
 		return;
 
-	// si le sémaphore n'est pas crée
+	// si le sÃ©maphore n'est pas crÃ©e
 	if(_sem[n].valeur == -1000)
 		return;
 
-	// zone critique car plusieurs tâches ne doivent pas modifier le sémaphore en même temps
+	// zone critique car plusieurs tÃ¢ches ne doivent pas modifier le sÃ©maphore en mÃªme temps
 	_lock_();			
 
-	_sem[n].valeur--;				// décrémentation du sémaphore
+	_sem[n].valeur--;				// dÃ©crÃ©mentation du sÃ©maphore
 
 	if(_sem[n].valeur < 0)
 	{
-		// on ajoute la tâche courante à la fin de la file
+		// on ajoute la tÃ¢che courante Ã  la fin de la file
 		_sem[n].file.taches[_sem[n].file.fin_file] = _tache_c;	
 			
-		// incrémente la fin de la file
+		// incrÃ©mente la fin de la file
 		_sem[n].file.fin_file = _sem[n].file.fin_file + 1;	
 			
-		// on met à jour la fin de la file circulaire
-		// si fin_file < MAX_TACHES alors on ne change rien sinon on revient au début de la file
+		// on met Ã  jour la fin de la file circulaire
+		// si fin_file < MAX_TACHES alors on ne change rien sinon on revient au dÃ©but de la file
 		_sem[n].file.fin_file = (_sem[n].file.fin_file) % MAX_TACHES; 
 
-		dort();	// la tâche courante s'endort
+		dort();	// la tÃ¢che courante s'endort
 	}
 
 	_unlock_();
 }
 \end{lstlisting}
 
-Enfin, la fonction \textit{s\_signal} implémente l'opération V qui permet de libérer une ressource associée au sémaphore. On incrémente donc la valeur du sémaphore et si celle-ci est inférieure ou égale à 0 alors on extrait une tâche de la file des tâches en attente et on la libère/réveille. Dans notre fonction les tâches sont extraites au début de file.\newline
+Enfin, la fonction \textit{s\_signal} implÃ©mente l'opÃ©ration V qui permet de libÃ©rer une ressource associÃ©e au sÃ©maphore. On incrÃ©mente donc la valeur du sÃ©maphore et si celle-ci est infÃ©rieure ou Ã©gale Ã  0 alors on extrait une tÃ¢che de la file des tÃ¢ches en attente et on la libÃ¨re/rÃ©veille. Dans notre fonction les tÃ¢ches sont extraites au dÃ©but de file.\newline
 
 \begin{lstlisting}
 void s_signal ( ushort n )
@@ -992,28 +992,28 @@ void s_signal ( ushort n )
 	if(n >= MAX_SEM || n < 0)
 		return;
 
-	// si le sémaphore n'est pas crée
+	// si le sÃ©maphore n'est pas crÃ©e
 	if(_sem[n].valeur == -1000)		
 		return;
 
-	// zone critique car plusieurs tâches ne doivent pas modifier le sémaphore en même temps
+	// zone critique car plusieurs tÃ¢ches ne doivent pas modifier le sÃ©maphore en mÃªme temps
 	_lock_();						
 
-	_sem[n].valeur++;				// incrémentation du sémaphore
+	_sem[n].valeur++;				// incrÃ©mentation du sÃ©maphore
 
 	if(_sem[n].valeur <= 0)
 	{
-		// on extrait une tâche au début de la file
+		// on extrait une tÃ¢che au dÃ©but de la file
 		tache = _sem[n].file.taches[_sem[n].file.debut_file]; 	
 		
-		// incrémente le début de la file
+		// incrÃ©mente le dÃ©but de la file
 		_sem[n].file.debut_file = _sem[n].file.debut_file + 1;		
 		
-		// on met à jour le début de la file circulaire
-		// si debut_file < MAX_TACHES alors on ne change rien sinon on va à la fin de la file
+		// on met Ã  jour le dÃ©but de la file circulaire
+		// si debut_file < MAX_TACHES alors on ne change rien sinon on va Ã  la fin de la file
 		_sem[n].file.debut_file = (_sem[n].file.debut_file) % MAX_TACHES; 
 
-		reveille(tache);	// réveil de la tâche
+		reveille(tache);	// rÃ©veil de la tÃ¢che
 	}
 
 	_unlock_();
@@ -1022,7 +1022,7 @@ void s_signal ( ushort n )
 
 \subsection{Producteur/Consommateur}
 
-Afin de tester nos sémaphores, nous avons ré-implémenté le problème du producteur/consommateur en remplaçant les primitives \textit{dort()} et \textit{reveille()} par respectivement \textit{s\_wait} et \textit{s\_signal}. Nous mettons en place deux sémaphores associés respectivement au producteur et au consommateur qu'on initialise à 0. Ceci permet au producteur d'être bloqué si la file est pleine et au consommateur d'être réveillé si il y a un entier à consommer. Le principe reste exactement le même que dans l'exercice précédent. 
+Afin de tester nos sÃ©maphores, nous avons rÃ©-implÃ©mentÃ© le problÃ¨me du producteur/consommateur en remplaÃ§ant les primitives \textit{dort()} et \textit{reveille()} par respectivement \textit{s\_wait} et \textit{s\_signal}. Nous mettons en place deux sÃ©maphores associÃ©s respectivement au producteur et au consommateur qu'on initialise Ã  0. Ceci permet au producteur d'Ãªtre bloquÃ© si la file est pleine et au consommateur d'Ãªtre rÃ©veillÃ© si il y a un entier Ã  consommer. Le principe reste exactement le mÃªme que dans l'exercice prÃ©cÃ©dent. 
 
 \begin{lstlisting}
 #define TAILLE_TABLEAU 3	
@@ -1035,7 +1035,7 @@ uint16_t fifo[TAILLE_TABLEAU];	// la file
 uint16_t nb_places_libres = TAILLE_TABLEAU;
 ushort sem1, sem2;	// sem1 => producteur, sem2 => consommateur
 
-TACHE	tacheStart(void)		// tâche de démarrage
+TACHE	tacheStart(void)		// tÃ¢che de dÃ©marrage
 {
   puts("------> EXEC tache Start");
   prod = cree(tacheProd);
@@ -1047,7 +1047,7 @@ TACHE	tacheStart(void)		// tâche de démarrage
   fin_tache();
 }
 
-TACHE	tacheProd(void)		// tâche producteur
+TACHE	tacheProd(void)		// tÃ¢che producteur
 {
   puts("------> EXEC tache Prod");
 
@@ -1094,7 +1094,7 @@ TACHE	tacheProd(void)		// tâche producteur
   fin_tache();
 }
 
-TACHE	tacheConso(void)		// tâche consommateur
+TACHE	tacheConso(void)		// tÃ¢che consommateur
 {
   uint16_t k,i=0;
 
@@ -1158,12 +1158,12 @@ int main()
 }
 \end{lstlisting}
 
-Le résultat obtenu lorsque le consommateur est plus rapide que le producteur est exactement le même que sur la figure \ref{conso_plus_rapide}.
-De même, dans le cas où le producteur est plus rapide que le consommateur, nous obtenons exactement le même résultat que dans la figure \ref{prod_plus_rapide}.\newline
+Le rÃ©sultat obtenu lorsque le consommateur est plus rapide que le producteur est exactement le mÃªme que sur la figure \ref{conso_plus_rapide}.
+De mÃªme, dans le cas oÃ¹ le producteur est plus rapide que le consommateur, nous obtenons exactement le mÃªme rÃ©sultat que dans la figure \ref{prod_plus_rapide}.\newline
 
 \subsection{2 Producteurs/ 1 Consommateur}
 
-Nous avons également testé nos sémaphores en ajoutant un producteur au problème précédent. Pour cela, il faut mettre en place un sémaphore binaire ou mutex qu'on initialise à 1 et qui empêche les deux producteurs de produire en même temps. On bloque le mutex avant production et on le libère après. De plus, il faut mettre en place des variables globales pour les indices et les valeurs de la file pour que les producteurs manipulent les mêmes données.\newline
+Nous avons Ã©galement testÃ© nos sÃ©maphores en ajoutant un producteur au problÃ¨me prÃ©cÃ©dent. Pour cela, il faut mettre en place un sÃ©maphore binaire ou mutex qu'on initialise Ã  1 et qui empÃªche les deux producteurs de produire en mÃªme temps. On bloque le mutex avant production et on le libÃ¨re aprÃ¨s. De plus, il faut mettre en place des variables globales pour les indices et les valeurs de la file pour que les producteurs manipulent les mÃªmes donnÃ©es.\newline
 
 \begin{lstlisting}
 #define TAILLE_TABLEAU 3
@@ -1178,7 +1178,7 @@ uint16_t nb_places_libres = TAILLE_TABLEAU;
 ushort sem1, sem2, semMutexProd; 
 
 // variables globales pour les producteurs
-// l => indice de la file et j => valeur à cet indice
+// l => indice de la file et j => valeur Ã  cet indice
 int l = 0, j = 0; 
 
 TACHE	tacheStart(void)
@@ -1207,7 +1207,7 @@ TACHE	tacheProd1(void)
 	  //for (k=0; k<30000; k++);
 	  for (k=0; k<10000; k++);
 
-	  s_wait(semMutexProd);	// P du mutex (entrée de la zone critique) 
+	  s_wait(semMutexProd);	// P du mutex (entrÃ©e de la zone critique) 
 
 	  if (nb_places_libres>=1)
 	  {
@@ -1252,7 +1252,7 @@ TACHE	tacheProd2(void)
 	  //for (k=0; k<30000; k++);
 	  for (k=0; k<10000; k++);
 
-	  s_wait(semMutexProd); // P du mutex (entrée de la zone critique) 
+	  s_wait(semMutexProd); // P du mutex (entrÃ©e de la zone critique) 
 
 	  if (nb_places_libres>=1)
 	  {
@@ -1338,7 +1338,7 @@ int main()
   sem1 = s_cree(0);		// prod
   sem2 = s_cree(0);		// conso
 	
-	// mutex entre les 2 producteurs pour les empêcher de produire en même temps
+	// mutex entre les 2 producteurs pour les empÃªcher de produire en mÃªme temps
   semMutexProd = s_cree(1);	
 		
   start(tacheStart);
@@ -1347,12 +1347,12 @@ int main()
 }
 \end{lstlisting}
 
-Nous avons testé deux configurations, l'une où les producteurs sont plus rapides que le consommateur et la deuxième où le consommateur est plus rapide que les producteurs. On suppose que les producteurs ont la même vitesse.\newline
+Nous avons testÃ© deux configurations, l'une oÃ¹ les producteurs sont plus rapides que le consommateur et la deuxiÃ¨me oÃ¹ le consommateur est plus rapide que les producteurs. On suppose que les producteurs ont la mÃªme vitesse.\newline
 
-Le résultat dans le premier cas est visible sur la figure \ref{prod_plus_rapide_sem_2prod_meme_vitesse_1conso}. 
-On voit bien dans ce cas que le producteur 1 et 2 ne produisent pas en même temps mais à tour de rôle. Comme le consommateur est plus lent il consomme les entiers avec un retard de 2 indices. Par exemple, le producteur 2 écrit l'entier 2 à la case 2 et juste après le consommateur lit l'entier 0 à la case 0 (2 écritures ont été faite entre temps à cause de la rapidité des producteurs).\newline
+Le rÃ©sultat dans le premier cas est visible sur la figure \ref{prod_plus_rapide_sem_2prod_meme_vitesse_1conso}. 
+On voit bien dans ce cas que le producteur 1 et 2 ne produisent pas en mÃªme temps mais Ã  tour de rÃ´le. Comme le consommateur est plus lent il consomme les entiers avec un retard de 2 indices. Par exemple, le producteur 2 Ã©crit l'entier 2 Ã  la case 2 et juste aprÃ¨s le consommateur lit l'entier 0 Ã  la case 0 (2 Ã©critures ont Ã©tÃ© faite entre temps Ã  cause de la rapiditÃ© des producteurs).\newline
 
-Dans le cas où le consommateur est plus rapide (figure \ref{conso_plus_rapide_sem_2prod_meme_vitesse_1conso}), on remarque qu'il n'a pas de retard, il consomme les entiers directement après production ce qui est tout à fait cohérent.
+Dans le cas oÃ¹ le consommateur est plus rapide (figure \ref{conso_plus_rapide_sem_2prod_meme_vitesse_1conso}), on remarque qu'il n'a pas de retard, il consomme les entiers directement aprÃ¨s production ce qui est tout Ã  fait cohÃ©rent.
 
 \newpage
 
@@ -1376,7 +1376,7 @@ Dans le cas où le consommateur est plus rapide (figure \ref{conso_plus_rapide_se
 
 \subsection{1 Producteur/ 2 Consommateurs}
 
-Nous avons également testé le cas opposé où il y a cette fois-ci un producteur et deux consommateurs. Le principe est exactement le même que précédemment sauf que le mutex s'applique aux deux consommateurs avant et après lecture d'un entier. De même que précédemment, les consommateurs partagent des variables globales. On suppose que les consommateurs ont la même vitesse.\newline
+Nous avons Ã©galement testÃ© le cas opposÃ© oÃ¹ il y a cette fois-ci un producteur et deux consommateurs. Le principe est exactement le mÃªme que prÃ©cÃ©demment sauf que le mutex s'applique aux deux consommateurs avant et aprÃ¨s lecture d'un entier. De mÃªme que prÃ©cÃ©demment, les consommateurs partagent des variables globales. On suppose que les consommateurs ont la mÃªme vitesse.\newline
 
 \begin{lstlisting}
 #define TAILLE_TABLEAU 3
@@ -1391,7 +1391,7 @@ uint16_t nb_places_libres = TAILLE_TABLEAU;
 ushort sem1, sem2, semMutexConso;
 
 // variables globales pour les producteurs
-// l => indice de la file et j => valeur à cet indice
+// l => indice de la file et j => valeur Ã  cet indice
 int l = 0, j = 0;
 
 TACHE	tacheStart(void)
@@ -1464,7 +1464,7 @@ TACHE	tacheConso1(void)
 	  for (k=0; k<10000; k++);
 
 
-	  s_wait(semMutexConso); // P du mutex (entrée de la zone critique) 
+	  s_wait(semMutexConso); // P du mutex (entrÃ©e de la zone critique) 
 
 	  if (nb_places_libres==TAILLE_TABLEAU)
 	  {
@@ -1509,7 +1509,7 @@ TACHE	tacheConso2(void)
 	  for (k=0; k<10000; k++);
 
 
-	  s_wait(semMutexConso); // P du mutex (entrée de la zone critique) 
+	  s_wait(semMutexConso); // P du mutex (entrÃ©e de la zone critique) 
 
 	  if (nb_places_libres==TAILLE_TABLEAU)
 	  {
@@ -1554,7 +1554,7 @@ int main()
   sem1 = s_cree(0);		// prod
   sem2 = s_cree(0);		// conso
 	
-	// mutex entre les 2 consommateurs pour les empêcher de consommer en même temps
+	// mutex entre les 2 consommateurs pour les empÃªcher de consommer en mÃªme temps
   semMutexConso = s_cree(1);		
 	
   start(tacheStart);
@@ -1563,8 +1563,8 @@ int main()
 }
 \end{lstlisting}
 
-Le résultat dans le cas où le producteur est plus rapide que les consommateurs est visible sur la figure \ref{prod_plus_rapide_sem_2conso_meme_vitesse_1prod}. Les consommateurs ont tendance à être en retard d'un ou deux indices.\newline
-Pour le cas où les consommateurs sont plus rapides que le producteur (figure \ref{conso_plus_rapide_sem_2conso_meme_vitesse_1prod}), la consommation se fait dans l'ordre juste après les productions comme précédemment.
+Le rÃ©sultat dans le cas oÃ¹ le producteur est plus rapide que les consommateurs est visible sur la figure \ref{prod_plus_rapide_sem_2conso_meme_vitesse_1prod}. Les consommateurs ont tendance Ã  Ãªtre en retard d'un ou deux indices.\newline
+Pour le cas oÃ¹ les consommateurs sont plus rapides que le producteur (figure \ref{conso_plus_rapide_sem_2conso_meme_vitesse_1prod}), la consommation se fait dans l'ordre juste aprÃ¨s les productions comme prÃ©cÃ©demment.
 
 \newpage
 
@@ -1588,7 +1588,7 @@ Pour le cas où les consommateurs sont plus rapides que le producteur (figure \re
 
 \subsection{2 Producteurs/ 2 Consommateurs}
 
-Finalement, nous avons implémenté le cas avec 2 producteurs et 2 consommateurs. Dans cette exemple, nous avons besoin des 2 mutex précédents, un pour empêcher les producteurs de produire en même temps et un autre pour empêcher les consommateurs de produire en même temps. Les producteurs partagent également des variables globales pour la file d'entiers et de même pour les consommateurs. Le principe reste exactement le même que précédemment.\newline
+Finalement, nous avons implÃ©mentÃ© le cas avec 2 producteurs et 2 consommateurs. Dans cette exemple, nous avons besoin des 2 mutex prÃ©cÃ©dents, un pour empÃªcher les producteurs de produire en mÃªme temps et un autre pour empÃªcher les consommateurs de produire en mÃªme temps. Les producteurs partagent Ã©galement des variables globales pour la file d'entiers et de mÃªme pour les consommateurs. Le principe reste exactement le mÃªme que prÃ©cÃ©demment.\newline
 
 \begin{lstlisting}
 #define TAILLE_TABLEAU 3
@@ -1635,7 +1635,7 @@ TACHE	tacheProd1(void)
 	  for (k=0; k<30000; k++);
 	  //for (k=0; k<10000; k++);
 
-	  s_wait(semMutexProd);// P du mutex (entrée de la zone critique)
+	  s_wait(semMutexProd);// P du mutex (entrÃ©e de la zone critique)
 
 	  if (nb_places_libres>=1)
 	  {
@@ -1680,7 +1680,7 @@ TACHE	tacheProd2(void)
 	  for (k=0; k<30000; k++);
 	  //for (k=0; k<10000; k++);
 
-	  s_wait(semMutexProd);// P du mutex (entrée de la zone critique)
+	  s_wait(semMutexProd);// P du mutex (entrÃ©e de la zone critique)
 
 	  if (nb_places_libres>=1)
 	  {
@@ -1729,7 +1729,7 @@ TACHE	tacheConso1(void)
 	  for (k=0; k<10000; k++);
 
 
-	  s_wait(semMutexConso); // P du mutex (entrée de la zone critique)
+	  s_wait(semMutexConso); // P du mutex (entrÃ©e de la zone critique)
 
 	  if (nb_places_libres==TAILLE_TABLEAU)
 	  {
@@ -1773,7 +1773,7 @@ TACHE	tacheConso2(void)
 	  //for (k=0; k<30000; k++);
 	  for (k=0; k<10000; k++);
 
-	  s_wait(semMutexConso); // P du mutex (entrée de la zone critique)
+	  s_wait(semMutexConso); // P du mutex (entrÃ©e de la zone critique)
 
 	  if (nb_places_libres==TAILLE_TABLEAU)
 	  {
@@ -1818,10 +1818,10 @@ int main()
   sem1 = s_cree(0);		// prod
   sem2 = s_cree(0);		// conso
   
-  // mutex entre les 2 consommateurs pour les empêcher de consommer en même temps
+  // mutex entre les 2 consommateurs pour les empÃªcher de consommer en mÃªme temps
   semMutexConso = s_cree(1);
   
-  // mutex entre les 2 producteurs pour les empêcher de produire en même temps
+  // mutex entre les 2 producteurs pour les empÃªcher de produire en mÃªme temps
   semMutexProd = s_cree(1);		
 
   start(tacheStart);
@@ -1830,13 +1830,13 @@ int main()
 }
 \end{lstlisting}
 
-Pour cette exemple, nous avons testé trois configurations différentes :\newline 
+Pour cette exemple, nous avons testÃ© trois configurations diffÃ©rentes :\newline 
 
-1) Les producteurs et consommateurs ont tous la même vitesse (figure \ref{prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK}).
+1) Les producteurs et consommateurs ont tous la mÃªme vitesse (figure \ref{prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK}).
 
-2) Les producteurs ont la même vitesse mais sont plus rapides que les consommateurs qui ont la même vitesse également (figure \ref{prod_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK}).
+2) Les producteurs ont la mÃªme vitesse mais sont plus rapides que les consommateurs qui ont la mÃªme vitesse Ã©galement (figure \ref{prod_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK}).
 
-3) Les consommateurs ont la même vitesse mais sont plus rapides que les producteurs qui ont la même vitesse également (figure \ref{conso_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse}).
+3) Les consommateurs ont la mÃªme vitesse mais sont plus rapides que les producteurs qui ont la mÃªme vitesse Ã©galement (figure \ref{conso_plus_rapide_sem_2prod_meme_vitesse_2conso_meme_vitesse}).
 
 
 
@@ -1845,7 +1845,7 @@ Pour cette exemple, nous avons testé trois configurations différentes :\newline
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.35\textwidth]{screens/prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK.png}
-		\caption{2 producteurs et 2 consommateurs à la même vitesse}
+		\caption{2 producteurs et 2 consommateurs Ã  la mÃªme vitesse}
 		\label{prod_conso_meme_vitesse_sem_2prod_meme_vitesse_2conso_meme_vitesse_TRAFIK}
 \end{figure}
 
@@ -1875,11 +1875,11 @@ Pour cette exemple, nous avons testé trois configurations différentes :\newline
 
 
 \chapter{Rapport TP3 - Parties 5 et 6}
-\section{5ème partie : Le dîner des philosophes}
+\section{5Ã¨me partie : Le dÃ®ner des philosophes}
 
-Le dîner des philosophes est un problème de synchronisation très connu. Cinq philosophes sont réunis autour d'une table circulaire pour dîner. Cinq couverts composés d'une assiette et d'une fourchette sont disposés autour de la table. Chaque philosophe a besoin de deux fourchettes pour manger son plat, la fourchette de gauche et la fourchette de droite. 
-Un philosophe ne peut être que dans trois états, soit il pense, soit il a faim, soit il mange.
-On suppose dans notre cas que les fourchettes sont numérotées de 0 à 4 et que les philosophes sont numérotées de 1 à 5. Ainsi, le philosophe numéro 1 aura besoin de la fourchette 0 à sa gauche et de la fourchette 1 à sa droite, et le philosophe 5 aura besoin de la fourchette 4 à sa gauche et de la fourchette 0 à sa droite.
+Le dÃ®ner des philosophes est un problÃ¨me de synchronisation trÃ¨s connu. Cinq philosophes sont rÃ©unis autour d'une table circulaire pour dÃ®ner. Cinq couverts composÃ©s d'une assiette et d'une fourchette sont disposÃ©s autour de la table. Chaque philosophe a besoin de deux fourchettes pour manger son plat, la fourchette de gauche et la fourchette de droite. 
+Un philosophe ne peut Ãªtre que dans trois Ã©tats, soit il pense, soit il a faim, soit il mange.
+On suppose dans notre cas que les fourchettes sont numÃ©rotÃ©es de 0 Ã  4 et que les philosophes sont numÃ©rotÃ©es de 1 Ã  5. Ainsi, le philosophe numÃ©ro 1 aura besoin de la fourchette 0 Ã  sa gauche et de la fourchette 1 Ã  sa droite, et le philosophe 5 aura besoin de la fourchette 4 Ã  sa gauche et de la fourchette 0 Ã  sa droite.
 
 \begin{figure}[h]
 	\centering
@@ -1889,16 +1889,16 @@ On suppose dans notre cas que les fourchettes sont numérotées de 0 à 4 et que le
 
 \newpage
 
-Nous avons résolu ce problème à l'aide des sémaphores suivants :\newline
+Nous avons rÃ©solu ce problÃ¨me Ã  l'aide des sÃ©maphores suivants :\newline
 
-1) Un tableau de 5 sémaphores initialisés à 1 pour l'accès aux fourchettes. Un sémaphore à 1 signifie que la fourchette est disponible et 0 qu'elle n'est pas disponible.\newline
-2) Un sémaphore initialisé à 4 qui garanti qu'une fourchette sera toujours disponible. En effet, normalement il n'est pas judicieux de mettre des sémaphores sur les fourchettes car ceci peut générer un interblocage si jamais les philosophes s'emparent tous de la fourchette gauche ou de la fourchette droite. C'est pour cela que nous avons ajouté un sémaphore qui autorise ou non la prise d'une fourchette. Comme ce sémaphore est initialisé à 4, il autorise au maximum la prise de 4 fourchettes donc il restera toujours une fourchette de disponible.\newline
-3) Un sémaphore d'attente initialisé à 0 qui permet à chaque philosophe qui a fini de manger d'attendre la fin des autres. Lorsqu'un philosophe fini de manger, il se bloque sur ce sémaphore. Ceci permet de finir proprement le repas. On suppose ici que chaque philosophe n'a qu'un plat et qu'il n'y a pas de second repas.\newline
-4) Un sémaphore de type mutex initialisé à 1 qui permet de protéger la variable qui compte le nombre de philosophes ayant fini de manger.\newline
+1) Un tableau de 5 sÃ©maphores initialisÃ©s Ã  1 pour l'accÃ¨s aux fourchettes. Un sÃ©maphore Ã  1 signifie que la fourchette est disponible et 0 qu'elle n'est pas disponible.\newline
+2) Un sÃ©maphore initialisÃ© Ã  4 qui garanti qu'une fourchette sera toujours disponible. En effet, normalement il n'est pas judicieux de mettre des sÃ©maphores sur les fourchettes car ceci peut gÃ©nÃ©rer un interblocage si jamais les philosophes s'emparent tous de la fourchette gauche ou de la fourchette droite. C'est pour cela que nous avons ajoutÃ© un sÃ©maphore qui autorise ou non la prise d'une fourchette. Comme ce sÃ©maphore est initialisÃ© Ã  4, il autorise au maximum la prise de 4 fourchettes donc il restera toujours une fourchette de disponible.\newline
+3) Un sÃ©maphore d'attente initialisÃ© Ã  0 qui permet Ã  chaque philosophe qui a fini de manger d'attendre la fin des autres. Lorsqu'un philosophe fini de manger, il se bloque sur ce sÃ©maphore. Ceci permet de finir proprement le repas. On suppose ici que chaque philosophe n'a qu'un plat et qu'il n'y a pas de second repas.\newline
+4) Un sÃ©maphore de type mutex initialisÃ© Ã  1 qui permet de protÃ©ger la variable qui compte le nombre de philosophes ayant fini de manger.\newline
 
-En résumé, un philosophe pense puis lorsqu'il a faim il demande au sémaphore numéro 2 s'il peut prendre une fourchette. Si oui, c'est à dire s'il reste au moins deux fourchettes, alors il demande au tableau de sémaphores numéro 1 s'il peut s'emparer de la fourchette de gauche et de droite. La fourchette de gauche associé à ce philosophe se trouve à l'indice $(id - 1) \% 5$ avec $id$ l'identifiant du philosophe et la fourchette de droite se trouve à l'indice $id \% 5$. Par exemple, le philosophe 5 tentera de s'emparer de la fourchette $(5 - 1) \% 5 = 4 \% 5 = 4$ à sa gauche et de la fourchette $id \% 5 = 5 \% 5 = 0$ à sa droite.
-Si le philosophe a pris ses deux fourchettes, alors il mange et lorsqu'il a terminé, il libère le sémaphore numéro 2, c'est à dire qu'il incrémente le nombre de fourchettes que tous les philosophes peuvent prendre en même temps. Il libère aussi les sémaphores associés aux fourchettes qu'il vient d'utiliser via le tableau de sémaphores numéro 1.
-Puis il demande au mutex numéro 4 s'il peut incrémenter la variable qui compte le nombre de philosophes ayant fini de manger. Si oui, alors il y a deux cas possibles, soit la variable est inférieure à 5 ce qui veut dire que des philosophes n'ont pas encore fini de manger, soit elle vaut 5 ce qui veut dire que tout le monde a fini de manger. Dans le premier cas, le philosophe se bloque sur le sémaphore d'attente numéro 3 pour attendre ses collègues et dans le deuxième cas, tous les philosophes sont libérés et c'est la fin du repas.
+En rÃ©sumÃ©, un philosophe pense puis lorsqu'il a faim il demande au sÃ©maphore numÃ©ro 2 s'il peut prendre une fourchette. Si oui, c'est Ã  dire s'il reste au moins deux fourchettes, alors il demande au tableau de sÃ©maphores numÃ©ro 1 s'il peut s'emparer de la fourchette de gauche et de droite. La fourchette de gauche associÃ© Ã  ce philosophe se trouve Ã  l'indice $(id - 1) \% 5$ avec $id$ l'identifiant du philosophe et la fourchette de droite se trouve Ã  l'indice $id \% 5$. Par exemple, le philosophe 5 tentera de s'emparer de la fourchette $(5 - 1) \% 5 = 4 \% 5 = 4$ Ã  sa gauche et de la fourchette $id \% 5 = 5 \% 5 = 0$ Ã  sa droite.
+Si le philosophe a pris ses deux fourchettes, alors il mange et lorsqu'il a terminÃ©, il libÃ¨re le sÃ©maphore numÃ©ro 2, c'est Ã  dire qu'il incrÃ©mente le nombre de fourchettes que tous les philosophes peuvent prendre en mÃªme temps. Il libÃ¨re aussi les sÃ©maphores associÃ©s aux fourchettes qu'il vient d'utiliser via le tableau de sÃ©maphores numÃ©ro 1.
+Puis il demande au mutex numÃ©ro 4 s'il peut incrÃ©menter la variable qui compte le nombre de philosophes ayant fini de manger. Si oui, alors il y a deux cas possibles, soit la variable est infÃ©rieure Ã  5 ce qui veut dire que des philosophes n'ont pas encore fini de manger, soit elle vaut 5 ce qui veut dire que tout le monde a fini de manger. Dans le premier cas, le philosophe se bloque sur le sÃ©maphore d'attente numÃ©ro 3 pour attendre ses collÃ¨gues et dans le deuxiÃ¨me cas, tous les philosophes sont libÃ©rÃ©s et c'est la fin du repas.
 
 \newpage
 
@@ -1907,11 +1907,11 @@ TACHE tacheStart();
 TACHE tachePhilo();
 
 // semProtectFourch => garanti qu'une fourchette sera toujours disponible
-// semAttente => permet à chaque philosophe qui a fini de manger d'attendre la fin des autres
-// mutex => protéger la variable qui compte le nombre de philosophes ayant fini de manger
+// semAttente => permet Ã  chaque philosophe qui a fini de manger d'attendre la fin des autres
+// mutex => protÃ©ger la variable qui compte le nombre de philosophes ayant fini de manger
 ushort semProtectFourch, semAttente, mutex;	
 
-// tableau de sémaphores des fourchettes
+// tableau de sÃ©maphores des fourchettes
 ushort semFourchette[5];	
 
 ushort id_philo;	// id unique par philosophe
@@ -1924,7 +1924,7 @@ TACHE	tacheStart(void)
 		puts("------> EXEC tache Start");
 
     int i;
-    s_init();	// initialisation des sémaphores
+    s_init();	// initialisation des sÃ©maphores
 
 		// autorise au maximum la prise de 4 fourchettes
     semProtectFourch = s_cree(4);			
@@ -1945,18 +1945,18 @@ TACHE tachePhilo()
 {
 	uint16_t k;
 
-	ushort id = id_philo; // récupération de l'id du philosophe
-  printf("------> Philosophe n° : %d demarre\n", id); // il pense
+	ushort id = id_philo; // rÃ©cupÃ©ration de l'id du philosophe
+  printf("------> Philosophe nÂ° : %d demarre\n", id); // il pense
 
   while (1)
 	{
     for (k=0; k<60000; k++);	// il pense
 
 		_lock_();
-    printf("------> Philosophe n° : %d attend pour manger : il a faim\n", id);
+    printf("------> Philosophe nÂ° : %d attend pour manger : il a faim\n", id);
     _unlock_();
 
-		// autoriser à prendre une fourchette ?
+		// autoriser Ã  prendre une fourchette ?
     s_wait(semProtectFourch); 
 		
 		// on prend la fourchette de gauche
@@ -1966,13 +1966,13 @@ TACHE tachePhilo()
     s_wait(semFourchette[ id % 5 ]);	
 
 		_lock_();
-    printf("------> Philosophe n° : %d en train de manger\n", id);
+    printf("------> Philosophe nÂ° : %d en train de manger\n", id);
     _unlock_();
 
 		for (k=0; k<30000; k++);		// temps d'attente pour qu'il mange
 
 		_lock_();
-    printf("------> Philosophe n° : %d a fini de manger : il pense\n", id);
+    printf("------> Philosophe nÂ° : %d a fini de manger : il pense\n", id);
     _unlock_();
 
 		// autorisation de prendre une fourchette de plus
@@ -1985,13 +1985,13 @@ TACHE tachePhilo()
     s_signal(semFourchette[ id % 5 ]);	
 
 
-		s_wait(mutex);		// pour protéger le compteur j
+		s_wait(mutex);		// pour protÃ©ger le compteur j
 		j++;	 // un philosophe de plus a fini de manger
 
 		if(j == 5) 			// ils ont tous fini de manger
 		{
 			for(k=0; k < 5; k++)
-			s_signal(semAttente);	// on libere toutes les tâches 
+			s_signal(semAttente);	// on libere toutes les tÃ¢ches 
 
 			j = 0;						
 			s_signal(mutex);
@@ -2003,7 +2003,7 @@ TACHE tachePhilo()
 		else
 		{
 			s_signal(mutex);
-			s_wait(semAttente);	// on bloque la tâche, le philosophe attend 
+			s_wait(semAttente);	// on bloque la tÃ¢che, le philosophe attend 
 
 			fin_tache();	// fin du repas
 		}
@@ -2028,17 +2028,17 @@ int main()
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.5\textwidth]{screens/philo_pense_meme_vitesse.png}
-		\caption{Le dîner des philosophes}
+		\caption{Le dÃ®ner des philosophes}
 \end{figure}
 
 \newpage
 
-On voit bien sur la figure précédente que lorsque le philosophe 2 mange, les philosophes 1 et 3 sont logiquement bloqués. Seul le philosophe 4 est autorisé à manger en même que le philosophe 2. De même, lorsque le philosophe 1 mange, seul le philosophe 3 peut manger en même temps sachant que les philosophes 2 et 4 ont fini de manger et que le philosophe 5 est bloqué. Enfin, lorsque le philosophe 5 a fini de manger, le repas se termine.
+On voit bien sur la figure prÃ©cÃ©dente que lorsque le philosophe 2 mange, les philosophes 1 et 3 sont logiquement bloquÃ©s. Seul le philosophe 4 est autorisÃ© Ã  manger en mÃªme que le philosophe 2. De mÃªme, lorsque le philosophe 1 mange, seul le philosophe 3 peut manger en mÃªme temps sachant que les philosophes 2 et 4 ont fini de manger et que le philosophe 5 est bloquÃ©. Enfin, lorsque le philosophe 5 a fini de manger, le repas se termine.
 
-\section{6ème partie : Communication par tubes}
-Dans cette partie nous devons réaliser un système de communication par tube. De chaque côté du tube ne se trouve qu'une seule et unique tâche.
+\section{6Ã¨me partie : Communication par tubes}
+Dans cette partie nous devons rÃ©aliser un systÃ¨me de communication par tube. De chaque cÃ´tÃ© du tube ne se trouve qu'une seule et unique tÃ¢che.
 
-Commençons par le fichier \textit{pipe.h} :
+CommenÃ§ons par le fichier \textit{pipe.h} :
 \begin{lstlisting}
 #ifndef PIPE_H_
 #define PIPE_H_
@@ -2061,7 +2061,7 @@ PIPE  _pipe[MAX_PIPES] ;   // Variables tubes
 
 //Allocation du conduit
 unsigned int p_open(unsigned int redacteur, unsigned int lecteur); 
-//Libération du tube
+//LibÃ©ration du tube
 void p_close (unsigned int conduit); 
 //Lecture dans un tube
 void p_read  (int tube, uchar* donnees, int quantite); 
@@ -2071,7 +2071,7 @@ void p_write(int tube, uchar* donnees, int quantite);
 void init_pipes();
 \end{lstlisting}
 
-Nous avons choisi un nombre de tubes égal à 5 et une taille de 10 pour chaque tube.
+Nous avons choisi un nombre de tubes Ã©gal Ã  5 et une taille de 10 pour chaque tube.
 
 \subsection{Fonction init\_pipes}
 \begin{lstlisting}
@@ -2079,21 +2079,21 @@ void init_pipes()
 {
 	unsigned int i;
 	for (i=0;i<MAX_PIPES;i++)
-		_pipe[i].pr_w=MAX_TACHES; //Tube inutilisé
+		_pipe[i].pr_w=MAX_TACHES; //Tube inutilisÃ©
 }
 \end{lstlisting}
-La fonction \textit{init\_pipes()} initialise tous les tubes au départ en leur assignant la constante MAX\_TACHES comme écrivain, ce qui signifie qu'ils sont inutilisés.
+La fonction \textit{init\_pipes()} initialise tous les tubes au dÃ©part en leur assignant la constante MAX\_TACHES comme Ã©crivain, ce qui signifie qu'ils sont inutilisÃ©s.
 
 \subsection{Fonction p\_open}
 \begin{lstlisting}
 //Ouvre un nouveau pipe
 unsigned int p_open(unsigned int redacteur, unsigned int lecteur)
 {
-	//VérifIier si les tâches sont créées
+	//VÃ©rifIier si les tÃ¢ches sont crÃ©Ã©es
 	if (_contexte[redacteur].status == NCREE || _contexte[lecteur].status == NCREE)
 		return -1;
 
-	//Vérifier qu'il n'existe pas de tube avec ces 2 taches
+	//VÃ©rifier qu'il n'existe pas de tube avec ces 2 taches
 	unsigned int i;
 	for (i=0 ; i<MAX_PIPES ; i++)
 	{
@@ -2102,7 +2102,7 @@ unsigned int p_open(unsigned int redacteur, unsigned int lecteur)
 			return -1;
 	}
 
-	//Trouver un tube non utilisé
+	//Trouver un tube non utilisÃ©
 	i=0;
 	while ( (_pipe[i].pr_w != MAX_TACHES) && (i < MAX_PIPES) )
 		i++;
@@ -2113,17 +2113,17 @@ unsigned int p_open(unsigned int redacteur, unsigned int lecteur)
 	_pipe[i].pr_w = redacteur;
 	_pipe[i].pr_r = lecteur;
 	_pipe[i].is = _pipe[i].ie = 0;
-	_pipe[i].ocupp = 0; //Données restantes (0 au départ)
+	_pipe[i].ocupp = 0; //DonnÃ©es restantes (0 au dÃ©part)
 
 
-	//Retourner le numéro du tube créé
+	//Retourner le numÃ©ro du tube crÃ©Ã©
 	return i;
 }
 \end{lstlisting}
 
-Cette fonction permet d'ouvrir un nouveau tube. Elle prend comme arguments la tâche lectrice et la tâche rédactrice. 
+Cette fonction permet d'ouvrir un nouveau tube. Elle prend comme arguments la tÃ¢che lectrice et la tÃ¢che rÃ©dactrice. 
 
-On commence par vérifier si ces deux tâches existent, et qu'il n'existe pas déjà de tube entre ces deux tâches. Ensuite, on cherche un tube non utilisé dans le tableau de tube \textit{\_pipe}. Une fois trouvé, on attribue les valeurs adéquates aux champs pr\_w, pr\_r, is, ie (tous les deux à zéro) et occup (à zéro aussi) du tube.
+On commence par vÃ©rifier si ces deux tÃ¢ches existent, et qu'il n'existe pas dÃ©jÃ  de tube entre ces deux tÃ¢ches. Ensuite, on cherche un tube non utilisÃ© dans le tableau de tube \textit{\_pipe}. Une fois trouvÃ©, on attribue les valeurs adÃ©quates aux champs pr\_w, pr\_r, is, ie (tous les deux Ã  zÃ©ro) et occup (Ã  zÃ©ro aussi) du tube.
 
 
 \subsection{Fonction p\_close}
@@ -2134,26 +2134,26 @@ void p_close (unsigned int conduit)
 	_pipe[conduit].pr_w = MAX_TACHES;
 }
 \end{lstlisting}
-La fonction \textit{p\_close} permet de ferme un tube en le rendant inutilisé en attribuant la valeur MAX\_TACHES à son écrivain.
+La fonction \textit{p\_close} permet de fermer un tube en le rendant inutilisÃ© en attribuant la valeur MAX\_TACHES Ã  son Ã©crivain.
 
 
 \subsection{Fonction p\_read}
 \begin{lstlisting}
-//Lit un certain nombre de données sur un pipe
+//Lit un certain nombre de donnÃ©es sur un pipe
 void p_read  (int tube, uchar* donnees, int quantite)
 {
-	//Vérifier que le tube existe et que la tâche en est propriétaire
+	//VÃ©rifier que le tube existe et que la tÃ¢che en est propriÃ©taire
 	if ( (_pipe[tube].pr_r != _tache_c) )
 	{
 		printf("Tache non autorisee a lire dans le pipe\n");
 		return;
 	}
 
-	//Lire les données à partir du tampon
+	//Lire les donnÃ©es Ã  partir du tampon
 	int i = 0;
 	for (i=0 ; i < quantite ; i++)
 	{
-		//Vérifier que le tampon n?est pas vide, sinon endormir la tache
+		//VÃ©rifier que le tampon n?est pas vide, sinon endormir la tache
 		if (_pipe[tube].ocupp == 0)
 		{
 			printf("Tampon vide ==> endormissement de la tache %d\n", _pipe[tube].pr_r);
@@ -2164,58 +2164,58 @@ void p_read  (int tube, uchar* donnees, int quantite)
 		_pipe[tube].is++;
 		_pipe[tube].ocupp--;
 
-		//Si  le  tube  était  plein  et  si
-		//la  tâche  écrivain  est  suspendue	sur  une
-		//écriture  dans  ce  tube alors la réveiller 
+		//Si  le  tube  Ã©tait  plein  et  si
+		//la  tÃ¢che  Ã©crivain  est  suspendue	sur  une
+		//Ã©criture  dans  ce  tube alors la rÃ©veiller 
 		if ( (_pipe[tube].ocupp+1 == SIZE_PIPE) && (_contexte[_pipe[tube].pr_w].status == SUSP) )
 			reveille(_pipe[tube].pr_w);
 	}
 }
 \end{lstlisting}
 
-La fonction \textit{p\_read} lit une certaine quantité de données sur un tube. Elle prend comme argument le tube en question, un tableau de données et la quantité à lire.
+La fonction \textit{p\_read} lit une certaine quantitÃ© de donnÃ©es sur un tube. Elle prend comme argument le tube en question, un tableau de donnÃ©es et la quantitÃ© Ã  lire.
 
-On commence une fois de plus par une vérification. On vérifie si le tube demandé existe et si la tâche qui veut y lire en a bien le droit (c'est à dire on vérifie si le champ pr\_r du tube est bien la tâche courante).
+On commence une fois de plus par une vÃ©rification. On vÃ©rifie si le tube demandÃ© existe et si la tÃ¢che qui veut y lire en a bien le droit (c'est Ã  dire on vÃ©rifie si le champ pr\_r du tube est bien la tÃ¢che courante).
 
-Ensuite, on peut commencer à lire les données du tube. Sachant que nos tubes sont des tableaux de caractères et qu'on lit une certaine quantité, on fait une boucle allant de 0 à cette quantité pour lire caractère par caractère.
+Ensuite, on peut commencer Ã  lire les donnÃ©es du tube. Sachant que nos tubes sont des tableaux de caractÃ¨res et qu'on lit une certaine quantitÃ©, on fait une boucle allant de 0 Ã  cette quantitÃ© pour lire caractÃ¨re par caractÃ¨re.
 
-A chaque lecture du tube, on vérifie s'il est vide ou non. S'il l'est, on l'endort. Sinon, on peut procéder à la lecture du caractère (dà l'emplacement de sortie "is"). On incrément le champ \textit{is} du tube et on décrémente la champ \textit{ocupp} car on vient de lire un caractère.
+A chaque lecture du tube, on vÃ©rifie s'il est vide ou non. S'il l'est, on l'endort. Sinon, on peut procÃ©der Ã  la lecture du caractÃ¨re (Ã  l'emplacement de sortie "is"). On incrÃ©mente le champ \textit{is} du tube et on dÃ©crÃ©mente la champ \textit{ocupp} car on vient de lire un caractÃ¨re.
 
-Enfin, si  le  tube  était  plein  et  si la  tâche  écrivain  est  suspendue sur une écriture dans ce tube (c'est à dire si l'écrivain, lors d'une tentation d'écriture est tombé sur un tube plein) alors on la réveille. De cette façon, une écriture sur un tube plein ne posera pas de problème : le rédacteur attendra simplement (en s'endormant) que le lecteur lise une donnée dans le tube et le réveille.
+Enfin, si  le  tube  Ã©tait  plein  et  si la  tÃ¢che  Ã©crivain  est  suspendue sur une Ã©criture dans ce tube (c'est Ã  dire si l'Ã©crivain, lors d'une tentation d'Ã©criture est tombÃ© sur un tube plein) alors on la rÃ©veille. De cette faÃ§on, une Ã©criture sur un tube plein ne posera pas de problÃ¨me : le rÃ©dacteur attendra simplement (en s'endormant) que le lecteur lise une donnÃ©e dans le tube et le rÃ©veille.
 
 
 
 \subsection{Fonction p\_write}
 \begin{lstlisting}
-//Ecrit un certain nombre de données sur un pipe
+//Ecrit un certain nombre de donnÃ©es sur un pipe
 void p_write(int tube, uchar* donnees, int quantite)
 {
-	//Vérifier que le tube existe et que la tâche en est propriétaire
+	//VÃ©rifier que le tube existe et que la tÃ¢che en est propriÃ©taire
 	if ( (_pipe[tube].pr_w != _tache_c) )
 	{
 		printf("Tache non autorisee a ecrire dans le pipe\n");
 		return;
 	}
 
-	//Copie des données dans le tube
+	//Copie des donnÃ©es dans le tube
 	int i;
 	for (i=0 ; i < quantite ; i++)
 	{
-		//Vérifier qu?il y a de la place dans le tampon, sinon endormir la tache
+		//VÃ©rifier qu?il y a de la place dans le tampon, sinon endormir la tache
 		if (_pipe[tube].ocupp == SIZE_PIPE)
 		{
 			printf("Plus de place dans le tampon ==> endormissement de la tache %d\n", _pipe[tube].pr_w);
 			dort();
 		}
 
-		//Copie des données
+		//Copie des donnÃ©es
 		_pipe[tube].tube[_pipe[tube].ie] = donnees[i];
 		_pipe[tube].ie++;
 		_pipe[tube].ocupp++;
 
-		//Si le tube était vide et si
+		//Si le tube Ã©tait vide et si
 		//la tache lectrice est suspendue sur
-		//une lecture de ce tube alors la réveiller
+		//une lecture de ce tube alors la rÃ©veiller
 		if ( (_pipe[tube].ocupp-1 == 0) && (_contexte[_pipe[tube].pr_r].status == SUSP) )
 			reveille(_pipe[tube].pr_r);
 	}
@@ -2223,33 +2223,33 @@ void p_write(int tube, uchar* donnees, int quantite)
 }
 \end{lstlisting}
 
-La fonction \textit{p\_write} écrit une certaine quantité de données sur un tube.  Elle prend en argument le tube désiré, un tableau de données et une quantité de données à écrire.
+La fonction \textit{p\_write} Ã©crit une certaine quantitÃ© de donnÃ©es sur un tube.  Elle prend en argument le tube dÃ©sirÃ©, un tableau de donnÃ©es et une quantitÃ© de donnÃ©es Ã  Ã©crire.
 
-Tout comme pour la lecture, on vérifie si le tube demandé existe et si la tâche qui veut y écrire en a bien le droit (c'est à dire on vérifie si le champ pr\_w du tube est bien la tâche courante).
+Tout comme pour la lecture, on vÃ©rifie si le tube demandÃ© existe et si la tÃ¢che qui veut y Ã©crire en a bien le droit (c'est Ã  dire on vÃ©rifie si le champ pr\_w du tube est bien la tÃ¢che courante).
 
-On peut ensuite commencer à écrire dans le tube. On procède de la même manière que la lecture c'est à dire caractère par caractère.
+On peut ensuite commencer Ã  Ã©crire dans le tube. On procÃ¨de de la mÃªme maniÃ¨re que la lecture c'est Ã  dire caractÃ¨re par caractÃ¨re.
 
-Si le tube est plein, on endort le rédacteur jusqu'à ce que le lecteur le réveille après avoir lu un caractère. Sinon, on peut copier le caractère dans le tube (à l'emplacement d'entrée "ie"). On incrémente ie et ocupp comme il se doit.
+Si le tube est plein, on endort le rÃ©dacteur jusqu'Ã  ce que le lecteur le rÃ©veille aprÃ¨s avoir lu un caractÃ¨re. Sinon, on peut copier le caractÃ¨re dans le tube (Ã  l'emplacement d'entrÃ©e "ie"). On incrÃ©mente ie et ocupp comme il se doit.
 
-Enfin, si le tube était vide et si la tache lectrice est suspendue sur une lecture de ce tube (c'est à dire si un lecteur, en tentant de lire, est tombé sur un tube vide) alors on la réveille. De cette façon, une lecture sur un tube vide ne posera pas de problème : le lecteur attendra simplement (en s'endormant) que le rédacteur écrive dans le tube et le réveille.
+Enfin, si le tube Ã©tait vide et si la tache lectrice est suspendue sur une lecture de ce tube (c'est Ã  dire si un lecteur, en tentant de lire, est tombÃ© sur un tube vide) alors on la rÃ©veille. De cette faÃ§on, une lecture sur un tube vide ne posera pas de problÃ¨me : le lecteur attendra simplement (en s'endormant) que le rÃ©dacteur Ã©crive dans le tube et le rÃ©veille.
 
 \subsection{Test de ces fonctions}
-Pour tester notre système de tubes, on réalise un programme de deux tâches : la tâche A et la tâche B. Deux tubes leur sont associés : un de A vers B et l'autre de B vers A. Le déroulement du programme est le suivant :
+Pour tester notre systÃ¨me de tubes, on rÃ©alise un programme de deux tÃ¢ches : la tÃ¢che A et la tÃ¢che B. Deux tubes leur sont associÃ©s : un de A vers B et l'autre de B vers A. Le dÃ©roulement du programme est le suivant :
 \begin{itemize}
-\item La tâche A envoie le message "salut" à la tâche B via le premier tube
-\item La tâche B reçoit ce message via ce même tube
-\item La tâche B envoie ce message reçu à la tâche A via le deuxième tube
-\item La tâche A reçoit le message via le deuxième tube.
+\item La tÃ¢che A envoie le message "salut" Ã  la tÃ¢che B via le premier tube
+\item La tÃ¢che B reÃ§oit ce message via ce mÃªme tube
+\item La tÃ¢che B envoie ce message reÃ§u Ã  la tÃ¢che A via le deuxiÃ¨me tube
+\item La tÃ¢che A reÃ§oit le message via le deuxiÃ¨me tube.
 \end{itemize}
 
-Voici le code associé :
+Voici le code associÃ© :
 
 \begin{lstlisting}
 #include "pipe.h"
 #include "noyau.h"
 #define TAILLE_MESSAGE 10
 
-//definitions des fonctions citées précédemment
+//definitions des fonctions citÃ©es prÃ©cÃ©demment
 
 TACHE tacheStart();
 TACHE tacheA();
@@ -2338,15 +2338,15 @@ int main()
 }
 \end{lstlisting}
 
-Le résultat obtenu est le suivant :
+Le rÃ©sultat obtenu est le suivant :
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{screens/pipe.PNG}
-		\caption{Résultat du pipe}
+		\caption{RÃ©sultat du pipe}
 		\label{pipe}
 \end{figure}
 
-On constate que notre système de tubes fonctionne bien. La tâche B reçoit bien le message de A et est capable de lui renvoyer. La tâche A reçoit bien le retour de B.
+On constate que notre systÃ¨me de tubes fonctionne bien. La tÃ¢che B reÃ§oit bien le message de A et est capable de lui renvoyer. La tÃ¢che A reÃ§oit bien le retour de B.
 
 
 \end{document}
