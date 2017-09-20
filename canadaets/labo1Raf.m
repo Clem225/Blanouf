@@ -6,7 +6,7 @@ clc
 %%% CONTOUR DU PROFIL
 BA = [0;1.25;2.5;5;7.5;10;15;20;30;40;50;60;70;80;90;95;100];
 ext = [1.5;3.14;3.94;5;5.37;6.09;6.67;6.96;6.94;6.63;6.13;5.52;4.79;3.91;2.81;2.17;0.94];
-int = -[1.50;0.76;0.5;0.18;0.02;0.02;0.18;0.53;1.02;1.02;0.71;0.33;0.06;0.04;0.21;0.32;0.94];
+int = [1.50;0.76;0.5;0.18;0.02;0.02;0.18;0.53;1.02;1.02;0.71;0.33;0.06;0.04;0.21;0.32;0.94];
 figure('Name', 'Profil - RAF15');
 plot(BA,[ext,int]);
 title('Profil - RAF15');
@@ -28,6 +28,8 @@ epaisseur_max = max(ext-int)
 [finesseMax, idFMax] = max(Cz./Cx)
 alphaMax = alpha(idFMax)
 Fmax = Czmax/Cxmin
+
+%GRAPHIQUES
 
 figure('Name', 'Courbe de coefficient de portance VS angle d''attaque, RAF15');
 hold on;
@@ -54,8 +56,6 @@ ylabel('Finesse Cz/Cx');
 %Polaire du profil
 figure('Name', 'Polaire du profil - RAF15');
 plot(Cx,Cz);
-CxRAF15 = Cx;
-CzRAF15 = Cz;
 title('Polaire du profil - RAF15');
 xlabel('Coefficient de trainee Cx');
 ylabel('Coefficient de portance Cz');
@@ -79,6 +79,9 @@ title('Rapport lie a la puissance requise pour propulser l''avion - RAF15');
 xlabel('Angle d''attaque alpha');
 ylabel('Cx^{3/2}/Cz');
 
+CxRAF15 = Cx;
+CzRAF15 = Cz;
+raf15_finesse = Cz./Cx;
 
 
 %PROFIL CLARK YH
@@ -108,6 +111,7 @@ epaisseur_max = max(ext-int)
 alphaMax = alpha(idFMax)
 Fmax = Czmax/Cxmin
 
+%GRAPHIQUES
 figure('Name', 'Courbe de coefficient de portance VS angle d''attaque, CLARK YH');
 hold on;
 plot(alpha,Cz);
@@ -133,8 +137,6 @@ ylabel('Finesse Cz/Cx');
 %Polaire du profil
 figure('Name', 'Polaire du profil - CLARK YH');
 plot(Cx,Cz);
-CxCLARK = Cx;
-CzCLARK = Cz;
 title('Polaire du profil - CLARK YH');
 xlabel('Coefficient de trainee Cx');
 ylabel('Coefficient de portance Cz');
@@ -147,6 +149,9 @@ title('Rapport lie a la puissance requise pour propulser l''avion - CLARK YH');
 xlabel('Angle d''attaque alpha');
 ylabel('Cx^{3/2}/Cz');
 
+CxCLARK = Cx;
+CzCLARK = Cz;
+clark_finesse = Cz./Cx;
 
 %PROFIL NACA 23018
 
@@ -175,6 +180,7 @@ epaisseur_max = max(ext-int)
 alphaMax = alpha(idFMax)
 Fmax = Czmax/Cxmin
 
+%%GRAPHIQUES
 figure('Name', 'Courbe de coefficient de portance VS angle d''attaque, NACA 23018');
 hold on;
 plot(alpha,Cz);
@@ -200,8 +206,6 @@ ylabel('Finesse Cz/Cx');
 %Polaire du profil
 figure('Name', 'Polaire du profil - NACA 23018');
 plot(Cx,Cz);
-CxNACA = Cx;
-CzNACA = Cz;
 title('Polaire du profil - NACA 23018');
 xlabel('Coefficient de trainee Cx');
 ylabel('Coefficient de portance Cz');
@@ -215,20 +219,42 @@ title('Rapport lie a la puissance requise pour propulser l''avion - NACA 23018')
 xlabel('Angle d''attaque alpha');
 ylabel('Cx^{3/2}/Cz');
 
-figure('Name', 'Rapport lie a la puissance requise pour propulser l''avion - TOUT');
-hold on;
-plot(alpharaf15,raf15);
-plot(alphaclark,clark);
-plot(alphanaca,naca);
-title('Rapport lie a la puissance requise pour propulser l''avion - TOUT');
-xlabel('Angle d''attaque alpha');
-ylabel('Cx^{3/2}/Cz');
+CxNACA = Cx;
+CzNACA = Cz;
+naca_finesse = Cz./Cx;
 
-figure('Name', 'Polaire du profil - TOUT');
+
+
+%GRAPHS CONFONDUS
+
+figure('Name', 'Finesses de tous les profils');
+hold on;
+plot(alpharaf15,raf15_finesse);
+plot(alphaclark,clark_finesse);
+plot(alphanaca,naca_finesse);
+legend('RAF15', 'CLARK YH', 'NACA 23018');
+title('Finesses de tous les profils');
+xlabel('Angle d''incidence alpha');
+ylabel('Finesse Cz/Cx');
+
+
+figure('Name', 'Polaires de tous les profils');
 hold on;
 plot(CxRAF15,CzRAF15);
 plot(CxCLARK,CzCLARK);
 plot(CxNACA,CzNACA);
+legend('RAF15', 'CLARK YH', 'NACA 23018');
 title('Polaire du profil - TOUT');
 xlabel('Coefficient de trainee Cx');
 ylabel('Coefficient de portance Cz');
+
+
+figure('Name', 'Rapports lies a la puissance requise pour propulser l''avion');
+hold on;
+plot(alpharaf15,raf15);
+plot(alphaclark,clark);
+plot(alphanaca,naca);
+legend('RAF15', 'CLARK YH', 'NACA 23018');
+title('Rapports lies a la puissance requise pour propulser l''avion');
+xlabel('Angle d''attaque alpha');
+ylabel('Cx^{3/2}/Cz');
