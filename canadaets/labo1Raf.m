@@ -62,6 +62,17 @@ ylabel('Coefficient de portance Cz');
 
 %Rapport lie a la puissance requise pour propulser l'avion
 figure('Name', 'Rapport lie a la puissance requise pour propulser l''avion - RAF15');
+
+%Cz_norm = zeros(length(Cz), 1);
+%for i=1:length(Cz) 
+%    Cz_norm(i) = norm(Cz(i)^(3/2)/Cx(i));
+%    if Cz(i) < 0
+%       Cz_norm = - Cz_norm;
+%    end
+%end
+%plot(alpha,Cz_norm);
+
+
 raf15 = Cz.^(3/2)./Cx;
 plot(alpha,raf15);
 title('Rapport lie a la puissance requise pour propulser l''avion - RAF15');
@@ -70,12 +81,11 @@ ylabel('Cx^{3/2}/Cz');
 
 
 
-
 %PROFIL CLARK YH
 %%% CONTOUR DU PROFIL
 BA = [0;1.25;2.5;5;7.5;10;15;20;30;40;50;60;70;80;90;95;100];
 ext = [3.5;5.45;6.5;7.9;8.85;9.6;10.68;11.36;11.7;11.4;10.51;9.15;7.42;5.62;3.84;2.93;2.05];
-int = -[3.5;1.93;1.47;0.93;0.63;0.42;0.15;0.03;0;0;0;0;0.06;0.38;1.02;1.4;1.85];
+int = [3.5;1.93;1.47;0.93;0.63;0.42;0.15;0.03;0;0;0;0;0.06;0.38;1.02;1.4;1.85];
 figure('Name', 'Profil - CLARK YH');
 plot(BA,[ext,int]);
 title('Profil - CLARK YH');
@@ -87,7 +97,7 @@ legend('Extrados', 'Intrados'); grid on ; box on; axis equal;
 alpha = [-4:2:18,19,20,25,30]';
 alphaclark = alpha;
 Cz =  [-0.09;0.05;0.2;0.36;0.51;0.66;0.8;0.94;1.06;1.21;1.33;1.43;1.36;1.26;0.97;0.81];
-Cx =   [0.01;0.009;0.01;0.015;0.022;0.033;0.045;0.062;0.083;.103;.125;.146;.170;.211;.324;.430];
+Cx =  [0.01;0.009;0.01;0.015;0.022;0.033;0.045;0.062;0.083;.103;.125;.146;.170;.211;.324;.430];
  
 %Valeurs Czmax, Cxmin et Fmax
 sprintf('Valeurs pour CLARK YH : ')
