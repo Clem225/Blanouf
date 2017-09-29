@@ -5,7 +5,7 @@ close all
 clc
 
 %% Question 1
-%
+% Avec la fonction atmosia
 H = [0:1000:20000];
 [T, a, P, rho] = atmosisa(H);
 
@@ -15,7 +15,7 @@ subplot(2,2,1);
 plot(H,T);
 title('Temperature en fonction de l''altitude');
 xlabel('Altitude (m)');
-ylabel('Température (K)');
+ylabel('Temperature (K)');
 
 subplot(2,2,2);
 plot(H,a);
@@ -31,9 +31,9 @@ ylabel('Pression (pascal)');
 
 subplot(2,2,4);
 plot(H,rho);
-title('Densité de l''air en fonction de l''altitude');
+title('Densite de l''air en fonction de l''altitude');
 xlabel('Altitude (m)');
-ylabel('Densité de l''air (kg/m3)');
+ylabel('Densite de l''air (kg/m3)');
 
 
 %En utilisant les equations
@@ -64,7 +64,7 @@ subplot(2,2,1);
 plot(H,[T_equa1 T_equa2]);
 title('Temperature en fonction de l''altitude');
 xlabel('Altitude (m)');
-ylabel('Température (K)');
+ylabel('Temperature (K)');
 
 subplot(2,2,2);
 plot(H,[a_equa1 a_equa2]);
@@ -80,15 +80,16 @@ ylabel('Pression (pascal)');
 
 subplot(2,2,4);
 plot(H,[rho_equa1 rho_equa2]);
-title('Densité de l''air en fonction de l''altitude');
+title('Densite de l''air en fonction de l''altitude');
 xlabel('Altitude (m)');
-ylabel('Densité de l''air (kg/m3)');
+ylabel('Densite de l''air (kg/m3)');
 
 
 
 %% Question 2
 %
 
+% Groupes 2 et 9
 Psmes = [10789 20145 28996 41358 50658 59789 70138 79864 90124 92654 93945 100123 100954 101325];
 Ptmes = [29854 37416 45879 52678 64598 76458 86223 92600 97420 98500 99956 101000 101800 101325];
 [T0, a0, P0, rho0] = atmosisa(0);
@@ -125,12 +126,13 @@ for i=1:length(Vc)
     end
 end
 
-figure();
-plot(Qc,Vc);
-title('Qc vs Vc');
-xlabel('Qc (Pa)');
-ylabel('Vc (m/s)');
+%figure();
+%plot(Qc,Vc);
+%title('Qc vs Vc');
+%xlabel('Qc (Pa)');
+%ylabel('Vc (m/s)');
 
+figure();
 xq = Ptmes-Psmes;
 vq1 = interp1(Qc,Vc,xq);
 plot(Qc,Vc,'-',xq,vq1,'o');
@@ -143,7 +145,7 @@ legend('Formule', 'Interpolation'); grid on ; box on;
 %Calcul de H en fct de Psmes
 H = [0:1000:20000];
 [T, a, P, rho] = atmosisa(H);
-plot(H,P);
+%plot(H,P);
 
 xq = Psmes;
 vq1 = interp1(P,H,xq);
