@@ -1,6 +1,6 @@
 %% TP4
 
-%% Choix avion : US Navy (premier)
+%% Choix avion : US Navy (premier) ==» Condition de vol 2
 
 %% Caracteristiques
 
@@ -31,11 +31,24 @@ Malpha_pt = -0.204;
 Mw_pt = Malpha_pt / V;
 Mq = -0.670;
 
+Xgamaelevator = 2.55;
+Zgamaelevator = -22.94;
+Mgamaelevator = -7.40;
+
+
 Alon = [Xu              Xw              0               -g*cos(theta0);
         Zu              Zw              u0              0;
         Mu+Mw_pt*Zu     Mw+Mw_pt*Zw     Mq+Mw_pt*u0     0;
         0               0               1               0]
 
+Blon = [Xgamaelevator                       ;
+        Zgamaelevator                       ;
+        Mgamaelevator+Mw_pt*Zgamaelevator   ;
+        0                                   ];
+    
+Clon = eye(4,4);
+Dlon = [0; 0; 0; 0];   
+    
 coeffsAlon = poly(Alon)
 polesAlon = eig(Alon)
 
@@ -52,11 +65,26 @@ Nbeta = 8.223;
 Np = 0;
 Nr = -0.401;
 
+Ygamaileron = -0.795;
+Ygamrudder = 10.83;
+Lgamaileron = 8.757;
+Lgamrudder = 2.802;
+Ngamaileron = -0.246;
+Ngamrudder = -3.651;
+
 Alat = [Ybeta/u0 Yp/u0 -(1-Yr/u0) (g/u0)*cos(theta0);
         Lbeta    Lp    Lr         0                 ;
         Nbeta    Np    Nr         0                 ;
         0        1     0          0                 ]
-
+ 
+Blat = [Ygamaileron/u0 Ygamrudder/u0;
+        Lgamaileron    Lgamrudder   ;
+        Ngamaileron    Ngamrudder   ;
+        0              0            ];
+    
+Clat = eye(4,4);
+Dlat = [0 0; 0 0; 0 0; 0 0];    
+    
 coeffsAlat = poly(Alat)
 polesAlat = eig(Alat)
 
@@ -89,5 +117,7 @@ tau1 = -1/real(polesAlat(3))
 tau2 = -1/real(polesAlat(4))
 
 tau = tau1 + tau2; % a voir
+
+
 
 
