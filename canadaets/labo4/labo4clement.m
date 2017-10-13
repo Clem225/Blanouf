@@ -123,12 +123,12 @@ tau = tau1 + tau2; % a voir
 %%  Question 3
 pulslon = zeros(1,4);
 for i=1:4
-    pulslon(i)=sqrt(real(real(polesAlon(i)))^2+imag(polesAlon(i))^2);
+    pulslon(i)=sqrt(real(polesAlon(i))^2+imag(polesAlon(i))^2);
 end
 
 pulslat = zeros(1,4);
 for i=1:4
-    pulslat(i)=sqrt(real(real(polesAlat(i)))^2+imag(polesAlat(i))^2);
+    pulslat(i)=sqrt(real(polesAlat(i))^2+imag(polesAlat(i))^2);
 end
 
 amorlon = zeros(1,4);
@@ -138,7 +138,7 @@ end
 
 amorlat = zeros(1,4);
 for i=1:4
-    amorlat(i)=-(real(polesAlat(i)))/pulslon(i);
+    amorlat(i)=-(real(polesAlat(i)))/pulslat(i);
 end
 
 
