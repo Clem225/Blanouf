@@ -102,6 +102,8 @@ Tlon2 = (2*pi)/wlon2
 
 %  Temps requis pour obtenir la moitié ou le double de l’amplitude
 tlat = log(2)/abs(real(polesAlat(1)))
+tlat2 = log(2)/abs(real(polesAlat(3)))
+tlat3 = log(2)/abs(real(polesAlat(4)))
 
 tlon1 = log(2)/abs(real(polesAlon(1)))
 tlon2 = log(2)/abs(real(polesAlon(3)))
