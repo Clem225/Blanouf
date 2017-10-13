@@ -1,6 +1,6 @@
 %% TP4
 
-%% Choix avion : US Navy (premier) ==Â» Condition de vol 2
+%% Choix avion : US Navy (premier) ==» Condition de vol 2
 
 %% Caracteristiques
 
@@ -90,7 +90,7 @@ polesAlat = eig(Alat)
 
 %%  Question 2
 
-%  PÃ©riode dâ€™oscillation
+%  Période d’oscillation
 wlat = abs(imag(polesAlat(1)));
 Tlat = (2*pi)/wlat
 
@@ -100,24 +100,43 @@ Tlon1 = (2*pi)/wlon1
 wlon2 = abs(imag(polesAlon(3)));
 Tlon2 = (2*pi)/wlon2
 
-%  Temps requis pour obtenir la moitiÃ© ou le double de lâ€™amplitude
+%  Temps requis pour obtenir la moitié ou le double de l’amplitude
 tlat = log(2)/abs(real(polesAlat(1)))
 
 tlon1 = log(2)/abs(real(polesAlon(1)))
 tlon2 = log(2)/abs(real(polesAlon(3)))
 
-%  Nombre de cycles pour obtenir la moitiÃ© ou le double de lâ€™amplitude
+%  Nombre de cycles pour obtenir la moitié ou le double de l’amplitude
 Nlat = tlat/Tlat
 
 Nlon1 = tlon1/Tlon1
 Nlon2 = tlon2/Tlon2
 
-%  Constante de temps Ï„
+%  Constante de temps ?
 tau1 = -1/real(polesAlat(3))
 tau2 = -1/real(polesAlat(4))
 
 tau = tau1 + tau2; % a voir
 
+%%  Question 3
+pulslon = zeros(1,4);
+for i=1:4
+    pulslon(i)=sqrt(real(real(polesAlon(i)))^2+imag(polesAlon(i))^2);
+end
 
+pulslat = zeros(1,4);
+for i=1:4
+    pulslat(i)=sqrt(real(real(polesAlat(i)))^2+imag(polesAlat(i))^2);
+end
+
+amorlon = zeros(1,4);
+for i=1:4
+    amorlon(i)=-(real(polesAlon(i)))/pulslon(i);
+end
+
+amorlat = zeros(1,4);
+for i=1:4
+    amorlat(i)=-(real(polesAlat(i)))/pulslon(i);
+end
 
 
