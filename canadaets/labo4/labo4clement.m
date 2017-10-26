@@ -4,16 +4,15 @@
 
 %% Caracteristiques
 
-% h = 15000;  % ft
-% M = 0.4;
-% V = 423; % ft/s
-% g = 32.174; % ft/s^2
-
-h = 0;  % ft
+h = 15000;  % ft
 M = 0.4;
-V = 447; % ft/s
-g = 32.174; % ft/s^2
+V = 423; % ft/s
 
+% h = 0;  % ft
+% M = 0.4;
+% V = 447; % ft/s
+
+g = 32.174; % ft/s^2
 theta0 = 0;
 u0 = V;
 
@@ -23,44 +22,44 @@ u0 = V;
 % Longitudinal
 
 % Condition 2
-% Xu = -0.0148;
-% Xalpha = -12.46;
-% Xw = Xalpha / V;
-% 
-% Zu = -0.160;
-% Zalpha = -219.6;
-% Zw = Zalpha / V;
-% 
-% Mu = 0.0005;
-% Malpha = -5.639;
-% Mw = Malpha / V;
-% Malpha_pt = -0.204;
-% Mw_pt = Malpha_pt / V;
-% Mq = -0.670;
-% 
-% Xgamaelevator = 2.55;
-% Zgamaelevator = -22.94;
-% Mgamaelevator = -7.40;
-
-% Condition 1
-Xu = -0.0160;
-Xalpha = -1.742;
+Xu = -0.0148;
+Xalpha = -12.46;
 Xw = Xalpha / V;
 
-Zu = -0.156;
-Zalpha = -398.5;
+Zu = -0.160;
+Zalpha = -219.6;
 Zw = Zalpha / V;
 
-Mu = 0.0004;
-Malpha = -10.233;
+Mu = 0.0005;
+Malpha = -5.639;
 Mw = Malpha / V;
-Malpha_pt = -0.342;
+Malpha_pt = -0.204;
 Mw_pt = Malpha_pt / V;
-Mq = -1.151;
+Mq = -0.670;
 
-Xgamaelevator = 4.14;
-Zgamaelevator = -42.56;
-Mgamaelevator = -13.73;
+Xgamaelevator = 2.55;
+Zgamaelevator = -22.94;
+Mgamaelevator = -7.40;
+
+% Condition 1
+% Xu = -0.0160;
+% Xalpha = -1.742;
+% Xw = Xalpha / V;
+% 
+% Zu = -0.156;
+% Zalpha = -398.5;
+% Zw = Zalpha / V;
+% 
+% Mu = 0.0004;
+% Malpha = -10.233;
+% Mw = Malpha / V;
+% Malpha_pt = -0.342;
+% Mw_pt = Malpha_pt / V;
+% Mq = -1.151;
+% 
+% Xgamaelevator = 4.14;
+% Zgamaelevator = -42.56;
+% Mgamaelevator = -13.73;
 
 
 Alon = [Xu              Xw              0               -g*cos(theta0);
@@ -83,40 +82,40 @@ polesAlon = eig(Alon)
 % Lateral
 
 % Condition 2
-% Ybeta = -62.42;
-% Yp = 0;
-% Yr = 0;
-% Lbeta = -14.01;
-% Lp = -0.988;
-% Lr = 0.607;
-% Nbeta = 8.223;
-% Np = 0;
-% Nr = -0.401;
-% 
-% Ygamaileron = -0.795;
-% Ygamrudder = 10.83;
-% Lgamaileron = 8.757;
-% Lgamrudder = 2.802;
-% Ngamaileron = -0.246;
-% Ngamrudder = -3.651;
-
-% Condition 1
-Ybeta = -110.94;
+Ybeta = -62.42;
 Yp = 0;
 Yr = 0;
-Lbeta = -27.67;
-Lp = -1.732;
-Lr = 0.933;
-Nbeta = 15.16;
-Np = 0.040;
-Nr = -0.639;
+Lbeta = -14.01;
+Lp = -0.988;
+Lr = 0.607;
+Nbeta = 8.223;
+Np = 0;
+Nr = -0.401;
 
-Ygamaileron = -2.599;
-Ygamrudder = 19.65;
-Lgamaileron = 17.27;
-Lgamrudder = 7.305;
-Ngamaileron = 0.334;
-Ngamrudder = -6.732;
+Ygamaileron = -0.795;
+Ygamrudder = 10.83;
+Lgamaileron = 8.757;
+Lgamrudder = 2.802;
+Ngamaileron = -0.246;
+Ngamrudder = -3.651;
+
+% Condition 1
+% Ybeta = -110.94;
+% Yp = 0;
+% Yr = 0;
+% Lbeta = -27.67;
+% Lp = -1.732;
+% Lr = 0.933;
+% Nbeta = 15.16;
+% Np = 0.040;
+% Nr = -0.639;
+% 
+% Ygamaileron = -2.599;
+% Ygamrudder = 19.65;
+% Lgamaileron = 17.27;
+% Lgamrudder = 7.305;
+% Ngamaileron = 0.334;
+% Ngamrudder = -6.732;
 
 Alat = [Ybeta/u0 Yp/u0 -(1-(Yr/u0)) (g/u0)*cos(theta0);
         Lbeta    Lp    Lr         0                 ;
